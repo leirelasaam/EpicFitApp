@@ -61,6 +61,10 @@ Eliminar rama remota:
 ```bash
 git push origin --delete nombre-de-tu-rama
 ```
+Actualizar referencias de las ramas remotas:
+```bash
+git remote prune origin
+```
 
 ### Gestionar merge
 Actualizar tu rama:
