@@ -125,3 +125,11 @@ Hacer push:
 ```bash
 git push
 ```
+Ver el estado de git local:
+```bash
+git status
+```
+Ver el listado de commits:
+```bash
+git log
+```
