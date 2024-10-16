@@ -73,20 +73,43 @@ Actualizar referencias de las ramas remotas:
 git remote prune origin
 ```
 
-### Gestionar merge
-Actualizar tu rama:
-```bash
-git fetch origin
-git merge origin/main
-```
-Tras pasar el contenido de la rama main a la tuya, pueden surgir conflictos que se deben solucionar.
-Una vez solucionados los posibles conflictos, pasar a la rama main:
+### Gestionar subida de contenido a main desde otra rama
+1. Actualizar la rama main:
 ```bash
 git switch main
 ```
-Pasar el contenido de tu rama al main:
 ```bash
-git merge nombre-de-tu-rama
+git pull
+```
+2. Pasarse a la rama:
+```bash
+git switch tu-rama
+```
+3. Añadir el contenido de main a tu rama
+```bash
+git merge origin/main
+```
+4. Si hay conflictos, se indican los archivos conflictivos que deben ser modificados. Vas a entrar en un estado de MERGING que se verá reflejado en el nombre de la rama actual.
+5. Para solucionar los conflictos, hay que editar los archivos y eliminar los flags que aparecen.
+6. Tras solucionarlo, hacer push de esta rama:
+```bash
+git add .
+```
+```bash
+git commit -m "Comentario"
+```
+```bash
+git push
+```
+7. Pasar el contenido actualizado de la rama a main.
+```bash
+git switch main
+```
+```bash
+git merge tu-rama
+```
+```bash
+git push
 ```
 
 ### Hacer un push
