@@ -62,7 +62,11 @@ git switch nombre
 ```
 Eliminar rama local:
 ```bash
-git branch -d nombre-de-tu-rama
+git branch -d tu-rama
+```
+Forzar borrado de la rama:
+```bash
+git branch -D tu-rama
 ```
 Eliminar rama remota:
 ```bash
