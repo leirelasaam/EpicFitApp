@@ -52,6 +52,10 @@ Listar todas las ramas (tecla **q** para cerrar):
 ```bash
 git branch -a
 ```
+Crear y subir la rama a GitHub:
+```bash
+git push --set-upstream origin Lucian
+```
 Cambiarse a una rama:
 ```bash
 git switch nombre
