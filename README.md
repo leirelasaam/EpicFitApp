@@ -129,7 +129,7 @@ Ver el estado de git local:
 ```bash
 git status
 ```
-Ver el listado de commits:
+Ver el listado de commits (para salir pulsar la tecla **q**):
 ```bash
 git log
 ```
