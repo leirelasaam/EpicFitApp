@@ -5,9 +5,12 @@ Clonar un repositorio, donde la url es la ruta que se copia al entrar al reposit
 ```bash
 git clone git@github.com:propietario/nombreProyecto.git
 ```
-Establecer el nombre y correo:
+Establecer el nombre:
 ```bash
 git config user.name "Nombre"
+```
+Establecer correo:
+```bash
 git config user.email "tu-correo"
 ```
 ### Establecer la conexión mediante SSH
