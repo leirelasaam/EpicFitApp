@@ -19,6 +19,10 @@ Crear una clave SSH para conectarse desde el equipo al repositorio remoto (GitHu
 ```bash
 ssh-keygen
 ```
+1.1.Forma alternativa de crear una clave ed25519 con tu email
+```bash
+  $ ssh-keygen -t ed25519 -C "email@email.com"
+```
 2. Seguir los pasos donde primero se puede indicar la ruta y nombre del archivo id_rsa/id_ed que se va a generar.
 3. Enter varias veces seguidas.
 4. Copiar la clave pública (dirección puesta como ejemplo, donde se suele generar el archivo).
