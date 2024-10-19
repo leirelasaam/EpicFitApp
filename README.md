@@ -29,6 +29,10 @@ ssh-keygen
 ```bash
 cat ~/.ssh/id_rsa.pub
 ```
+4.1.Alternativa: Copiar la clave públic tipo ssh-ed25519
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
 5. En GitHub acceder a Settings > SSH and GPG Keys
 6. Crear una nueva clave haciendo click en _New SSH key_ y pegar el contenido de la misma.
 
