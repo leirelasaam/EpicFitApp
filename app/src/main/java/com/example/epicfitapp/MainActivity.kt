@@ -30,13 +30,13 @@ class MainActivity : AppCompatActivity() {
 
         Log.d("MainActivity", "ID de usuario: ${usuario.id}")
 
-        db.collection(collectionName).get()
+        db.collection(collectionName).whereEqualTo("usuario", db.collection("Usuarios").document(usuario.id)) // Filtrar por referencia de usuario
+            .get()
             .addOnSuccessListener { documents ->
                 if (documents.isEmpty) {
                     Log.d("FirestoreService", "No se encontraron historicos para el usuario.")
                 } else {
                     for (document in documents) {
-                        val usuarioRef = document.get("usuario")
                         val workoutRef = document.getDocumentReference("workout")
                         val tiempo = document.getDouble("tiempo")?.toInt()
                         val porcentaje = document.getDouble("porcentaje")?.toInt()
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
                         Log.d(
                             "FirestoreService",
-                            "Historico: \n$usuarioRef\n $workoutRef\n $tiempo\n $porcentaje\n $fecha\n"
+                            "Historico: $workoutRef\n $tiempo\n $porcentaje\n $fecha\n"
                         )
                     }
                 }
