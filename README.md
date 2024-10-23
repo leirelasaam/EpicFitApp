@@ -39,7 +39,7 @@ Crear una clave SSH para conectarse desde el equipo al repositorio remoto (GitHu
 ```bash
 ssh-keygen
 ```
-      **Alternativa** de crear una clave ed25519 con tu email
+1.1. **Alternativa** de crear una clave ed25519 con tu email
 ```bash
   $ ssh-keygen -t ed25519 -C "email@email.com"
 ```
@@ -49,7 +49,7 @@ ssh-keygen
 ```bash
 cat ~/.ssh/id_rsa.pub
 ```
-      **Alternativa:** Copiar la clave públic tipo ssh-ed25519
+4.1. **Alternativa:** Copiar la clave públic tipo ssh-ed25519
 ```bash
 cat ~/.ssh/id_ed25519.pub
 ```
@@ -65,10 +65,13 @@ nano .git/config
 ```bash
 sshCommand = ssh -i ~/.ssh/id_rsa
 ``` 
-3. Si aún así persisten los problemas, quizás sea por el agente SSH. Para ello, introducir los siguientes comandos (la ruta debe ser la de tu clave):
+3. Si aún así persisten los problemas, quizás sea por el agente SSH. Para ello, introducir los siguientes comandos:
 ```bash
 eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_rsa
+```
+4. Agrega la clave SSH indicando la ruta de tu clave(si hay varias personas en tu PC la clave podria ser id_ed25519_nombreUsuario):
+```bash
+ssh-add ~/.ssh/id_ed25519
 ``` 
 
 ### Gestionar ramas
