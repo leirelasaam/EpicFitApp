@@ -39,7 +39,7 @@ Crear una clave SSH para conectarse desde el equipo al repositorio remoto (GitHu
 ```bash
 ssh-keygen
 ```
-1.1.Forma alternativa de crear una clave ed25519 con tu email
+      **Alternativa** de crear una clave ed25519 con tu email
 ```bash
   $ ssh-keygen -t ed25519 -C "email@email.com"
 ```
@@ -49,7 +49,7 @@ ssh-keygen
 ```bash
 cat ~/.ssh/id_rsa.pub
 ```
-4.1.Alternativa: Copiar la clave públic tipo ssh-ed25519
+      **Alternativa:** Copiar la clave públic tipo ssh-ed25519
 ```bash
 cat ~/.ssh/id_ed25519.pub
 ```
@@ -161,7 +161,15 @@ Ver el estado de git local:
 ```bash
 git status
 ```
-Ver el listado de commits (para salir pulsar la tecla **q**):
+**Alternativa:** Vista simplificada del status
+```bash
+git status -s
+```
+Ver el listado de commits (para salir, pulsar la tecla **q**):
 ```bash
 git log
+```
+**Alternativa:** log simplificado e incluye el indentificador del commit:
+```bash
+git log --oneline
 ```
