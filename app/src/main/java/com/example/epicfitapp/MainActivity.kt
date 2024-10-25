@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
+import modelo.pojos.Usuario
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,14 +21,9 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        getAllUsers { result ->
-            if (result != null) {
-                Log.d("MainActivity", "Usuarios obtenidos.")
-            } else {
-                Log.d("MainActivity", "No se pudieron obtener los usuarios.")
-            }
-        }
+
     }
+
 
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val collectionName = "Usuarios"
@@ -56,6 +52,5 @@ class MainActivity : AppCompatActivity() {
                 onResult(null)
             }
     }
-
-
 }
+
