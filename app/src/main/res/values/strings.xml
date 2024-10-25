@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">EpicFitApp</string>
     <string name="titulo_workouts">Workouts</string>
-    <string name="nivel_pl">Nivel:</string>
+    <string name="nivel_pl">Nivel de EpicFit:</string>
 </resources>
