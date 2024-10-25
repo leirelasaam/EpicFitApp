@@ -3,11 +3,8 @@ package com.example.epicfitapp
 import adaptadores.HistoricoAdapter
 import android.os.Build
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
@@ -17,7 +14,7 @@ import bbdd.GestorDeHistoricos
 import kotlinx.coroutines.launch
 import modelo.pojos.Usuario
 
-class HistoricoActivity : AppCompatActivity() {
+class HistoricoActivity : BaseActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,9 +39,4 @@ class HistoricoActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menu, menu)
-        return true
-    }
 }
