@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">EpicFitApp</string>
+    <string name="titulo_workouts">Workouts</string>
+    <string name="nivel_pl">Nivel de EpicFit:</string>
+    <string name="nivel">Nivel:</string>
+    <string name="menu_workouts">Workouts</string>
+    <string name="menu_perfil">Perfil</string>
+    <string name="menu_entrenador">Entrenador</string>
 </resources>
