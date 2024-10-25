@@ -1,7 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.EpicFitApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <style name="Base.Theme.EpicFitApp" parent="Theme.Material3.DayNight">
+    </style>
+
+    <style name="Theme.EpicFitApp" parent="Base.Theme.EpicFitApp">
+        <item name="colorPrimary">@color/primary</item> <!-- Action Bar background color -->
+        <item name="android:textColorPrimary">@color/black</item> <!-- Title text color -->
+        <item name="colorPrimaryDark">@color/white</item> <!-- Status bar color -->
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 </resources>
