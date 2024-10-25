@@ -40,7 +40,15 @@ class HistoricoAdapter(private val context: Context?, private val historicos: Li
         holder.fecha.text = historico.fecha?.let { DateUtils.formatearFecha(it) }
         holder.tiempo.text = historico.tiempo?.let { DateUtils.formatearTiempo(it) }
         holder.porcentaje.text = historico.porcentaje.toString() + "%"
-        holder.imagen.setImageResource(R.drawable.logo)
+
+        if (historico.workout?.tipo == "brazo"){
+            holder.imagen.setImageResource(R.drawable.brazo)
+        } else if(historico.workout?.tipo == "pecho"){
+            holder.imagen.setImageResource(R.drawable.pecho)
+        } else {
+            holder.imagen.setImageResource(R.drawable.logo)
+        }
+
     }
 
     override fun getItemCount(): Int {

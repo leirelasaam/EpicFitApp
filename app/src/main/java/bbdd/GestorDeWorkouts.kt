@@ -33,11 +33,13 @@ class GestorDeWorkouts {
                 val nivel = document.getDouble("nivel")?.toInt()
                 val tiempo = document.getDouble("tiempo")?.toInt()
                 val video = document.getString("video")
+                val tipo = document.getString("tipo")
 
                 workout.nombre = nombre
                 workout.nivel = nivel
                 workout.tiempo = tiempo
                 workout.video = video
+                workout.tipo = tipo
             }
         } catch (e: WorkoutNotFoundException) {
             Log.d("FirestoreService", "Error: ${e.message}")

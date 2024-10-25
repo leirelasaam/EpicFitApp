@@ -22,7 +22,7 @@
             android:id="@+id/textTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#CBFF9800"
+            android:background="#FF9800"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="@string/titulo_workouts"
