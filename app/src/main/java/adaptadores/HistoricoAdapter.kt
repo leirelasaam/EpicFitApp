@@ -1,6 +1,8 @@
 package adaptadores
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.view.View
 import android.widget.TextView
@@ -35,18 +37,25 @@ class HistoricoAdapter(private val context: Context?, private val historicos: Li
     override fun onBindViewHolder(holder: HistoricoViewHolder, position: Int) {
         val historico = historicos[position]
         holder.nombre.text = historico.workout?.nombre
-        holder.nivel.text = "Nivel: " + historico.workout?.nivel.toString()
+        holder.nivel.text = context?.getString(R.string.nivel) + " " + historico.workout?.nivel.toString()
         holder.tiempoPrev.text = historico.workout?.tiempo?.let { DateUtils.formatearTiempo(it) }
         holder.fecha.text = historico.fecha?.let { DateUtils.formatearFecha(it) }
         holder.tiempo.text = historico.tiempo?.let { DateUtils.formatearTiempo(it) }
         holder.porcentaje.text = historico.porcentaje.toString() + "%"
 
-        if (historico.workout?.tipo == "brazo"){
-            holder.imagen.setImageResource(R.drawable.brazo)
-        } else if(historico.workout?.tipo == "pecho"){
-            holder.imagen.setImageResource(R.drawable.pecho)
-        } else {
-            holder.imagen.setImageResource(R.drawable.logo)
+        when (historico.workout?.tipo) {
+            "brazo" -> holder.imagen.setImageResource(if (historico.workout?.video != null) R.drawable.brazo else R.drawable.brazo_off)
+            "pecho" -> holder.imagen.setImageResource(if (historico.workout?.video != null) R.drawable.pecho else R.drawable.pecho_off)
+            else -> holder.imagen.setImageResource(R.drawable.logo)
+        }
+
+        holder.imagen.setOnClickListener {
+            val videoUrl = historico.workout?.video
+            if (!videoUrl.isNullOrEmpty()) {
+                // Abrir el enlace del video
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl))
+                context?.startActivity(intent)
+            }
         }
 
     }
