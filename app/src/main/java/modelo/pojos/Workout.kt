@@ -1,5 +1,11 @@
 package modelo.pojos
 
-class Workout(var nombre: String? = null, var nivel: Int? = 0, var tiempo: Int? = 0, var video: String? = null, var tipo: String? = null) {
+class Workout(
+    var nombre: String? = null,
+    var nivel: Int? = 0,
+    var tiempo: Int? = 0,
+    var video: String? = null,
+    var tipo: String? = null,
+) {
 
 }
