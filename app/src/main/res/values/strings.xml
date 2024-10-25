@@ -1,5 +1,9 @@
 <resources>
+    <!--String General-->
     <string name="app_name">EpicFitApp</string>
+
+    <!--String Login-->
+
     <string name="textViewUsuario">Usuario</string>
     <string name="placeHolderUsuario">usuario1@epicfit.com</string>
     <string name="textViewContraseña">Contraseña</string>
@@ -7,5 +11,11 @@
     <string name="textViewNoTienesCuenta">¿Todavía no tienes cuenta?</string>
     <string name="buttonRegistrarme">Registrarme</string>
 
+    <!--String Register-->
+    
+
+    <!--String Workouts-->
+    <string name="titulo_workouts">Workouts</string>
+    <string name="nivel_pl">Nivel:</string>
 
 </resources>
