@@ -1,5 +1,5 @@
 package modelo.pojos
 
-class Usuario(var id: String) {
+class Usuario(var id: String = "") {
 
 }

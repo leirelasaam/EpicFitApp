@@ -21,68 +21,36 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        obtenerHistoricos(Usuario("zoVUUYKznIh8KDXOxjUc"))
+
     }
 
-    private fun obtenerHistoricos(usuario: Usuario) {
-        val db: FirebaseFirestore = FirebaseFirestore.getInstance()
-        val collectionName = "Historicos"
 
-        Log.d("MainActivity", "ID de usuario: ${usuario.id}")
+    private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private val collectionName = "Usuarios"
 
-        db.collection(collectionName).whereEqualTo("usuario", db.collection("Usuarios").document(usuario.id)) // Filtrar por referencia de usuario
+    private fun getAllUsers(onResult: (QuerySnapshot?) -> Unit) {
+        db.collection(collectionName)
             .get()
-            .addOnSuccessListener { documents ->
-                if (documents.isEmpty) {
-                    Log.d("FirestoreService", "No se encontraron historicos para el usuario.")
-                } else {
-                    for (document in documents) {
-                        val workoutRef = document.getDocumentReference("workout")
-                        val tiempo = document.getDouble("tiempo")?.toInt()
-                        val porcentaje = document.getDouble("porcentaje")?.toInt()
-                        val fecha = document.getDate("fecha")
+            .addOnSuccessListener { result ->
+                onResult(result)
 
-                        Log.d(
-                            "FirestoreService",
-                            "Historico: $workoutRef\n $tiempo\n $porcentaje\n $fecha\n"
-                        )
+                // Verificar si hay documentos en la consulta
+                if (result != null && !result.isEmpty) {
+                    // Iterar sobre los documentos obtenidos
+                    for (document in result.documents) {
+                        val userId = document.id
+                        val userData = document.data
+
+                        Log.d("FirestoreService", "User ID: $userId, Data: $userData")
                     }
+                } else {
+                    Log.d("FirestoreService", "No users found.")
                 }
             }
             .addOnFailureListener { e ->
-                Log.d("FirestoreService", "Error: " + e)
+                Log.w("FirestoreService", "Error getting documents.", e)
+                onResult(null)
             }
     }
 }
 
-
-/*
-private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
-private val collectionName = "Usuarios"
-
-private fun getAllUsers(onResult: (QuerySnapshot?) -> Unit) {
-    db.collection(collectionName)
-        .get()
-        .addOnSuccessListener { result ->
-            onResult(result)
-
-            // Verificar si hay documentos en la consulta
-            if (result != null && !result.isEmpty) {
-                // Iterar sobre los documentos obtenidos
-                for (document in result.documents) {
-                    val userId = document.id
-                    val userData = document.data
-
-                    Log.d("FirestoreService", "User ID: $userId, Data: $userData")
-                }
-            } else {
-                Log.d("FirestoreService", "No users found.")
-            }
-        }
-        .addOnFailureListener { e ->
-            Log.w("FirestoreService", "Error getting documents.", e)
-            onResult(null)
-        }
-}
-
-*/

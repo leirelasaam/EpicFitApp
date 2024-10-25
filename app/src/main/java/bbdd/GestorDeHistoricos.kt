@@ -1,40 +1,72 @@
 package bbdd
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
+import kotlinx.coroutines.tasks.await
+import modelo.pojos.Historico
 import modelo.pojos.Usuario
+import modelo.pojos.Workout
 
+
+class HistoricosNotFoundException(message: String) : Exception(message)
 class GestorDeHistoricos {
 
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val collectionName = "Historicos"
+    private val gestorDeWorkouts = GestorDeWorkouts()
 
-    fun obtenerHistoricos(usuario: Usuario, onResult: (QuerySnapshot?) -> Unit) {
-        db.collection(collectionName).whereEqualTo("usuario", usuario.id).get()
-            .addOnSuccessListener { result ->
-                onResult(result)
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun obtenerHistoricos(usuario: Usuario): List<Historico> {
+        val db: FirebaseFirestore = FirebaseFirestore.getInstance()
+        val collectionName = "Historicos"
+        val historicos = mutableListOf<Historico>()
 
-                // Verificar si hay documentos en la consulta
-                if (result != null && !result.isEmpty) {
-                    // Iterar sobre los documentos obtenidos
-                    for (document in result.documents) {
-                        val usuarioRef = document.getDocumentReference("usuario")
-                        val workoutRef = document.getDocumentReference("workout")
-                        val tiempo = document.getDouble("tiempo")?.toInt()
-                        val porcentaje = document.getDouble("porcentaje")?.toInt()
-                        val fecha = document.getDate("fecha")
+        try {
+            val documents = db.collection(collectionName).whereEqualTo(
+                "usuario",
+                db.collection("Usuarios").document(usuario.id)
+            ).get().await()
 
-                        Log.d("FirestoreService", "Historico: \n$usuarioRef\n $workoutRef\n $tiempo\n $porcentaje\n $fecha\n")
+            if (documents.isEmpty) {
+                throw HistoricosNotFoundException("No se encontraron historicos para el usuario con ID: ${usuario.id}")
+            } else {
+                for (document in documents) {
+                    val tiempo = document.getDouble("tiempo")?.toInt()
+                    val porcentaje = document.getDouble("porcentaje")?.toInt()
+                    val fecha = document.getDate("fecha")?.toInstant()
+                        ?.atZone(java.time.ZoneId.systemDefault())
+                        ?.toLocalDateTime()
+
+                    val workoutRef: DocumentReference? = document.getDocumentReference("workout")
+                    val workout: Workout? = if (workoutRef != null) {
+                        gestorDeWorkouts.obtenerWorkoutPorId(workoutRef.id)
+                    } else {
+                        null
                     }
-                } else {
-                    Log.d("FirestoreService", "No se ha encontrado el histórico.")
+
+                    val historico = Historico(
+                        fecha = fecha,
+                        porcentaje = porcentaje,
+                        tiempo = tiempo,
+                        usuario = Usuario(usuario.id),
+                        workout = workout
+                    )
+                    historicos.add(historico)
                 }
             }
-            .addOnFailureListener { e ->
-                Log.w("FirestoreService", "Error recogiendo los documentos.", e)
-                onResult(null)
-            }
+        } catch (e: HistoricosNotFoundException) {
+            Log.d("FirestoreService", "Error: ${e.message}")
+            throw e
+        } catch (e: Exception) {
+            Log.d("FirestoreService", "Error: $e")
+            throw Exception("Error al obtener los historicos")
+        }
+
+        return historicos
     }
 
 }

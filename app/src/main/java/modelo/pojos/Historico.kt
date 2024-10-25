@@ -2,6 +2,12 @@ package modelo.pojos
 
 import java.time.LocalDateTime
 
-class Historico(var fecha: LocalDateTime, var porcentaje: Int, var tiempo: Int, var usuario: Usuario, var workout: Workout) {
+class Historico (
+    var fecha: LocalDateTime? = null,
+    var porcentaje: Int? = 0,
+    var tiempo: Int? = 0,
+    var usuario: Usuario? = null,
+    var workout: Workout? = null
+) {
 
 }
