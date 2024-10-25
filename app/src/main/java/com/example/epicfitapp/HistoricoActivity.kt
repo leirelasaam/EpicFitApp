@@ -3,6 +3,8 @@ package com.example.epicfitapp
 import adaptadores.HistoricoAdapter
 import android.os.Build
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -38,6 +40,11 @@ class HistoricoActivity : AppCompatActivity() {
             val adapter = HistoricoAdapter(this@HistoricoActivity, historicos)
             recycler.adapter = adapter
         }
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+        return true
     }
 }
