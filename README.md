@@ -25,6 +25,10 @@ Clonar un repositorio, donde la url es la ruta que se copia al entrar al reposit
 ```bash
 git clone git@github.com:propietario/nombreProyecto.git
 ```
+**Alternativa: ** clonar sin historico, solo el último commit, útil para clonar proyectos muy grandes de los que no necesites todo el historico 
+```bash
+git clone git@github.com:propietario/nombreProyecto.git --depth=1
+```
 Establecer el nombre:
 ```bash
 git config user.name "Nombre"
