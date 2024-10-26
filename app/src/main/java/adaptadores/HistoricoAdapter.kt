@@ -15,7 +15,7 @@ import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import utils.DateUtils
 
-class HistoricoAdapter(private val context: Context?, private val historicos: List<Historico>) :
+class HistoricoAdapter(private val context: Context?, private var historicos: List<Historico>) :
     RecyclerView.Adapter<HistoricoAdapter.HistoricoViewHolder>() {
 
     class HistoricoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -62,6 +62,11 @@ class HistoricoAdapter(private val context: Context?, private val historicos: Li
 
     override fun getItemCount(): Int {
         return historicos.size
+    }
+
+    fun updateData(newHistoricos: List<Historico>) {
+        historicos = newHistoricos
+        notifyDataSetChanged()
     }
 
 }

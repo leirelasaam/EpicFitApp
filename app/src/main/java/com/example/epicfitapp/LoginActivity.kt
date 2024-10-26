@@ -20,7 +20,7 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.Date
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
     private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
 
     @RequiresApi(Build.VERSION_CODES.O)

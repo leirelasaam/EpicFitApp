@@ -1,12 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.EpicFitApp" parent="Theme.Material3.DayNight">
+        <!-- Fondo general de la aplicación -->
+        <item name="android:windowBackground">@color/dark_background</item> <!-- Fondo gris oscuro -->
+        <item name="android:statusBarColor">@color/black</item> <!-- Color de la barra de estado -->
+        <item name="android:colorBackground">@color/dark_background</item> <!-- Fondo de los elementos -->
+        <item name="android:textColorPrimary">@color/white</item> <!-- Color del texto principal -->
+        <item name="android:textColorSecondary">@color/light_gray</item> <!-- Color del texto secundario -->
     </style>
 
     <style name="Theme.EpicFitApp" parent="Base.Theme.EpicFitApp">
         <item name="colorPrimary">@color/primary</item> <!-- Action Bar background color -->
-        <item name="android:textColorPrimary">@color/black</item> <!-- Title text color -->
-        <item name="colorPrimaryDark">@color/white</item> <!-- Status bar color -->
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="colorPrimaryDark">@color/black</item> <!-- Status bar color -->
+        <item name="android:windowLightStatusBar">false</item> <!-- Desactivar el estado claro de la barra -->
     </style>
 </resources>
