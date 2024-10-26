@@ -15,4 +15,6 @@
     <!--String Workouts-->
     <string name="nivel_pl">Nivel de</string>
     <string name="nivel">Nivel:</string>
+    <string name="filtrar_niveles">Filtrar por niveles:</string>
+    <string name="todos_niveles">Todos los niveles</string>
 </resources>

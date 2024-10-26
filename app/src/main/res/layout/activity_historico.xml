@@ -34,6 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:paddingStart="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp">
 
@@ -54,11 +55,20 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="@string/filtrar_niveles" />
+
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/spinnerNiveles"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_weight="0" />
+            android:layout_weight="0"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listaHistorico"
