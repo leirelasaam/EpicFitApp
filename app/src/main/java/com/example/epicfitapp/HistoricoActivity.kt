@@ -3,6 +3,7 @@ package com.example.epicfitapp
 import adaptadores.HistoricoAdapter
 import android.os.Build
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.core.view.ViewCompat
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import bbdd.GestorDeHistoricos
 import kotlinx.coroutines.launch
 import modelo.pojos.Usuario
+import modelo.pojos.UsuarioLogueado
 
 class HistoricoActivity : BaseActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -26,16 +28,24 @@ class HistoricoActivity : BaseActivity() {
             insets
         }
 
+        val usuarioActual = UsuarioLogueado.usuario
+
+        if (usuarioActual != null){
+            (findViewById<TextView>(R.id.nivelTxt)).text = (findViewById<TextView>(R.id.nivelTxt)).text.toString() + " @" + usuarioActual.user
+            (findViewById<TextView>(R.id.nivelValorTxt)).text = usuarioActual.nivel.toString()
+        }
+
         val recycler = findViewById<RecyclerView>(R.id.listaHistorico)
         recycler.layoutManager = LinearLayoutManager(this)
         val gdh: GestorDeHistoricos = GestorDeHistoricos()
 
         lifecycleScope.launch {
-            val usuarioId = "zoVUUYKznIh8KDXOxjUc" // ID de ejemplo del usuario leire
-            val historicos = gdh.obtenerHistoricos(Usuario(usuarioId))
+            if (usuarioActual != null) {
+                val historicos = gdh.obtenerHistoricos(usuarioActual)
 
-            val adapter = HistoricoAdapter(this@HistoricoActivity, historicos)
-            recycler.adapter = adapter
+                val adapter = HistoricoAdapter(this@HistoricoActivity, historicos)
+                recycler.adapter = adapter
+            }
         }
     }
 
