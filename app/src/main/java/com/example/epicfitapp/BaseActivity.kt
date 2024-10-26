@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import modelo.pojos.UsuarioLogueado
 
 
 open class BaseActivity : AppCompatActivity() {
@@ -16,6 +17,16 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
+
+        val usuarioActual = UsuarioLogueado.usuario
+
+        // Verificar si el usuario es entrenador
+        if (usuarioActual != null) {
+            if (!usuarioActual.esEntrenador!!) {
+                menu.findItem(R.id.item_entrenador)?.isVisible = false
+            }
+        }
+
         return true
     }
 
