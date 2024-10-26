@@ -9,4 +9,17 @@
         <item name="colorPrimaryDark">@color/white</item> <!-- Status bar color -->
         <item name="android:windowLightStatusBar">true</item>
     </style>
+
+    <style name="Widget.Theme.EpicFitApp.Button" parent="Widget.Material3.Button">
+        <item name="cornerRadius">5dp</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="Widget.Theme.EpicFitApp.OutlinedButton" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">5dp</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Widget.Theme.EpicFitApp.ButtonPrimary" parent="Widget.Theme.EpicFitApp.Button">
+        <item name="backgroundTint">@color/primary</item>
+    </style>
 </resources>
