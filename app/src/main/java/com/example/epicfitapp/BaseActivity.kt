@@ -44,15 +44,29 @@ open class BaseActivity : AppCompatActivity() {
             sharedPreferences.edit().putBoolean("dark_mode", isChecked).apply()
         }
 
-        // Verificar si el usuario es entrenador
-        val usuarioActual = UsuarioLogueado.usuario
-        if (usuarioActual != null) {
-            if (!usuarioActual.esEntrenador!!) {
-                menu.findItem(R.id.item_entrenador)?.isVisible = false
-            }
+        // Ocultar ítems si la actividad actual es LoginActivity
+        if (this is LoginActivity) {
+            ocultarItemsDelMenu(menu)
+        } else {
+            mostrarItemsSegunUsuario(menu)
         }
 
         return true
+    }
+
+    // Función para ocultar los ítems del menú
+    private fun ocultarItemsDelMenu(menu: Menu) {
+        menu.findItem(R.id.item_workout)?.isVisible = false
+        menu.findItem(R.id.item_perfil)?.isVisible = false
+        menu.findItem(R.id.item_entrenador)?.isVisible = false
+    }
+
+    // Función para mostrar ítems según el tipo de usuario
+    private fun mostrarItemsSegunUsuario(menu: Menu) {
+        val usuarioActual = UsuarioLogueado.usuario
+        if (usuarioActual != null && !usuarioActual.esEntrenador!!) {
+            menu.findItem(R.id.item_entrenador)?.isVisible = false
+        }
     }
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
