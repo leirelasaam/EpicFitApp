@@ -51,7 +51,8 @@ class LoginActivity : AppCompatActivity() {
 
                         // Aquí puedes realizar otras acciones con el usuario logueado
                         println("Usuario logueado: ${usuario.nombre}")
-                        Toast.makeText(this, "Bienvenido ${usuario.nombre}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Bienvenido ${usuario.nombre}", Toast.LENGTH_SHORT)
+                            .show()
 
                         // Pasar a histórico tras login correcto
                         val intent = Intent(this, HistoricoActivity::class.java)
@@ -62,7 +63,8 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                Toast.makeText(this, "Por favor ingrese usuario y contraseña", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Por favor ingrese usuario y contraseña", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
@@ -81,25 +83,15 @@ class LoginActivity : AppCompatActivity() {
                     callback(null)
                 } else {
                     result.documents.firstOrNull()?.let { document ->
-                        val usuario = Usuario().apply {
-                            id = document.id
-                            apellido = document.getString("apellido")
-                            correo = document.getString("correo")
-                            esEntrenador = document.getBoolean("esEntrenador")
-                            fechaAlt = document.getDate("fechaAlt")?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDateTime()
-                            fechaNac = document.getDate("fechaNac")?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDateTime()
-                            nivel = document.getDouble("nivel")?.toInt() ?: 0
-                            nombre = document.getString("nombre")
-                            pass = document.getString("pass")
-                            user = document.getString("usuario")
-                        }
+                        val usuarioEncontrado = document.toObject(Usuario::class.java)
+                        usuarioEncontrado?.id = document.id
 
                         // Asignar el usuario a UsuarioLogueado
-                        UsuarioLogueado.usuario = usuario
+                        UsuarioLogueado.usuario = usuarioEncontrado
 
-                        Log.d(TAG, "Usuario encontrado: ${usuario.user}")
+                        Log.d(TAG, "Usuario encontrado: ${usuarioEncontrado?.usuario}")
                         //Toast.makeText(this, "Bienvenido ${usuario.user}", Toast.LENGTH_SHORT).show()
-                        callback(usuario)
+                        callback(usuarioEncontrado)
                     }
                 }
             }

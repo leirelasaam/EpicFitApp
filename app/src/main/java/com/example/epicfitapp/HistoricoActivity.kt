@@ -3,6 +3,7 @@ package com.example.epicfitapp
 import adaptadores.HistoricoAdapter
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
@@ -30,8 +31,9 @@ class HistoricoActivity : BaseActivity() {
 
         val usuarioActual = UsuarioLogueado.usuario
 
-        if (usuarioActual != null){
-            (findViewById<TextView>(R.id.nivelTxt)).text = (findViewById<TextView>(R.id.nivelTxt)).text.toString() + " @" + usuarioActual.user
+        if (usuarioActual != null) {
+            (findViewById<TextView>(R.id.nivelTxt)).text =
+                (findViewById<TextView>(R.id.nivelTxt)).text.toString() + " @" + usuarioActual.usuario
             (findViewById<TextView>(R.id.nivelValorTxt)).text = usuarioActual.nivel.toString()
         }
 
@@ -39,13 +41,17 @@ class HistoricoActivity : BaseActivity() {
         recycler.layoutManager = LinearLayoutManager(this)
         val gdh: GestorDeHistoricos = GestorDeHistoricos()
 
-        lifecycleScope.launch {
-            if (usuarioActual != null) {
-                val historicos = gdh.obtenerHistoricos(usuarioActual)
-
-                val adapter = HistoricoAdapter(this@HistoricoActivity, historicos)
-                recycler.adapter = adapter
-            }
+        if (usuarioActual != null) {
+            gdh.obtenerHistoricosPorUsuario(
+                usuarioActual,
+                onSuccess = { historicos ->
+                    val adapter = HistoricoAdapter(this@HistoricoActivity, historicos)
+                    recycler.adapter = adapter
+                },
+                onFailure = { exception ->
+                    Log.e("HIS", "Error al obtener históricos: ${exception.message}")
+                }
+            )
         }
     }
 

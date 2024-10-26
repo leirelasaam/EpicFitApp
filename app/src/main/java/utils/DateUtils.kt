@@ -2,18 +2,13 @@ package utils
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.google.firebase.Timestamp
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 class DateUtils {
     companion object {
-        @RequiresApi(Build.VERSION_CODES.O)
-        @JvmStatic
-        fun formatearFecha(fecha: LocalDateTime): String {
-            val formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
-            return fecha.format(formatoFecha)
-        }
-
         @JvmStatic
         fun formatearTiempo(tiempoEnSegundos: Int): String {
             val horas = tiempoEnSegundos / 3600
@@ -34,6 +29,13 @@ class DateUtils {
             return partes.joinToString(" ")
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
+        fun formatearTimestamp(timestamp: Timestamp): String {
+            val instant = timestamp.toDate().toInstant()
+            val localDateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
 
+            val formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
+            return localDateTime.format(formatoFecha)
+        }
     }
 }

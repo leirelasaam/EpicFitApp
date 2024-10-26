@@ -36,21 +36,21 @@ class HistoricoAdapter(private val context: Context?, private val historicos: Li
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: HistoricoViewHolder, position: Int) {
         val historico = historicos[position]
-        holder.nombre.text = historico.workout?.nombre
-        holder.nivel.text = context?.getString(R.string.nivel) + " " + historico.workout?.nivel.toString()
-        holder.tiempoPrev.text = historico.workout?.tiempo?.let { DateUtils.formatearTiempo(it) }
-        holder.fecha.text = historico.fecha?.let { DateUtils.formatearFecha(it) }
+        holder.nombre.text = historico.workoutObj?.nombre
+        holder.nivel.text = context?.getString(R.string.nivel) + " " + historico.workoutObj?.nivel.toString()
+        holder.tiempoPrev.text = historico.workoutObj?.tiempo?.let { DateUtils.formatearTiempo(it) }
+        holder.fecha.text = historico.fecha?.let { DateUtils.formatearTimestamp(it) }
         holder.tiempo.text = historico.tiempo?.let { DateUtils.formatearTiempo(it) }
         holder.porcentaje.text = historico.porcentaje.toString() + "%"
 
-        when (historico.workout?.tipo) {
-            "brazo" -> holder.imagen.setImageResource(if (historico.workout?.video != null) R.drawable.brazo else R.drawable.brazo_off)
-            "pecho" -> holder.imagen.setImageResource(if (historico.workout?.video != null) R.drawable.pecho else R.drawable.pecho_off)
+        when (historico.workoutObj?.tipo) {
+            "brazo" -> holder.imagen.setImageResource(if (historico.workoutObj?.video != null) R.drawable.brazo else R.drawable.brazo_off)
+            "pecho" -> holder.imagen.setImageResource(if (historico.workoutObj?.video != null) R.drawable.pecho else R.drawable.pecho_off)
             else -> holder.imagen.setImageResource(R.drawable.logo)
         }
 
         holder.imagen.setOnClickListener {
-            val videoUrl = historico.workout?.video
+            val videoUrl = historico.workoutObj?.video
             if (!videoUrl.isNullOrEmpty()) {
                 // Abrir el enlace del video
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl))
