@@ -1,6 +1,7 @@
 package com.example.epicfitapp
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -42,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
 
         btnIniciarSesion.setOnClickListener {
             if (user.text.isNotEmpty() && pass.text.isNotEmpty()) {
-                Toast.makeText(this, "User y pass introducidos", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "User y pass introducidos", Toast.LENGTH_SHORT).show()
                 comprobarUsuario(user.text.toString(), pass.text.toString()) { usuario ->
                     if (usuario != null) {
                         // Asignar el usuario a UsuarioLogueado
@@ -51,6 +52,11 @@ class LoginActivity : AppCompatActivity() {
                         // Aquí puedes realizar otras acciones con el usuario logueado
                         println("Usuario logueado: ${usuario.nombre}")
                         Toast.makeText(this, "Bienvenido ${usuario.nombre}", Toast.LENGTH_SHORT).show()
+
+                        // Pasar a histórico tras login correcto
+                        val intent = Intent(this, HistoricoActivity::class.java)
+                        startActivity(intent)
+                        finish()
                     } else {
                         Toast.makeText(this, "No se pudo iniciar sesión", Toast.LENGTH_SHORT).show()
                     }
@@ -71,7 +77,7 @@ class LoginActivity : AppCompatActivity() {
             .addOnSuccessListener { result ->
                 if (result.isEmpty) {
                     Log.d(TAG, "Usuario no encontrado o contraseña incorrecta.")
-                    Toast.makeText(this, "Usuario no encontrado o contraseña incorrecta.", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this, "Usuario no encontrado o contraseña incorrecta.", Toast.LENGTH_SHORT).show()
                     callback(null)
                 } else {
                     result.documents.firstOrNull()?.let { document ->
@@ -92,14 +98,14 @@ class LoginActivity : AppCompatActivity() {
                         UsuarioLogueado.usuario = usuario
 
                         Log.d(TAG, "Usuario encontrado: ${usuario.user}")
-                        Toast.makeText(this, "Bienvenido ${usuario.user}", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this, "Bienvenido ${usuario.user}", Toast.LENGTH_SHORT).show()
                         callback(usuario)
                     }
                 }
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error obteniendo documentos.", exception)
-                Toast.makeText(this, "Error al obtener usuarios.", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "Error al obtener usuarios.", Toast.LENGTH_SHORT).show()
                 callback(null)
             }
     }

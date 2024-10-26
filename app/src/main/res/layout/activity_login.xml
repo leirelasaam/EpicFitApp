@@ -27,7 +27,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/logo" />
 
     <Button
         android:id="@+id/btn_IniciarSesion"
@@ -90,7 +90,7 @@
         android:layout_height="39dp"
         android:ems="10"
         android:inputType="text"
-        android:text="@string/placeHolderUsuario"
+        android:text=""
         app:layout_constraintBottom_toTopOf="@+id/textViewPass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
