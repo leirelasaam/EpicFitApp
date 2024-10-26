@@ -32,7 +32,7 @@ class GestorDeHistoricos {
             ).get().await()
 
             if (documents.isEmpty) {
-                throw HistoricosNotFoundException("No se encontraron historicos para el usuario con ID: ${usuario.usuario}")
+                throw HistoricosNotFoundException("No se encontraron historicos para el usuario con ID: ${usuario.user}")
             } else {
                 for (document in documents) {
                     val tiempo = document.getDouble("tiempo")?.toInt()

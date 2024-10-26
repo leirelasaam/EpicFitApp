@@ -1,22 +1,28 @@
 package com.example.epicfitapp
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
 import modelo.pojos.Usuario
+import modelo.pojos.UsuarioLogueado
 import java.time.LocalDateTime
+import java.time.ZoneId
+import java.util.Date
 
 class LoginActivity : AppCompatActivity() {
     private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,64 +43,77 @@ class LoginActivity : AppCompatActivity() {
         btnIniciarSesion.setOnClickListener {
             if (user.text.isNotEmpty() && pass.text.isNotEmpty()) {
                 Toast.makeText(this, "User y pass introducidos", Toast.LENGTH_SHORT).show()
-                comprobarUsuario(user.text.toString(), pass.text.toString())
+                comprobarUsuario(user.text.toString(), pass.text.toString()) { usuario ->
+                    if (usuario != null) {
+                        // Asignar el usuario a UsuarioLogueado
+                        UsuarioLogueado.usuario = usuario
+
+                        // Aquí puedes realizar otras acciones con el usuario logueado
+                        println("Usuario logueado: ${usuario.nombre}")
+                        Toast.makeText(this, "Bienvenido ${usuario.nombre}", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "No se pudo iniciar sesión", Toast.LENGTH_SHORT).show()
+                    }
+                }
             } else {
                 Toast.makeText(this, "Por favor ingrese usuario y contraseña", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
-    private fun comprobarUsuario(username: String, password: String) {
-        val usuario = Usuario()
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun comprobarUsuario(username: String, password: String, callback: (Usuario?) -> Unit) {
         db.collection("Usuarios")
-            .whereEqualTo("usuario", username) // Filtrar por el campo "usuario"
-            .whereEqualTo("pass", password) // Filtrar por el campo "pass"
+            .whereEqualTo("usuario", username)
+            .whereEqualTo("pass", password)
             .get()
             .addOnSuccessListener { result ->
                 if (result.isEmpty) {
                     Log.d(TAG, "Usuario no encontrado o contraseña incorrecta.")
                     Toast.makeText(this, "Usuario no encontrado o contraseña incorrecta.", Toast.LENGTH_SHORT).show()
+                    callback(null)
                 } else {
-                    for (document in result.documents) {
-                        // Aquí puedes devolver el usuario encontrado o realizar otra acción
+                    result.documents.firstOrNull()?.let { document ->
+                        val usuario = Usuario().apply {
+                            id = document.id
+                            apellido = document.getString("apellido")
+                            correo = document.getString("correo")
+                            esEntrenador = document.getBoolean("esEntrenador")
+                            fechaAlt = document.getDate("fechaAlt")?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDateTime()
+                            fechaNac = document.getDate("fechaNac")?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDateTime()
+                            nivel = document.getDouble("nivel")?.toInt() ?: 0
+                            nombre = document.getString("nombre")
+                            pass = document.getString("pass")
+                            user = document.getString("usuario")
+                        }
 
-                        val id = document.getId()
-                        val apellido = document.getString("apellido")
-                        val correo = document.getString("correo")
-                        val esEntrenador = document.getBoolean("esEntrenador")
-                        val fechaAlt = document.getDate("fechaAlt")
-                        val fechaNac = document.getDate("fechaNac")
-                        val nivel = document.getDouble("nivel")
-                        val nombre = document.getString("nombre")
-                        val pass = document.getString("pass")
-                        val user = document.getString("usuario")
+                        // Asignar el usuario a UsuarioLogueado
+                        UsuarioLogueado.usuario = usuario
 
-                            Toast.makeText(this, "Login correcto, $usuario, $pass", Toast.LENGTH_SHORT).show()
-
-                        usuario.id = id
-                        usuario.apellido = apellido
-                        usuario.correo = correo
-                        usuario.esEntrenador = esEntrenador
-                        usuario.fechaAlt  = fechaAlt
-                        usuario.fechaNac = fechaNac
-                        usuario.nivel = nivel
-                        usuario.nombre = nombre
-                        usuario.pass = pass
-                        usuario.user = user
-
-
-                        Log.d(TAG, "Usuario encontrado: ${document.id} => ${document.data}")
-                        Toast.makeText(this, "Bienvenido ${document.data?.get("usuario")}", Toast.LENGTH_SHORT).show()
+                        Log.d(TAG, "Usuario encontrado: ${usuario.user}")
+                        Toast.makeText(this, "Bienvenido ${usuario.user}", Toast.LENGTH_SHORT).show()
+                        callback(usuario)
                     }
                 }
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error obteniendo documentos.", exception)
                 Toast.makeText(this, "Error al obtener usuarios.", Toast.LENGTH_SHORT).show()
+                callback(null)
             }
     }
 
     companion object {
         private const val TAG = "LoginActivity"
     }
+
+    //Así se accede al usuario logueado desde cualquier parte del proyecto
+    /*
+    val usuarioActual = UsuarioLogueado.usuario
+    if (usuarioActual != null) {
+        // Haz algo con el usuario logueado
+        println("Usuario logueado: ${usuarioActual.nombre}")
+    }
+    */
 }
