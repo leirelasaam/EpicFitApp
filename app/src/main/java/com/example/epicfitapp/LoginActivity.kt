@@ -1,12 +1,14 @@
 package com.example.epicfitapp
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
@@ -22,6 +24,9 @@ import java.util.Date
 
 class LoginActivity : BaseActivity() {
     private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
+    private lateinit var rememberMeCheckBox: CheckBox
+    private lateinit var user: EditText
+    private lateinit var pass: EditText
 
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("WrongViewCast")
@@ -36,9 +41,13 @@ class LoginActivity : BaseActivity() {
             insets
         }
 
+        user = findViewById<EditText>(R.id.inputUser)
+        pass = findViewById<EditText>(R.id.inputPass)
+
+        // Cargar datos de inicio si la casilla de rememberMe está marcada y ha habido antes un login exitoso
+        cargarDatosInicio()
+
         // Referencias a los EditText y el botón
-        val user = findViewById<EditText>(R.id.inputUser)
-        val pass = findViewById<EditText>(R.id.inputPass)
         val btnIniciarSesion = findViewById<Button>(R.id.btn_IniciarSesion)
 
         btnIniciarSesion.setOnClickListener {
@@ -54,8 +63,21 @@ class LoginActivity : BaseActivity() {
                         Toast.makeText(this, "Bienvenido ${usuario.nombre}", Toast.LENGTH_SHORT)
                             .show()
 
-                        // Pasar a histórico tras login correcto
-                        val intent = Intent(this, HistoricoActivity::class.java)
+                        // Guarda credenciales de inicio si rememberMe seleccionado
+                        if (rememberMeCheckBox.isChecked) {
+                            recordarUsuario(user.text.toString(), pass.text.toString())
+                        }
+                        else{
+                            //Si rememberMe no está seleccionado se borra las credenciales de inicio
+                            borrarUsuarioRecordado()
+                        }
+
+                        // Redirige a la actividad dependiendo si es entrenador o no
+                        val intent = if (true == usuario.esEntrenador) {
+                            Intent(this, EntrenadorActivity::class.java)
+                        } else {
+                            Intent(this, HistoricoActivity::class.java)
+                        }
                         startActivity(intent)
                         finish()
                     } else {
@@ -68,12 +90,19 @@ class LoginActivity : BaseActivity() {
             }
         }
 
+        btnIniciarSesion.setOnClickListener {
+            //Comentado porque todavia no está el RegisterActivity
+            //Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun comprobarUsuario(username: String, password: String, callback: (Usuario?) -> Unit) {
+        val usernameLowercase = username.lowercase() //user lo convertimos a minúsculas
         db.collection("Usuarios")
-            .whereEqualTo("usuario", username)
+            .whereEqualTo("usuario", usernameLowercase)
             .whereEqualTo("pass", password)
             .get()
             .addOnSuccessListener { result ->
@@ -102,6 +131,42 @@ class LoginActivity : BaseActivity() {
             }
     }
 
+    private fun recordarUsuario(username: String, password: String) {
+        val sharedPreferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+        with(sharedPreferences.edit()) {
+            putString("username", username)
+            putString("password", password)
+            putBoolean("rememberMe", true)
+            apply()
+        }
+    }
+
+    private fun cargarDatosInicio() {
+        val sharedPreferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+        val rememberMe = sharedPreferences.getBoolean("rememberMe", false)
+
+        if (rememberMe) {
+            val username = sharedPreferences.getString("username", "")
+            val password = sharedPreferences.getString("password", "")
+
+            // Si las credenciales están guardadas, las ponemos en los EditText
+            user.setText(username)
+            pass.setText(password)
+            rememberMeCheckBox.isChecked = true
+        }
+    }
+
+    private fun borrarUsuarioRecordado() {
+        val sharedPreferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+        with(sharedPreferences.edit()) {
+            remove("username")
+            remove("password")
+            //se setea a falso para que no cargue las credenciales el siguiente login
+            putBoolean("rememberMe", false)
+            apply()
+        }
+    }
+
     companion object {
         private const val TAG = "LoginActivity"
     }
@@ -114,4 +179,5 @@ class LoginActivity : BaseActivity() {
         println("Usuario logueado: ${usuarioActual.nombre}")
     }
     */
+
 }
