@@ -17,4 +17,10 @@
     <string name="nivel">Nivel:</string>
     <string name="filtrar_niveles">Filtrar por niveles:</string>
     <string name="todos_niveles">Todos los niveles</string>
+
+    <!--Spinner Tipo de usuario ( en registro)-->
+    <string-array name="tipoUsuario">
+        <item>Cliente</item>
+        <item>Entrenador</item>
+    </string-array>
 </resources>
