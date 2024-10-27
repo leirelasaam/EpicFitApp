@@ -111,7 +111,10 @@ Actualizar referencias de las ramas remotas:
 ```bash
 git remote prune origin
 ```
-
+Actualizamos nuestra rama con los contenidos del main **descartando conflictos que tiene con nuestra rama** y tomando todo de main. Útil cuando nuestra rama ya ha sido integrada en el main por otro compañero.
+```bash
+git merge main -X theirs
+```
 ### Gestionar subida de contenido a main desde otra rama
 1. Actualizar la rama main:
 ```bash
