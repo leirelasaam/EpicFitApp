@@ -14,7 +14,7 @@
         android:text="@string/buttonRegistrarme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.562"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
@@ -58,10 +58,9 @@
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/inputApellido"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tituloTxt2"
-        app:layout_constraintVertical_chainStyle="spread_inside"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -75,6 +74,7 @@
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/inputUsuario"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputFechaNac" />
 
@@ -82,14 +82,15 @@
         android:id="@+id/inputFechaNac"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="false"
         android:ems="10"
+        android:focusable="false"
         android:hint="Fecha de nacimiento"
         android:inputType="date"
         android:minHeight="48dp"
-        android:clickable="false"
-        android:focusable="false"
         app:layout_constraintBottom_toTopOf="@+id/inputCorreo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputApellido"
         tools:ignore="MissingConstraints" />
@@ -104,6 +105,7 @@
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/inputPass2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputUsuario" />
 
@@ -117,6 +119,7 @@
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputPass" />
 
@@ -130,6 +133,7 @@
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/inputFechaNac"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputNombre"
         tools:ignore="MissingConstraints" />
@@ -145,6 +149,7 @@
         android:textColorHint="#546E7A"
         app:layout_constraintBottom_toTopOf="@+id/inputPass"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputCorreo" />
 
@@ -152,10 +157,11 @@
         android:id="@+id/spinner"
         android:layout_width="210dp"
         android:layout_height="48dp"
-        android:hint="Tipo de usuario"
         android:entries="@array/tipoUsuario"
+        android:hint="Tipo de usuario"
         app:layout_constraintBottom_toTopOf="@+id/botonRegistro"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputPass2"
         tools:ignore="MissingConstraints" />
