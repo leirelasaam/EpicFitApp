@@ -28,6 +28,49 @@
             android:text="@string/entrenador"
             android:textSize="16dp"
             android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/input_filtrarWorkouts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Filtrar workouts" />
+
+        <Button
+            android:id="@+id/btn_filtrarWorkouts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Filtrar workouts" />
+
+        <Button
+            android:id="@+id/btn_aniadirWorkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aniardir workout" />
+
+        <Button
+            android:id="@+id/btn_ModificarWorkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Modificar workout" />
+
+        <Button
+            android:id="@+id/btn_eliminarWorkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Eliminar Workout" />
+
+        <Button
+            android:id="@+id/btn_volver_a_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Volver" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/workoutsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
