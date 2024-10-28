@@ -1,6 +1,7 @@
 package com.example.epicfitapp
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -61,10 +62,13 @@ class PerfilActivity : BaseActivity() {
                 //Toast.makeText(this, "Error al obtener usuarios.", Toast.LENGTH_SHORT).show()
             }
 
-        val btnIniciarSesion = findViewById<Button>(R.id.btn_volver)
+        val btnVolverWorkouts = findViewById<Button>(R.id.btn_volver)
 
-        btnIniciarSesion.setOnClickListener {
-            //volver
+        btnVolverWorkouts.setOnClickListener {
+            //volver a workouts
+            Intent(this, HistoricoActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }
