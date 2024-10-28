@@ -91,12 +91,14 @@ class LoginActivity : BaseActivity() {
             }
         }
 
-        btnIniciarSesion.setOnClickListener {
+        /*
+        btnRegistrarme.setOnClickListener {
             //Comentado porque todavia no está el RegisterActivity
-            //Intent(this, RegisterActivity::class.java)
+            Intent(this, RegisterActivity::class.java)
             startActivity(intent)
             finish()
         }
+        */
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
