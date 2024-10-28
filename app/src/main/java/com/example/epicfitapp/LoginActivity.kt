@@ -23,6 +23,7 @@ import java.time.ZoneId
 import java.util.Date
 
 class LoginActivity : BaseActivity() {
+
     private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
     private lateinit var rememberMeCheckBox: CheckBox
     private lateinit var user: EditText
