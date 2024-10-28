@@ -74,6 +74,7 @@ class LoginActivity : BaseActivity() {
         btnRegistrarme.setOnClickListener {
             val intent = Intent(this, RegistroActivity::class.java)
             startActivity(intent)
+
         }
 
     }
