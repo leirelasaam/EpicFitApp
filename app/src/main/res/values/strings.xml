@@ -17,4 +17,9 @@
     <string name="nivel">Nivel:</string>
     <string name="filtrar_niveles">Filtrar por niveles:</string>
     <string name="todos_niveles">Todos los niveles</string>
+    <string name="filtrar_workouts">Filtrar workouts</string>
+    <string name="aniardir_workout">Aniardir workout</string>
+    <string name="modificar_workout">Modificar workout</string>
+    <string name="eliminar_workout">Eliminar Workout</string>
+    <string name="volver">Volver</string>
 </resources>
