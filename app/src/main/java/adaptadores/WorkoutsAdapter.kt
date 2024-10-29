@@ -1,5 +1,6 @@
 package adaptadores
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -30,6 +31,7 @@ class WorkoutsAdapter(private val context: Context?, private var workouts: List<
         return WorkoutViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: WorkoutViewHolder, position: Int) {
         val workout = workouts[position]
@@ -58,6 +60,7 @@ class WorkoutsAdapter(private val context: Context?, private var workouts: List<
         return workouts.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateData(newWorkouts: List<Workout>) {
         workouts = newWorkouts
         notifyDataSetChanged()

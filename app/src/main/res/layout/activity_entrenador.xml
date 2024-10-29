@@ -33,9 +33,17 @@
             android:id="@+id/input_filtrarWorkouts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:hint="@string/filtrar_workouts"
             android:inputType="text"
+            android:minHeight="48dp"
+            android:textColorHint="#546E7A"
             tools:ignore="LabelFor" />
+
+        <Spinner
+            android:id="@+id/spinnerNiveles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/btn_filtrarWorkouts"
@@ -59,7 +67,8 @@
             android:id="@+id/btn_eliminarWorkout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/eliminar_workout" />
+            android:text="@string/eliminar_workout"
+            />
 
         <Button
             android:id="@+id/btn_volver_a_login"
