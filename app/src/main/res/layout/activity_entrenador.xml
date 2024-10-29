@@ -12,12 +12,12 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintHeight_percent="0.9">
 
         <TextView
             android:id="@+id/tituloTxt"
@@ -26,51 +26,53 @@
             android:background="@color/primary"
             android:padding="10dp"
             android:text="@string/entrenador"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/input_filtrarWorkouts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:hint="@string/filtrar_workouts"
             android:inputType="text"
-            android:text="Filtrar workouts" />
+            tools:ignore="LabelFor" />
 
         <Button
             android:id="@+id/btn_filtrarWorkouts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Filtrar workouts" />
+            android:text="@string/filtrar_workouts" />
 
         <Button
             android:id="@+id/btn_aniadirWorkout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Aniardir workout" />
+            android:text="@string/aniardir_workout" />
 
         <Button
             android:id="@+id/btn_ModificarWorkout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Modificar workout" />
+            android:text="@string/modificar_workout" />
 
         <Button
             android:id="@+id/btn_eliminarWorkout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Eliminar Workout" />
+            android:text="@string/eliminar_workout" />
 
         <Button
             android:id="@+id/btn_volver_a_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Volver" />
+            android:text="@string/volver" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/workoutsRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

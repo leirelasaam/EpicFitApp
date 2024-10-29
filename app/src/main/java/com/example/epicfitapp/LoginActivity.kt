@@ -12,15 +12,11 @@ import android.widget.CheckBox
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
 import modelo.pojos.Usuario
 import modelo.pojos.UsuarioLogueado
-import java.time.LocalDateTime
-import java.time.ZoneId
-import java.util.Date
 
 class LoginActivity : BaseActivity() {
 
@@ -41,6 +37,8 @@ class LoginActivity : BaseActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        rememberMeCheckBox = findViewById(R.id.inputMantenerSesion) // Ajusta el ID según corresponda
 
         user = findViewById<EditText>(R.id.inputUser)
         pass = findViewById<EditText>(R.id.inputPass)
@@ -91,12 +89,15 @@ class LoginActivity : BaseActivity() {
             }
         }
 
-        btnIniciarSesion.setOnClickListener {
-            //Comentado porque todavia no está el RegisterActivity
-            //Intent(this, RegisterActivity::class.java)
+        /*
+        val btnRegistrarSesion = findViewById<Button>(R.id.btn_IniciarSesion)
+        btnRegistrarSesion.setOnClickListener {
+            Comentado porque todavia no está el RegisterActivity
+            Intent(this, RegisterActivity::class.java)
             startActivity(intent)
             finish()
         }
+        */
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
