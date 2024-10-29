@@ -4,6 +4,7 @@
     <string name="workouts">Workouts</string>
     <string name="perfil">Perfil</string>
     <string name="entrenador">Entrenador</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
 
     <!--String Login-->
     <string name="textViewUsuario">Usuario</string>
