@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import bbdd.GestorDeWorkouts
 import modelo.pojos.Workout
 
-class EntrenadorActivity : AppCompatActivity() {
+class EntrenadorActivity : BaseActivity() {
 
     private lateinit var workoutsRecyclerView: RecyclerView
     private lateinit var workoutsAdapter: WorkoutsAdapter
