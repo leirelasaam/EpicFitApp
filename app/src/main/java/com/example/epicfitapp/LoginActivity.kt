@@ -48,6 +48,9 @@ class LoginActivity : BaseActivity() {
 
         // Referencias a los EditText y el botón
         val btnIniciarSesion = findViewById<Button>(R.id.btn_IniciarSesion)
+        // Referencia al botón de registro
+        val btnRegistrarme: Button = findViewById(R.id.btn_Registrarme)
+
 
         btnIniciarSesion.setOnClickListener {
             if (user.text.isNotEmpty() && pass.text.isNotEmpty()) {
@@ -88,6 +91,12 @@ class LoginActivity : BaseActivity() {
                     .show()
             }
         }
+        // Configurar el intent para ir a RegistroActivity
+        btnRegistrarme.setOnClickListener {
+            val intent = Intent(this, RegistroActivity::class.java)
+            startActivity(intent)
+
+        }
 
         /*
         val btnRegistrarSesion = findViewById<Button>(R.id.btn_IniciarSesion)
@@ -99,6 +108,7 @@ class LoginActivity : BaseActivity() {
         }
         */
     }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun comprobarUsuario(username: String, password: String, callback: (Usuario?) -> Unit) {
@@ -172,6 +182,7 @@ class LoginActivity : BaseActivity() {
     companion object {
         private const val TAG = "LoginActivity"
     }
+
 
     //Así se accede al usuario logueado desde cualquier parte del proyecto
     /*
