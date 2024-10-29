@@ -90,4 +90,8 @@ abstract class BaseActivity : AppCompatActivity() {
         }
         return true
     }
+
+    companion object {
+        var sharedPreferences: SharedPreferences? = null
+    }
 }
