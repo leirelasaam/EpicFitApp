@@ -22,4 +22,11 @@
     <string name="modificar_workout">Modificar workout</string>
     <string name="eliminar_workout">Eliminar Workout</string>
     <string name="volver">Volver</string>
+
+    <!--Spinner Tipo de usuario ( en registro)-->
+    <string-array name="tipoUsuario">
+        <item>Cliente</item>
+        <item>Entrenador</item>
+    </string-array>
+    
 </resources>
