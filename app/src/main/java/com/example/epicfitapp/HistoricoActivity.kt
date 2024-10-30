@@ -1,6 +1,7 @@
 package com.example.epicfitapp
 
 import adaptadores.HistoricoAdapter
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +23,7 @@ import modelo.pojos.Usuario
 import modelo.pojos.UsuarioLogueado
 
 class HistoricoActivity : BaseActivity() {
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

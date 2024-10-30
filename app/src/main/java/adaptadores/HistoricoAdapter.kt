@@ -1,19 +1,23 @@
 package adaptadores
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.epicfitapp.R
 import modelo.pojos.Historico
-import android.view.ViewGroup
-import android.view.LayoutInflater
-import android.widget.ImageView
-import androidx.annotation.RequiresApi
 import utils.DateUtils
+
 
 class HistoricoAdapter(private val context: Context?, private var historicos: List<Historico>) :
     RecyclerView.Adapter<HistoricoAdapter.HistoricoViewHolder>() {
@@ -47,6 +51,30 @@ class HistoricoAdapter(private val context: Context?, private var historicos: Li
             "brazo" -> holder.imagen.setImageResource(if (historico.workoutObj?.video != null) R.drawable.brazo else R.drawable.brazo_off)
             "pecho" -> holder.imagen.setImageResource(if (historico.workoutObj?.video != null) R.drawable.pecho else R.drawable.pecho_off)
             else -> holder.imagen.setImageResource(R.drawable.logo)
+        }
+
+        Log.d("ADAPTER", "Historico: ${historico.toString()}")
+
+        holder.nombre.setOnClickListener{
+            val alert: AlertDialog.Builder = AlertDialog.Builder(context)
+            alert.setTitle(historico.workoutObj?.nombre)
+            var mensaje: String = "Holiii"
+            val ejercicios = historico.workoutObj?.ejerciciosObj
+            Log.d("ADAPTER", "Ejercicios: ${ejercicios.toString()}")
+            if (ejercicios != null) {
+                for (ejercicio in ejercicios){
+                    Log.d("ADAPTER", "Ejercicio: ${ejercicio.toString()}")
+                    mensaje = mensaje + ejercicio.nombre + "; "
+                }
+            }
+            Log.d("ADAPTER", "Mensaje: $mensaje")
+            alert.setTitle(mensaje)
+
+            alert.setMessage(mensaje)
+
+            alert.setNegativeButton("Cerrar",
+                DialogInterface.OnClickListener { dialog, whichButton -> })
+            alert.show()
         }
 
         holder.imagen.setOnClickListener {

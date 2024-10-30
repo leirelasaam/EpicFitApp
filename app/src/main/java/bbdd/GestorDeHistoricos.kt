@@ -1,5 +1,6 @@
 package bbdd
 
+import adaptadores.HistoricoAdapter
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
@@ -16,6 +17,7 @@ class GestorDeHistoricos {
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val coleccionHistoricos = "Historicos"
     private val coleccionUsuarios = "Usuarios"
+    private val gde: GestorDeEjercicios = GestorDeEjercicios()
 
     fun obtenerHistoricosPorUsuario(
         usuario: Usuario,
@@ -42,7 +44,21 @@ class GestorDeHistoricos {
                     workoutRef?.get()?.addOnSuccessListener { workoutDocument ->
                         if (workoutDocument != null) {
                             val workout = workoutDocument.toObject(Workout::class.java)
-                            workout?.id = document.id
+                            workout?.id = workoutDocument.id
+
+                            if (workout != null) {
+                                gde.obtenerEjerciciosPorWorkout(
+                                    workout,
+                                    onSuccess = { ejercicios ->
+                                        workout.ejerciciosObj = ejercicios
+                                        Log.d("HIS", "Ejercicios objeto: ${ejercicios.toString()}")
+                                        Log.d("HIS", "Workout objeto: ${workout.toString()}")
+                                    },
+                                    onFailure = { exception ->
+                                        Log.e("HIS", "Error al obtener ejercicios: ${exception.message}")
+                                    }
+                                )
+                            }
 
                             historico.workoutObj = workoutDocument.toObject(Workout::class.java)
 
