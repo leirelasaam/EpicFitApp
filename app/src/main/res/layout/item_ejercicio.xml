@@ -12,7 +12,6 @@
         android:id="@+id/nombreEjTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="15dp"
         android:paddingBottom="8dp"
         android:textAlignment="textStart"
         android:textColor="@color/black"
@@ -28,7 +27,7 @@
             android:id="@+id/seriesEjTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="15dp"
+            android:paddingEnd="15dp"
             android:paddingBottom="8dp"
             android:textAlignment="textStart"
             android:textColor="@color/black"
@@ -38,40 +37,31 @@
             android:id="@+id/tiempoEjTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="15dp"
+            android:paddingEnd="15dp"
             android:paddingBottom="8dp"
             android:textAlignment="textStart"
             android:textColor="@color/black"
             android:textSize="14sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/repeticionesEjTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="15dp"
-            android:paddingBottom="8dp"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/descansoEjTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="15dp"
             android:paddingBottom="8dp"
             android:textAlignment="textStart"
             android:textColor="@color/black"
             android:textSize="14sp" />
     </LinearLayout>
 
-    <!-- View para el borde inferior -->
+    <TextView
+        android:id="@+id/descansoEjTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1.5dp"

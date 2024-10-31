@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +33,7 @@ class HistoricoAdapter(private val context: Context?, private var historicos: Li
         val fecha: TextView = view.findViewById(R.id.fechaTxt)
         val porcentaje: TextView = view.findViewById(R.id.porcentajeTxt)
         val imagen: ImageView = view.findViewById(R.id.imagen)
+        val layoutTexto: LinearLayout = view.findViewById(R.id.layoutVerticalWorkout)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoricoViewHolder {
@@ -44,7 +46,7 @@ class HistoricoAdapter(private val context: Context?, private var historicos: Li
         val historico = historicos[position]
         holder.nombre.text = historico.workoutObj?.nombre
         holder.nivel.text = context?.getString(R.string.nivel) + " " + historico.workoutObj?.nivel.toString()
-        holder.tiempoPrev.text = historico.workoutObj?.tiempo?.let { DateUtils.formatearTiempo(it) }
+        holder.tiempoPrev.text = "(" + historico.workoutObj?.tiempo?.let { DateUtils.formatearTiempo(it) } + ")"
         holder.fecha.text = historico.fecha?.let { DateUtils.formatearTimestamp(it) }
         holder.tiempo.text = historico.tiempo?.let { DateUtils.formatearTiempo(it) }
         holder.porcentaje.text = historico.porcentaje.toString() + "%"
@@ -55,9 +57,10 @@ class HistoricoAdapter(private val context: Context?, private var historicos: Li
             else -> holder.imagen.setImageResource(R.drawable.logo)
         }
 
+        Log.d("ADAPTER", "Fecha formateada: ${historico.fecha?.let { DateUtils.formatearTimestamp(it) }}")
         Log.d("ADAPTER", "Historico: ${historico.toString()}")
 
-        holder.nombre.setOnClickListener{
+        holder.layoutTexto.setOnClickListener{
             val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_ejercicios, null)
             val dialogBuilder = AlertDialog.Builder(context)
                 .setView(dialogView)

@@ -18,6 +18,9 @@
     <string name="nivel">Nivel:</string>
     <string name="filtrar_niveles">Filtrar por niveles:</string>
     <string name="todos_niveles">Todos los niveles</string>
+    <string name="repeticiones">repeticiones</string>
+    <string name="descanso">de descanso entre series</string>
+    <string name="completado">completado en</string>
 
     <!--Spinner Tipo de usuario ( en registro)-->
     <string-array name="tipoUsuario">

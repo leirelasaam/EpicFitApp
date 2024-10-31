@@ -70,6 +70,15 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:layout_below="@id/imagen"
+            android:background="@color/secondary"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listaHistorico"
             android:layout_width="match_parent"

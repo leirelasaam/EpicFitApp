@@ -30,10 +30,10 @@ class EjercicioAdapter (private val context: Context?, private var ejercicios: L
     override fun onBindViewHolder(holder: EjercicioViewHolder, position: Int) {
         val ejercicio = ejercicios[position]
         holder.nombre.text = ejercicio.nombre
-        holder.series.text = ejercicio.series.toString()
+        holder.series.text = "x" + ejercicio.series.toString()
         holder.tiempo.text = ejercicio.tiempoSerie?.let { DateUtils.formatearTiempo(it) }
-        holder.repeticiones.text = ejercicio.repeticiones.toString()
-        holder.descanso.text = ejercicio.descanso?.let { DateUtils.formatearTiempo(it) }
+        holder.repeticiones.text = "("  + ejercicio.repeticiones.toString() + " " + context?.getString(R.string.repeticiones) + ")"
+        holder.descanso.text = ejercicio.descanso?.let { DateUtils.formatearTiempo(it) } + " " + context?.getString(R.string.descanso)
     }
 
     override fun getItemCount(): Int {
