@@ -1,5 +1,6 @@
 package com.example.epicfitapp
 
+import GestorDeHistoricos
 import adaptadores.HistoricoAdapter
 import android.annotation.SuppressLint
 import android.os.Build
@@ -13,13 +14,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import bbdd.GestorDeHistoricos
-import kotlinx.coroutines.launch
 import modelo.pojos.Historico
-import modelo.pojos.Usuario
 import modelo.pojos.UsuarioLogueado
 
 class HistoricoActivity : BaseActivity() {

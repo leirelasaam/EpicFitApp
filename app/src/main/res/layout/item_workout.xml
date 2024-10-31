@@ -4,23 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="15dp"
-    android:background="@drawable/rounded_bg_rectangle"
-    android:orientation="vertical"
-    android:paddingTop="15dp"
-    android:paddingBottom="0dp">
+    android:layout_margin="10dp"
+    android:orientation="vertical">
 
     <!-- Título ocupa la primera fila -->
     <TextView
         android:id="@+id/nombreTxt"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="15dp"
         android:paddingBottom="8dp"
         android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:textStyle="bold" /> <!-- Espacio inferior para separar la imagen y el texto -->
+        android:textStyle="bold" />
 
     <!-- Segunda fila compartida entre imagen y texto -->
     <LinearLayout
@@ -90,4 +87,9 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="@color/secondary"
+        android:layout_marginTop="4dp" />
 </LinearLayout>

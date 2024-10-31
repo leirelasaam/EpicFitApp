@@ -4,15 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="15dp"
-    android:background="@drawable/rounded_bg_rectangle"
-    android:orientation="vertical"
-    android:paddingTop="15dp"
-    android:paddingBottom="0dp">
+    android:layout_margin="10dp"
+    android:orientation="vertical">
 
     <!-- Título ocupa la primera fila -->
     <TextView
-        android:id="@+id/nombreTxt"
+        android:id="@+id/nombreEjTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="15dp"
@@ -20,56 +17,64 @@
         android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:textStyle="bold" /> <!-- Espacio inferior para separar la imagen y el texto -->
+        android:textStyle="bold" />
 
-    <!-- Segunda fila compartida entre imagen y texto -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/nivelTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+        <TextView
+            android:id="@+id/seriesEjTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingBottom="8dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tiempoTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/tiempoPrevTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/fechaTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/porcentajeTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-            </LinearLayout>
+        <TextView
+            android:id="@+id/tiempoEjTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingBottom="8dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/repeticionesEjTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingBottom="8dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/descansoEjTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingBottom="8dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- View para el borde inferior -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/secondary" />
 </LinearLayout>

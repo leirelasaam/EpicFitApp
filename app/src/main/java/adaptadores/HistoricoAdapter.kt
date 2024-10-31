@@ -10,9 +10,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.epicfitapp.R
 import modelo.pojos.Historico
@@ -56,25 +58,25 @@ class HistoricoAdapter(private val context: Context?, private var historicos: Li
         Log.d("ADAPTER", "Historico: ${historico.toString()}")
 
         holder.nombre.setOnClickListener{
-            val alert: AlertDialog.Builder = AlertDialog.Builder(context)
-            alert.setTitle(historico.workoutObj?.nombre)
-            var mensaje: String = "Holiii"
-            val ejercicios = historico.workoutObj?.ejerciciosObj
-            Log.d("ADAPTER", "Ejercicios: ${ejercicios.toString()}")
-            if (ejercicios != null) {
-                for (ejercicio in ejercicios){
-                    Log.d("ADAPTER", "Ejercicio: ${ejercicio.toString()}")
-                    mensaje = mensaje + ejercicio.nombre + "; "
-                }
+            val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_ejercicios, null)
+            val dialogBuilder = AlertDialog.Builder(context)
+                .setView(dialogView)
+
+            val tituloWorkout = dialogView.findViewById<TextView>(R.id.tituloWorkout)
+            tituloWorkout.text = historico.workoutObj?.nombre
+
+            val recyclerEjercicios = dialogView.findViewById<RecyclerView>(R.id.recyclerEjercicios)
+            val ejercicios = historico.workoutObj?.ejerciciosObj ?: emptyList()
+            recyclerEjercicios.adapter = EjercicioAdapter(context, ejercicios)
+            recyclerEjercicios.layoutManager = LinearLayoutManager(context)
+
+            val dialog = dialogBuilder.create()
+
+            val btnCerrar = dialogView.findViewById<Button>(R.id.btnAceptar)
+            btnCerrar.setOnClickListener {
+                dialog.dismiss()
             }
-            Log.d("ADAPTER", "Mensaje: $mensaje")
-            alert.setTitle(mensaje)
-
-            alert.setMessage(mensaje)
-
-            alert.setNegativeButton("Cerrar",
-                DialogInterface.OnClickListener { dialog, whichButton -> })
-            alert.show()
+            dialog.show()
         }
 
         holder.imagen.setOnClickListener {
