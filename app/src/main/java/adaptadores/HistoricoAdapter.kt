@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.epicfitapp.R
@@ -33,6 +34,7 @@ class HistoricoAdapter(private val context: Context?, private var historicos: Li
         val porcentaje: TextView = view.findViewById(R.id.porcentajeTxt)
         val imagen: ImageView = view.findViewById(R.id.imagen)
         val layoutTexto: LinearLayout = view.findViewById(R.id.layoutVerticalWorkout)
+        val btnPlay: ImageView = view.findViewById(R.id.btnPlay)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoricoViewHolder {
@@ -52,8 +54,8 @@ class HistoricoAdapter(private val context: Context?, private var historicos: Li
         holder.porcentaje.text = historico.porcentaje.toString() + "%"
 
         when (historico.workoutObj?.tipo) {
-            "brazo" -> holder.imagen.setImageResource(if (historico.workoutObj?.video != null) R.drawable.brazo else R.drawable.brazo_off)
-            "pecho" -> holder.imagen.setImageResource(if (historico.workoutObj?.video != null) R.drawable.pecho else R.drawable.pecho_off)
+            "brazo" -> holder.imagen.setImageResource(R.drawable.brazo)
+            "pecho" -> holder.imagen.setImageResource(R.drawable.pecho)
             else -> holder.imagen.setImageResource(R.drawable.logo)
         }
 
@@ -61,8 +63,14 @@ class HistoricoAdapter(private val context: Context?, private var historicos: Li
             mostrarDialogEjercicios(historico)
         }
 
-        holder.imagen.setOnClickListener {
-            agregarEnlaceYoutube(historico)
+        val videoUrl = historico.workoutObj?.video
+        if (!videoUrl.isNullOrEmpty()) {
+            holder.btnPlay.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl))
+                context?.startActivity(intent)
+            }
+        } else {
+            holder.btnPlay.isVisible = false
         }
 
     }
@@ -96,15 +104,6 @@ class HistoricoAdapter(private val context: Context?, private var historicos: Li
             dialog.dismiss()
         }
         dialog.show()
-    }
-
-    private fun agregarEnlaceYoutube(historico : Historico){
-        val videoUrl = historico.workoutObj?.video
-        if (!videoUrl.isNullOrEmpty()) {
-            // Abrir el enlace del video
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl))
-            context?.startActivity(intent)
-        }
     }
 
 }
