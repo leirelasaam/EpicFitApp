@@ -8,13 +8,11 @@ class Historico(
     var fecha: Timestamp? = null,
     var porcentaje: Int? = 0,
     var tiempo: Int? = 0,
-    var usuario: DocumentReference? = null,
     var workout: DocumentReference? = null
 ) {
-    var usuarioObj: Usuario? = null // Usuario como objeto
     var workoutObj: Workout? = null // Workout como objeto
 
     override fun toString(): String {
-        return "Historico(id='$id', fecha=${fecha?.toDate()}, porcentaje=$porcentaje, tiempo=$tiempo, usuario=$usuario, workout=$workout, usuarioObj=$usuarioObj, workoutObj=$workoutObj)"
+        return "Historico(id='$id', fecha=${fecha?.toDate()}, porcentaje=$porcentaje, tiempo=$tiempo, workout=$workout, workoutObj=$workoutObj)"
     }
 }
