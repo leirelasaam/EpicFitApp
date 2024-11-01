@@ -1,6 +1,9 @@
 package com.example.epicfitapp
 
+import GestorDeHistoricos
 import adaptadores.HistoricoAdapter
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -12,16 +15,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import bbdd.GestorDeHistoricos
-import kotlinx.coroutines.launch
 import modelo.pojos.Historico
-import modelo.pojos.Usuario
 import modelo.pojos.UsuarioLogueado
 
 class HistoricoActivity : BaseActivity() {
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +36,14 @@ class HistoricoActivity : BaseActivity() {
         val usuarioActual = UsuarioLogueado.usuario
 
         if (usuarioActual != null) {
-            (findViewById<TextView>(R.id.nivelTxt)).text =
-                (findViewById<TextView>(R.id.nivelTxt)).text.toString() + " @" + usuarioActual.usuario
+            val usuarioTxt : TextView = findViewById(R.id.usuarioTxt)
+            usuarioTxt.text = " @" + usuarioActual.usuario
+            usuarioTxt.setOnClickListener {
+                val intent = Intent(this, PerfilActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
             (findViewById<TextView>(R.id.nivelValorTxt)).text = usuarioActual.nivel.toString()
         }
 

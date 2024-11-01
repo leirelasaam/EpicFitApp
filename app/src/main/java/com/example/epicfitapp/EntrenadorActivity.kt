@@ -82,7 +82,7 @@ class EntrenadorActivity : BaseActivity() {
                 } else {
                     // Filtrar por nivel seleccionado
                     val levelToFilter = selectedLevel.toInt()
-                    val filteredWorkouts = workouts.filter { it.workoutObj?.nivel == levelToFilter }
+                    val filteredWorkouts = workouts.filter { it.nivel == levelToFilter }
                     workoutAdapter.updateData(filteredWorkouts)
                 }
             }

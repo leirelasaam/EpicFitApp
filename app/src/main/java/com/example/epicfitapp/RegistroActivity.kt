@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.regex.Pattern
 
-class RegistroActivity : AppCompatActivity() {
+class RegistroActivity : BaseActivity() {
     private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
     private var fechaNacimiento: Timestamp? = null // Variable para almacenar la fecha de nacimiento
 

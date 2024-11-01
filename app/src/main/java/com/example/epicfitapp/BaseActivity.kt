@@ -45,7 +45,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
 
         // Ocultar ítems si la actividad actual es LoginActivity
-        if (this is LoginActivity) {
+        if (this is LoginActivity || this is RegistroActivity) {
             ocultarItemsDelMenu(menu)
         } else {
             mostrarItemsSegunUsuario(menu)
@@ -59,6 +59,7 @@ abstract class BaseActivity : AppCompatActivity() {
         menu.findItem(R.id.item_workout)?.isVisible = false
         menu.findItem(R.id.item_perfil)?.isVisible = false
         menu.findItem(R.id.item_entrenador)?.isVisible = false
+        menu.findItem(R.id.item_cerrar_sesion)?.isVisible = false
     }
 
     // Función para mostrar ítems según el tipo de usuario
@@ -83,6 +84,12 @@ abstract class BaseActivity : AppCompatActivity() {
             }
             R.id.item_entrenador -> {
                 val intent = Intent(this, EntrenadorActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+            R.id.item_cerrar_sesion -> {
+                UsuarioLogueado.usuario = null;
+                val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
             }
