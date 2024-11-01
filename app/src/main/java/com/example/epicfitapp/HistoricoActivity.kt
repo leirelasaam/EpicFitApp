@@ -3,6 +3,7 @@ package com.example.epicfitapp
 import GestorDeHistoricos
 import adaptadores.HistoricoAdapter
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -35,7 +36,14 @@ class HistoricoActivity : BaseActivity() {
         val usuarioActual = UsuarioLogueado.usuario
 
         if (usuarioActual != null) {
-            (findViewById<TextView>(R.id.usuarioTxt)).text = " @" + usuarioActual.usuario
+            val usuarioTxt : TextView = findViewById(R.id.usuarioTxt)
+            usuarioTxt.text = " @" + usuarioActual.usuario
+            usuarioTxt.setOnClickListener {
+                val intent = Intent(this, PerfilActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
             (findViewById<TextView>(R.id.nivelValorTxt)).text = usuarioActual.nivel.toString()
         }
 
