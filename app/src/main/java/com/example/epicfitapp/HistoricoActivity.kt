@@ -35,8 +35,7 @@ class HistoricoActivity : BaseActivity() {
         val usuarioActual = UsuarioLogueado.usuario
 
         if (usuarioActual != null) {
-            (findViewById<TextView>(R.id.nivelTxt)).text =
-                (findViewById<TextView>(R.id.nivelTxt)).text.toString() + " @" + usuarioActual.usuario
+            (findViewById<TextView>(R.id.usuarioTxt)).text = " @" + usuarioActual.usuario
             (findViewById<TextView>(R.id.nivelValorTxt)).text = usuarioActual.nivel.toString()
         }
 
