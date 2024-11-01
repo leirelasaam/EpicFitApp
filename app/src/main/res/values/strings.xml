@@ -21,11 +21,16 @@
     <string name="repeticiones">repeticiones</string>
     <string name="descanso">de descanso entre series</string>
     <string name="completado">completado en</string>
+    <string name="filtrar_workouts">Filtrar workouts</string>
+    <string name="aniardir_workout">Aniardir workout</string>
+    <string name="modificar_workout">Modificar workout</string>
+    <string name="eliminar_workout">Eliminar Workout</string>
+    <string name="volver">Volver</string>
 
     <!--Spinner Tipo de usuario ( en registro)-->
     <string-array name="tipoUsuario">
         <item>Cliente</item>
         <item>Entrenador</item>
     </string-array>
-
+    
 </resources>
