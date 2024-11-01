@@ -28,7 +28,6 @@ class GestorDeHistoricos {
                 for (document in historicosSnapshot) {
                     val historico = document.toObject(Historico::class.java)
                     historico.id = document.id
-                    historico.usuarioObj = usuario
 
                     val workoutRef = historico.workout
 
