@@ -41,9 +41,14 @@ class WorkoutsAdapter(private val context: Context?, private var workouts: List<
 
         // Aquí puedes manejar la imagen si tienes algún tipo relacionado
         when (workout.tipo) {
-            "brazo" -> holder.imagen.setImageResource(R.drawable.brazo) // Cambia por tu recurso
-            "pecho" -> holder.imagen.setImageResource(R.drawable.pecho) // Cambia por tu recurso
-            else -> holder.imagen.setImageResource(R.drawable.logo) // Cambia por tu recurso
+            "triceps" -> holder.imagen.setImageResource(R.drawable.triceps)
+            "biceps" -> holder.imagen.setImageResource(R.drawable.biceps)
+            "espalda" -> holder.imagen.setImageResource(R.drawable.espalda)
+            "gluteos" -> holder.imagen.setImageResource(R.drawable.gluteos)
+            "piernas" -> holder.imagen.setImageResource(R.drawable.piernas)
+            "abdominales" -> holder.imagen.setImageResource(R.drawable.abs)
+            "pecho" -> holder.imagen.setImageResource(R.drawable.pecho)
+            else -> holder.imagen.setImageResource(R.drawable.ejercicio)
         }
 
         holder.imagen.setOnClickListener {

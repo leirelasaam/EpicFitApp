@@ -54,9 +54,14 @@ class HistoricoAdapter(private val context: Context?, private var historicos: Li
         holder.porcentaje.text = historico.porcentaje.toString() + "%"
 
         when (historico.workoutObj?.tipo) {
-            "brazo" -> holder.imagen.setImageResource(R.drawable.brazo)
+            "triceps" -> holder.imagen.setImageResource(R.drawable.triceps)
+            "biceps" -> holder.imagen.setImageResource(R.drawable.biceps)
+            "espalda" -> holder.imagen.setImageResource(R.drawable.espalda)
+            "gluteos" -> holder.imagen.setImageResource(R.drawable.gluteos)
+            "piernas" -> holder.imagen.setImageResource(R.drawable.piernas)
+            "abdominales" -> holder.imagen.setImageResource(R.drawable.abs)
             "pecho" -> holder.imagen.setImageResource(R.drawable.pecho)
-            else -> holder.imagen.setImageResource(R.drawable.logo)
+            else -> holder.imagen.setImageResource(R.drawable.ejercicio)
         }
 
         holder.layoutTexto.setOnClickListener{
