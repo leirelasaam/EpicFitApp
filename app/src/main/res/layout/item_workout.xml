@@ -17,8 +17,7 @@
         android:background="@drawable/rounded_bg"
         android:padding="10dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/logo"
-        app:tint="@color/white"/>
+        android:src="@drawable/logo" />
 
     <LinearLayout
         android:id="@+id/layoutVerticalWorkout"
