@@ -1,27 +1,32 @@
 <resources>
-    <!--String General-->
+    <!-- General Strings -->
     <string name="app_name">EpicFit</string>
     <string name="workouts">Workouts</string>
-    <string name="perfil">Perfil</string>
-    <string name="entrenador">Entrenador</string>
+    <string name="perfil">Profile</string>
+    <string name="entrenador">Coach</string>
 
-    <!--String Login-->
-    <string name="textViewUsuario">Usuario</string>
-    <string name="textViewContraseña">Contraseña</string>
-    <string name="textViewMantenerSesion">Mantener sesión iniciada</string>
-    <string name="textViewNoTienesCuenta">¿Todavía no tienes cuenta?</string>
-    <string name="buttonRegistrarme">Registrarme</string>
+    <!-- Login Strings -->
+    <string name="textViewUsuario">User</string>
+    <string name="textViewContraseña">Password</string>
+    <string name="textViewMantenerSesion">Keep me logged in</string>
+    <string name="textViewNoTienesCuenta">Do not have an account?</string>
+    <string name="buttonRegistrarme">Sign up</string>
 
-    <!--String Workouts-->
-    <string name="nivel_pl">Nivel de</string>
-    <string name="nivel">Nivel:</string>
-    <string name="filtrar_niveles">Filtrar por niveles:</string>
-    <string name="todos_niveles">Todos los niveles</string>
+    <!-- Registro Strings -->
+    <string name="textViewNombre">Name</string>
+    <string name="textViewApellido">Surname</string>
+    <string name="textViewFechaNacimiento"></string>
+    <string name="textViewEmail">Email</string>
 
-    <!--Spinner Tipo de usuario ( en registro)-->
+    <!-- Workouts Strings -->
+    <string name="nivel_pl">Level of</string>
+    <string name="nivel">Level:</string>
+    <string name="filtrar_niveles">Filter by levels:</string>
+    <string name="todos_niveles">All levels</string>
+
+    <!-- User Type Spinner (in registration) -->
     <string-array name="tipoUsuario">
-        <item>Cliente</item>
-        <item>Entrenador</item>
+        <item>Client</item>
+        <item>Coach</item>
     </string-array>
-
 </resources>

@@ -168,7 +168,7 @@ class RegistroActivity : AppCompatActivity() {
     }
 
     private fun validarPassword(pass: String?): Boolean {
-        val regexPass = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!_]).{8,20}$"
+        val regexPass = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!_*/?|-]).{8,20}$"
         return pass != null && Pattern.matches(regexPass, pass)
     }
 
