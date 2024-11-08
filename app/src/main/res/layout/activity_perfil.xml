@@ -5,7 +5,7 @@
     android:id="@+id/perfil"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PerfilActivity">
+    android:padding="10dp">
 
     <LinearLayout
         android:id="@+id/verticalLayout"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="login" />
+            android:text="@string/inputUsuario" />
 
         <EditText
             android:id="@+id/inputNombre"
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="nombre" />
+            android:text="@string/inputNombre" />
 
         <EditText
             android:id="@+id/inputApellidos"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="apellidos" />
+            android:text="@string/inputApellidos" />
 
         <EditText
             android:id="@+id/inputEmail"
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="email" />
+            android:text="@string/inputEmail" />
 
         <EditText
             android:id="@+id/inputFechaNacimiento"
@@ -67,13 +67,13 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="fecha de nacimiento" />
+            android:text="@string/inputFechaNacimiento" />
 
         <Button
             android:id="@+id/btn_volver"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Volver" />
+            android:text="@string/volver" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

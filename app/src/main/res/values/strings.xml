@@ -13,6 +13,13 @@
     <string name="textViewNoTienesCuenta">¿Todavía no tienes cuenta?</string>
     <string name="buttonRegistrarme">Registrarme</string>
 
+    <!--String Perfil-->
+    <string name="inputUsuario">usuario</string>
+    <string name="inputNombre">nombre</string>
+    <string name="inputApellidos">apellidos</string>
+    <string name="inputEmail">email</string>
+    <string name="inputFechaNacimiento">fecha de nacimiento</string>
+
     <!--String Workouts-->
     <string name="nivel_pl">Nivel de</string>
     <string name="nivel">Nivel:</string>

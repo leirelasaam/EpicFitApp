@@ -145,7 +145,6 @@ class RegistroActivity : BaseActivity() {
                 val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                 fechaNacEditText.setText(sdf.format(selectedCalendar.time))
             }, year, month, day)
-
         datePickerDialog.show()
     }
 
@@ -168,7 +167,7 @@ class RegistroActivity : BaseActivity() {
     }
 
     private fun validarPassword(pass: String?): Boolean {
-        val regexPass = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!_]).{8,20}$"
+        val regexPass = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!_*/-]).{8,20}$"
         return pass != null && Pattern.matches(regexPass, pass)
     }
 
