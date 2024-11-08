@@ -10,13 +10,19 @@
     <string name="textViewContraseña">Password</string>
     <string name="textViewMantenerSesion">Keep me logged in</string>
     <string name="textViewNoTienesCuenta">Do not have an account?</string>
+    <string name="buttonIniciarSesion" >Login in</string>
     <string name="buttonRegistrarme">Sign up</string>
 
     <!-- Registro Strings -->
     <string name="textViewNombre">Name</string>
     <string name="textViewApellido">Surname</string>
-    <string name="textViewFechaNacimiento"></string>
+    <string name="textViewFechaNacimiento">Date of birth</string>
     <string name="textViewEmail">Email</string>
+    <string name="textViewNombreUsuario">User name</string>
+    <string name="textViewIntroduzcaContraseña">Introduce password</string>
+    <string name="textViewConfirmarContraseña">Confirm password</string>
+    <string name="buttonVolver">Go back</string>
+
 
     <!-- Workouts Strings -->
     <string name="nivel_pl">Level of</string>

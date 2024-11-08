@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!--String General-->
     <string name="app_name">EpicFit</string>
     <string name="workouts">Workouts</string>
@@ -10,13 +10,20 @@
     <string name="textViewContraseña">Contraseña</string>
     <string name="textViewMantenerSesion">Mantener sesión iniciada</string>
     <string name="textViewNoTienesCuenta">¿Todavía no tienes cuenta?</string>
-    <string name="buttonRegistrarme">Registrarme</string>
+    <string name="buttonIniciarSesion" >Iniciar Sesión</string>
+   <string name="buttonRegistrarme">Registrarme</string>
 
-    <!-- Registro Strings -->
+   <!-- Registro Strings -->
     <string name="textViewNombre">Nombre</string>
     <string name="textViewApellido">Apellidos</string>
     <string name="textViewFechaNacimiento">Fecha de nacimiento</string>
     <string name="textViewEmail">Correo electrónico</string>
+    <string name="textViewNombreUsuario">Nombre de usuario</string>
+    <string name="textViewIntroduzcaContraseña">Introduzca contraseña</string>
+    <string name="textViewConfirmarContraseña">Repita la contraseña</string>
+    <string name="buttonVolver">Volver</string>
+
+
 
     <!--String Workouts-->
     <string name="nivel_pl">Nivel de</string>
