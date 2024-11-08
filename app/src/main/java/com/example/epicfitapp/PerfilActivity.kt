@@ -48,8 +48,7 @@ class PerfilActivity : BaseActivity() {
 
         btnVolverWorkouts.setOnClickListener {
             //volver a workouts
-            Intent(this, HistoricoActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, HistoricoActivity::class.java))
             finish()
         }
     }
