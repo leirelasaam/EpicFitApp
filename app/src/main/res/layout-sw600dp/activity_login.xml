@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/textViewUser"
+        android:layout_width="59dp"
+        android:layout_height="20dp"
+        android:text="Usuario"
+        app:layout_constraintBottom_toTopOf="@+id/inputUser"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.001"
+        app:layout_constraintStart_toStartOf="@+id/inputUser"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="532dp"
+        android:layout_height="461dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewUser"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:srcCompat="@drawable/logo" />
+
+    <Button
+        android:id="@+id/btn_IniciarSesion"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:text="INICIAR SESIÓN"
+        app:layout_constraintBottom_toTopOf="@+id/textViewNoTienesCuenta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputMantenerSesion" />
+
+    <Button
+        android:id="@+id/btn_Registrarme"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:text="@string/buttonRegistrarme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNoTienesCuenta" />
+
+    <TextView
+        android:id="@+id/textViewNoTienesCuenta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¿Todavía no tienes cuenta?"
+        app:layout_constraintBottom_toTopOf="@+id/btn_Registrarme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_IniciarSesion" />
+
+    <CheckBox
+        android:id="@+id/inputMantenerSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textViewMantenerSesion"
+        app:layout_constraintBottom_toTopOf="@+id/btn_IniciarSesion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputPass" />
+
+    <TextView
+        android:id="@+id/textViewPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textViewContraseña"
+        app:layout_constraintBottom_toTopOf="@+id/inputPass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/inputPass"
+        app:layout_constraintTop_toBottomOf="@+id/inputUser" />
+
+    <EditText
+        android:id="@+id/inputUser"
+        android:layout_width="261dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/textViewPass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUser" />
+
+    <EditText
+        android:id="@+id/inputPass"
+        android:layout_width="263dp"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/inputMantenerSesion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPass" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
