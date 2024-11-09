@@ -13,7 +13,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bbdd.GestorDeUsuarios
-import com.google.firebase.firestore.FirebaseFirestore
 import modelo.pojos.UsuarioLogueado
 
 class LoginActivity : BaseActivity() {
@@ -43,8 +42,8 @@ class LoginActivity : BaseActivity() {
         val userReg = intent.getStringExtra("user")
         val passReg = intent.getStringExtra("pass")
 
-        user = findViewById<EditText>(R.id.inputUser)
-        pass = findViewById<EditText>(R.id.inputPass)
+        user = findViewById(R.id.inputUser)
+        pass = findViewById(R.id.inputPass)
 
         if (userReg != null && passReg != null) {
             user.setText(userReg)
