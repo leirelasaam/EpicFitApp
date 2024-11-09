@@ -47,7 +47,7 @@ class PerfilActivity : BaseActivity() {
         val btnVolverWorkouts = findViewById<Button>(R.id.btn_volver)
 
         btnVolverWorkouts.setOnClickListener {
-            //volver a workouts
+            //volver a historico
             startActivity(Intent(this, HistoricoActivity::class.java))
             finish()
         }

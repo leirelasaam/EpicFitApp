@@ -7,10 +7,12 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.core.view.ViewCompat
@@ -36,17 +38,19 @@ class HistoricoActivity : BaseActivity() {
         val usuarioActual = UsuarioLogueado.usuario
 
         if (usuarioActual != null) {
-            val usuarioTxt : TextView = findViewById(R.id.usuarioTxt)
+            val usuarioTxt: TextView = findViewById(R.id.usuarioTxt)
             usuarioTxt.text = " @" + usuarioActual.usuario
             usuarioTxt.setOnClickListener {
                 val intent = Intent(this, PerfilActivity::class.java)
                 startActivity(intent)
-                finish()
             }
 
             (findViewById<TextView>(R.id.nivelValorTxt)).text = usuarioActual.nivel.toString()
         }
 
+        val noHistoricos: TextView = findViewById(R.id.noHistoricos)
+        val txtFiltrar: TextView = findViewById(R.id.txtFiltrar)
+        val spinner = findViewById<Spinner>(R.id.spinnerNiveles)
         val recycler = findViewById<RecyclerView>(R.id.listaHistorico)
         recycler.layoutManager = LinearLayoutManager(this)
         val gdh: GestorDeHistoricos = GestorDeHistoricos()
@@ -55,21 +59,37 @@ class HistoricoActivity : BaseActivity() {
             gdh.obtenerHistoricosPorUsuario(
                 usuarioActual,
                 onSuccess = { historicos ->
-                    val adapter = HistoricoAdapter(this@HistoricoActivity, historicos)
-                    recycler.adapter = adapter
+                    if (historicos.isEmpty()){
+                        mostrarOcultar(noHistoricos, true)
+                        mostrarOcultar(recycler, false)
+                        mostrarOcultar(spinner, false)
+                        mostrarOcultar(txtFiltrar, false)
+                    } else {
+                        val adapter = HistoricoAdapter(this@HistoricoActivity, historicos)
+                        recycler.adapter = adapter
 
-                    // Obtener niveles únicos y ordenados de menor a mayor
-                    val niveles = historicos.mapNotNull { it.workoutObj?.nivel }.toSet().sorted()
-                    configurarSpinner(niveles.toList(), historicos, adapter)
+                        // Obtener niveles únicos y ordenados de menor a mayor
+                        val niveles =
+                            historicos.mapNotNull { it.workoutObj?.nivel }.toSet().sorted()
+                        configurarSpinner(niveles.toList(), historicos, adapter)
+                    }
                 },
-                onFailure = { exception ->
-                    Log.e("HIS", "Error al obtener históricos: ${exception.message}")
+                onFailure = { _ ->
+                    mostrarOcultar(noHistoricos, true)
+                    mostrarOcultar(recycler, false)
+                    mostrarOcultar(spinner, false)
+                    mostrarOcultar(txtFiltrar, false)
+                    Toast.makeText(this, "No se han podido obtener los históricos", Toast.LENGTH_SHORT).show()
                 }
             )
         }
     }
 
-    private fun configurarSpinner(niveles: List<Int>, historicos: List<Historico>, historicoAdapter: HistoricoAdapter) {
+    private fun configurarSpinner(
+        niveles: List<Int>,
+        historicos: List<Historico>,
+        historicoAdapter: HistoricoAdapter
+    ) {
         val spinner = findViewById<Spinner>(R.id.spinnerNiveles)
 
         // Añadir la opción por defecto, muestra todos los niveles
@@ -83,7 +103,12 @@ class HistoricoActivity : BaseActivity() {
 
         // Configurar el listener para cambios en el Spinner
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: android.view.View, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: android.view.View,
+                position: Int,
+                id: Long
+            ) {
                 val selectedLevel = nivelesConTodos[position]
                 if (selectedLevel == getString(R.string.todos_niveles)) {
                     // Si se selecciona "Todos los niveles", mostrar todos los históricos
@@ -91,7 +116,8 @@ class HistoricoActivity : BaseActivity() {
                 } else {
                     // Filtrar por nivel seleccionado
                     val levelToFilter = selectedLevel.toInt()
-                    val filteredHistoricos = historicos.filter { it.workoutObj?.nivel == levelToFilter }
+                    val filteredHistoricos =
+                        historicos.filter { it.workoutObj?.nivel == levelToFilter }
                     historicoAdapter.updateData(filteredHistoricos)
                 }
             }
@@ -100,6 +126,11 @@ class HistoricoActivity : BaseActivity() {
                 // TODO
             }
         }
+    }
+
+    // Método para cambiar la visibilidad de las vistas
+    private fun mostrarOcultar(view: View, mostrar: Boolean) {
+        view.visibility = if (mostrar) View.VISIBLE else View.GONE
     }
 
 }

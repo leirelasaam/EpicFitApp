@@ -1,10 +1,10 @@
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import modelo.pojos.Ejercicio
 import modelo.pojos.Historico
 import modelo.pojos.Usuario
 import modelo.pojos.Workout
+
 
 class GestorDeHistoricos {
 
@@ -24,6 +24,14 @@ class GestorDeHistoricos {
             .get()
             .addOnSuccessListener { historicosSnapshot ->
                 val historicos = mutableListOf<Historico>()
+
+                // Verificar si no hay historicos
+                if (historicosSnapshot.isEmpty) {
+                    Log.d("HIS", "El usuario no tiene históricos.")
+                    // Llamar a onSuccess con lista vacía
+                    onSuccess(historicos)
+                    return@addOnSuccessListener
+                }
 
                 for (document in historicosSnapshot) {
                     val historico = document.toObject(Historico::class.java)
@@ -50,6 +58,8 @@ class GestorDeHistoricos {
                                         }
 
                                         workout.ejerciciosObj = ejercicios
+                                        var tiempoTotal = agregarTiempoEstimadoWorkout(ejercicios)
+                                        workout.tiempo = tiempoTotal
                                         historico.workoutObj = workout
                                         historicos.add(historico)
 
@@ -76,5 +86,18 @@ class GestorDeHistoricos {
                 Log.e("HIS", "Error al obtener historicos: ", exception)
                 onFailure(exception)
             }
+    }
+
+    private fun agregarTiempoEstimadoWorkout(ejercicios: MutableList<Ejercicio>): Int {
+        var tiempoTotal = 0
+        for (ejercicio in ejercicios) {
+            val tiempo = ejercicio.tiempoSerie!!
+            val descanso = ejercicio.descanso!!
+            val cuentaRegresiva = 5
+            val series = ejercicio.series!!
+
+            tiempoTotal += (tiempo * series) + (descanso * (series - 1) + (cuentaRegresiva * series))
+        }
+        return tiempoTotal
     }
 }

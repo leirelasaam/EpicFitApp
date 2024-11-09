@@ -40,8 +40,17 @@ class LoginActivity : BaseActivity() {
 
         rememberMeCheckBox = findViewById(R.id.inputMantenerSesion) // Ajusta el ID según corresponda
 
+        // Obtener los datos pasados desde RegistroActivity
+        val userReg = intent.getStringExtra("user")
+        val passReg = intent.getStringExtra("pass")
+
         user = findViewById<EditText>(R.id.inputUser)
         pass = findViewById<EditText>(R.id.inputPass)
+
+        if (userReg != null && passReg != null){
+            user.setText(userReg)
+            pass.setText(passReg)
+        }
 
         // Cargar datos de inicio si la casilla de rememberMe está marcada y ha habido antes un login exitoso
         cargarDatosInicio()
