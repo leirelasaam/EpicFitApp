@@ -75,17 +75,14 @@ abstract class BaseActivity : AppCompatActivity() {
             R.id.item_workout -> {
                 val intent = Intent(this, HistoricoActivity::class.java)
                 startActivity(intent)
-                finish()
             }
             R.id.item_perfil -> {
                 val intent = Intent(this, PerfilActivity::class.java)
                 startActivity(intent)
-                finish()
             }
             R.id.item_entrenador -> {
                 val intent = Intent(this, EntrenadorActivity::class.java)
                 startActivity(intent)
-                finish()
             }
             R.id.item_cerrar_sesion -> {
                 UsuarioLogueado.usuario = null;
