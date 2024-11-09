@@ -80,7 +80,15 @@
             android:background="@color/secondary" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/noHistoricos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/no_historicos"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/txtFiltrar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"

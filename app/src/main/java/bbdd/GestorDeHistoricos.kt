@@ -25,6 +25,14 @@ class GestorDeHistoricos {
             .addOnSuccessListener { historicosSnapshot ->
                 val historicos = mutableListOf<Historico>()
 
+                // Verificar si no hay historicos
+                if (historicosSnapshot.isEmpty) {
+                    Log.d("HIS", "El usuario no tiene históricos.")
+                    // Llamar a onSuccess con lista vacía
+                    onSuccess(historicos)
+                    return@addOnSuccessListener
+                }
+
                 for (document in historicosSnapshot) {
                     val historico = document.toObject(Historico::class.java)
                     historico.id = document.id
