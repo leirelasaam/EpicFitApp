@@ -26,6 +26,7 @@
     <string name="modificar_workout">Modificar workout</string>
     <string name="eliminar_workout">Eliminar Workout</string>
     <string name="volver">Volver</string>
+    <string name="no_historicos">No has realizado ningún workout todavía</string>
 
     <!--Spinner Tipo de usuario ( en registro)-->
     <string-array name="tipoUsuario">
