@@ -95,6 +95,10 @@ Cambiarse a una rama:
 ```bash
 git switch nombre
 ```
+**Alternativa:** volver a la rama anterior:
+```bash
+git switch -
+```
 Eliminar rama local:
 ```bash
 git branch -d tu-rama
