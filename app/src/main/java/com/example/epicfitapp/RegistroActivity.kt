@@ -95,12 +95,14 @@ class RegistroActivity : BaseActivity() {
             )
 
             val comprobarValidaciones = validacionesCamposCorrectos(nuevoUsuario, pass, pass2);
-            if (comprobarValidaciones == true) {
+            if (comprobarValidaciones) {
                 // Guarda el usuario en Firestore
                 guardarUsuario(nuevoUsuario)
                 val intent = Intent(this, LoginActivity::class.java)
+                intent.putExtra("user", nuevoUsuario.usuario)
+                intent.putExtra("pass", nuevoUsuario.pass)
                 startActivity(intent)
-
+                finish()
             }
 
         }
@@ -111,7 +113,7 @@ class RegistroActivity : BaseActivity() {
             .add(nuevoUsuario)
             .addOnSuccessListener { documentReference ->
                 nuevoUsuario.id = documentReference.id // Asigna el ID generado por Firebase
-                Toast.makeText(this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "@${nuevoUsuario.usuario} registrado con éxito", Toast.LENGTH_SHORT).show()
                 Log.d("Firestore", "Usuario guardado con ID: ${documentReference.id}")
             }
             .addOnFailureListener { e ->

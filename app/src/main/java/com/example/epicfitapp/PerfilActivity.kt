@@ -68,7 +68,6 @@ class PerfilActivity : BaseActivity() {
             //volver a workouts
             Intent(this, HistoricoActivity::class.java)
             startActivity(intent)
-            finish()
         }
     }
 }

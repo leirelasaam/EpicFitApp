@@ -41,7 +41,6 @@ class HistoricoActivity : BaseActivity() {
             usuarioTxt.setOnClickListener {
                 val intent = Intent(this, PerfilActivity::class.java)
                 startActivity(intent)
-                finish()
             }
 
             (findViewById<TextView>(R.id.nivelValorTxt)).text = usuarioActual.nivel.toString()
