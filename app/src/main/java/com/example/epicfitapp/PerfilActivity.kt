@@ -2,25 +2,27 @@ package com.example.epicfitapp
 
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
 import modelo.pojos.UsuarioLogueado
+import utils.DateUtils
+import utils.DateUtils.Companion.formatearTimestamp
 
 class PerfilActivity : BaseActivity() {
 
     private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
-    private lateinit var user: EditText
-    private lateinit var nombre: EditText
-    private lateinit var apellidos: EditText
-    private lateinit var email: EditText
-    private lateinit var fechaNac: EditText
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,43 +33,23 @@ class PerfilActivity : BaseActivity() {
             insets
         }
 
-        // Inicializar los EditText
-        user = findViewById(R.id.inputUsuario)
-        nombre = findViewById(R.id.inputNombre)
-        apellidos = findViewById(R.id.inputApellidos)
-        email = findViewById(R.id.inputEmail)
-        fechaNac = findViewById(R.id.inputFechaNacimiento)
+        val usuarioActual = UsuarioLogueado.usuario
 
-        // Asumimos que UsuarioLogueado.usuario contiene el usuario logueado
-        db.collection("Usuarios")
-            .whereEqualTo("usuario", UsuarioLogueado.usuario)
-            .get()
-            .addOnSuccessListener { result ->
-                if (result.isEmpty) {
-                    Log.d(TAG, "Usuario no encontrado.")
-                    //Toast.makeText(this, "Usuario no encontrado.", Toast.LENGTH_SHORT).show()
-                } else {
-                    // Extraemos los datos del documento
-                    result.documents.firstOrNull()?.let { document ->
-                        user.setText(document.getString("usuario"))
-                        nombre.setText(document.getString("nombre"))
-                        apellidos.setText(document.getString("apellidos"))
-                        email.setText(document.getString("email"))
-                        fechaNac.setText(document.getString("fechaNacimiento"))
-                    }
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error obteniendo documentos.", exception)
-                //Toast.makeText(this, "Error al obtener usuarios.", Toast.LENGTH_SHORT).show()
-            }
+        if (usuarioActual != null) {
+            (findViewById<EditText>(R.id.inputUsuario)).setText(usuarioActual.usuario)
+            (findViewById<EditText>(R.id.inputNombre)).setText(usuarioActual.nombre)
+            (findViewById<EditText>(R.id.inputApellidos)).setText(usuarioActual.apellido.toString())
+            (findViewById<EditText>(R.id.inputEmail)).setText(usuarioActual.correo.toString())
+            (findViewById<EditText>(R.id.inputFechaNacimiento)).setText(
+                usuarioActual.fechaNac?.let { formatearTimestamp(it) })
+        }
 
         val btnVolverWorkouts = findViewById<Button>(R.id.btn_volver)
 
         btnVolverWorkouts.setOnClickListener {
-            //volver a workouts
-            Intent(this, HistoricoActivity::class.java)
-            startActivity(intent)
+            //volver a historico
+            startActivity(Intent(this, HistoricoActivity::class.java))
+            finish()
         }
     }
 }
