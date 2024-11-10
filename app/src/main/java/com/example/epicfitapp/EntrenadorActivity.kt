@@ -1,15 +1,24 @@
 package com.example.epicfitapp
 
 import adaptadores.WorkoutsAdapter
+import android.app.ProgressDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Spinner
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import bbdd.GestorDeWorkouts
+import modelo.pojos.Ejercicio
+import modelo.pojos.Usuario
 import modelo.pojos.Workout
 
 class EntrenadorActivity : BaseActivity() {
@@ -17,6 +26,7 @@ class EntrenadorActivity : BaseActivity() {
     private lateinit var workoutsRecyclerView: RecyclerView
     private lateinit var workoutsAdapter: WorkoutsAdapter
     private var workoutsList: List<Workout> = listOf() // Lista de workouts
+    val gdw = GestorDeWorkouts()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +39,12 @@ class EntrenadorActivity : BaseActivity() {
         // Carga los datos de los workouts
         loadWorkouts()
 
+        val btnAniadirWorkout = findViewById<Button>(R.id.btn_aniadirWorkout)
+        btnAniadirWorkout.setOnClickListener {
+            mostrarDialogoAniadirWorkout()
+
+        }
+
         // Configura el adaptador con los datos
         workoutsAdapter = WorkoutsAdapter(this, workoutsList)
         workoutsRecyclerView.adapter = workoutsAdapter
@@ -37,12 +53,9 @@ class EntrenadorActivity : BaseActivity() {
     private fun loadWorkouts() {
         val recycler = findViewById<RecyclerView>(R.id.workoutsRecyclerView)
         recycler.layoutManager = LinearLayoutManager(this)
-        val gdw = GestorDeWorkouts()
-
 
         gdw.obtenerWorkouts(
             onSuccess = { workouts ->
-                // Aquí se recibe la lista de workouts
                 workoutsList = workouts
 
                 // Configurar el adapter con la lista de workouts
@@ -55,7 +68,6 @@ class EntrenadorActivity : BaseActivity() {
             },
             onFailure = { exception ->
                 Log.e("loadWorkouts", "Error al obtener workouts: ${exception.message}")
-                // Aquí puedes manejar el error, como mostrar un mensaje al usuario
             }
         )
     }
@@ -88,12 +100,55 @@ class EntrenadorActivity : BaseActivity() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                // Aquí puedes decidir qué hacer si no se selecciona nada
-                // Por ejemplo, podrías mostrar todos los workouts nuevamente
                 workoutAdapter.updateData(workouts)
             }
         }
     }
 
+    fun mostrarDialogoAniadirWorkout() {
+        // Añadir un Workout
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Añadir Workout")
 
-}
+        val nombreInput = EditText(this)
+        nombreInput.hint = "Nombre del Workout"
+        val nivelInput = EditText(this)
+        nivelInput.hint = "Nivel (número entero)"
+        val tiempoInput = EditText(this)
+        tiempoInput.hint = "Tiempo (en minutos)"
+        val videoInput = EditText(this)
+        videoInput.hint = "Enlace del video (opcional)"
+        val tipoInput = EditText(this)
+        tipoInput.hint = "Tipo de Workout"
+
+        val layout = LinearLayout(this)
+        layout.orientation = LinearLayout.VERTICAL
+        layout.addView(nombreInput)
+        layout.addView(nivelInput)
+        layout.addView(tiempoInput)
+        layout.addView(videoInput)
+        layout.addView(tipoInput)
+        builder.setView(layout)
+
+        builder.setPositiveButton("Añadir") { dialog: DialogInterface, _: Int ->
+            val nuevoWorkout = Workout(
+                nombre = nombreInput.text.toString(),
+                nivel = nivelInput.text.toString().toIntOrNull() ?: 0,
+                tiempo = tiempoInput.text.toString().toIntOrNull() ?: 0,
+                video = videoInput.text.toString(),
+                tipo = tipoInput.text.toString())
+
+            // Llamar a la función para subir a Firebase
+            gdw.subirWorkout(this,nuevoWorkout)
+            loadWorkouts()
+            dialog.dismiss()
+        }
+
+        builder.setNegativeButton("Cancelar") { dialog: DialogInterface, _: Int ->
+            dialog.dismiss()
+        }
+
+        // Mostrar el diálogo
+        builder.create().show()
+    }
+    }
