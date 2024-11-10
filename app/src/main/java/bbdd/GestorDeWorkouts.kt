@@ -57,31 +57,13 @@ class GestorDeWorkouts {
             "video" to workout.video,
             "tipo" to workout.tipo,
         )
-        db.collection("cities")
+        db.collection(coleccionWorkouts)
             .add(data)
             .addOnSuccessListener { documentReference ->
                 Toast.makeText(context, "Workout '${workout.nombre}' registrado con éxito", Toast.LENGTH_SHORT).show()
                 Log.d("Firestore", "Workout guardado con ID: ${documentReference.id}")
             }
             .addOnFailureListener { e ->
-                Toast.makeText(context, "Error al registrar workout: ${e.message}", Toast.LENGTH_SHORT).show()
-                Log.e("Firestore", "Error al guardar workout", e)
-            }
-
-
-
-        db.collection(coleccionWorkouts)
-            .add(workout)
-            .addOnSuccessListener { documentReference ->
-                // Asignar el ID generado por Firebase al workout
-                workout.id = documentReference.id
-
-                // Mostrar un mensaje de éxito
-                Toast.makeText(context, "Workout '${workout.nombre}' registrado con éxito", Toast.LENGTH_SHORT).show()
-                Log.d("Firestore", "Workout guardado con ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                // Mostrar un mensaje de error en caso de fallo
                 Toast.makeText(context, "Error al registrar workout: ${e.message}", Toast.LENGTH_SHORT).show()
                 Log.e("Firestore", "Error al guardar workout", e)
             }

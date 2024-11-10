@@ -4,11 +4,11 @@ import com.google.firebase.firestore.DocumentReference
 
 class Workout(
     var id: String? = null,
-    var nombre: String? = null,
+    var nombre: String? = "",
     var nivel: Int? = 0,
     var tiempo: Int? = 0,
     var video: String? = null,
-    var tipo: String? = null
+    var tipo: String? = ""
 ) {
     var ejerciciosObj: List<Ejercicio>? = null // Lista de ejercicios
 
