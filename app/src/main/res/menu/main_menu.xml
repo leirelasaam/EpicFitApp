@@ -6,6 +6,7 @@
         android:id="@+id/logo_menu"
         android:title="EF"
         android:icon="@drawable/logo"
+        app:tint="@color/logo_color"
         app:showAsAction="always" />
     <item
         android:id="@+id/switch_tema"

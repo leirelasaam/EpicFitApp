@@ -10,6 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
+import androidx.core.content.ContextCompat
 import modelo.pojos.UsuarioLogueado
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -35,6 +36,15 @@ abstract class BaseActivity : AppCompatActivity() {
 
         val isDarkMode = sharedPreferences.getBoolean("dark_mode", false)
         switch?.isChecked = isDarkMode
+
+        // Cambiar el color del logo, dependiendo del tema
+        val logoMenuItem = menu.findItem(R.id.logo_menu)
+        val color = if (isDarkMode) {
+            ContextCompat.getColor(this, R.color.white)
+        } else {
+            ContextCompat.getColor(this, R.color.black)
+        }
+        logoMenuItem.icon?.setTint(color)
 
         // Configurar el listener para el Switch
         switch?.setOnCheckedChangeListener { _, isChecked ->
@@ -73,19 +83,25 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         when (menuItem.itemId) {
             R.id.item_workout -> {
-                val intent = Intent(this, HistoricoActivity::class.java)
-                startActivity(intent)
+                if (this::class.java != HistoricoActivity::class.java) {
+                    val intent = Intent(this, HistoricoActivity::class.java)
+                    startActivity(intent)
+                }
             }
             R.id.item_perfil -> {
-                val intent = Intent(this, PerfilActivity::class.java)
-                startActivity(intent)
+                if (this::class.java != PerfilActivity::class.java) {
+                    val intent = Intent(this, PerfilActivity::class.java)
+                    startActivity(intent)
+                }
             }
             R.id.item_entrenador -> {
-                val intent = Intent(this, EntrenadorActivity::class.java)
-                startActivity(intent)
+                if (this::class.java != EntrenadorActivity::class.java) {
+                    val intent = Intent(this, EntrenadorActivity::class.java)
+                    startActivity(intent)
+                }
             }
             R.id.item_cerrar_sesion -> {
-                UsuarioLogueado.usuario = null;
+                UsuarioLogueado.usuario = null
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
