@@ -42,6 +42,7 @@ class EntrenadorActivity : BaseActivity() {
         val btnAniadirWorkout = findViewById<Button>(R.id.btn_aniadirWorkout)
         btnAniadirWorkout.setOnClickListener {
             mostrarDialogoAniadirWorkout()
+
         }
 
         // Configura el adaptador con los datos
@@ -53,11 +54,8 @@ class EntrenadorActivity : BaseActivity() {
         val recycler = findViewById<RecyclerView>(R.id.workoutsRecyclerView)
         recycler.layoutManager = LinearLayoutManager(this)
 
-
-
         gdw.obtenerWorkouts(
             onSuccess = { workouts ->
-                // Aquí se recibe la lista de workouts
                 workoutsList = workouts
 
                 // Configurar el adapter con la lista de workouts
@@ -70,7 +68,6 @@ class EntrenadorActivity : BaseActivity() {
             },
             onFailure = { exception ->
                 Log.e("loadWorkouts", "Error al obtener workouts: ${exception.message}")
-                // Aquí puedes manejar el error, como mostrar un mensaje al usuario
             }
         )
     }
@@ -143,6 +140,7 @@ class EntrenadorActivity : BaseActivity() {
 
             // Llamar a la función para subir a Firebase
             gdw.subirWorkout(this,nuevoWorkout)
+            loadWorkouts()
             dialog.dismiss()
         }
 

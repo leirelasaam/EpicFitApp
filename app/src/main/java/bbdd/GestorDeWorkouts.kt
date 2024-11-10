@@ -67,6 +67,7 @@ class GestorDeWorkouts {
                 Toast.makeText(context, "Error al registrar workout: ${e.message}", Toast.LENGTH_SHORT).show()
                 Log.e("Firestore", "Error al guardar workout", e)
             }
+
     }
 
 
