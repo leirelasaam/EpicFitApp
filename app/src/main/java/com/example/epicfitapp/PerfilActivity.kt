@@ -43,13 +43,5 @@ class PerfilActivity : BaseActivity() {
             (findViewById<EditText>(R.id.inputFechaNacimiento)).setText(
                 usuarioActual.fechaNac?.let { formatearTimestamp(it) })
         }
-
-        val btnVolverWorkouts = findViewById<Button>(R.id.btn_volver)
-
-        btnVolverWorkouts.setOnClickListener {
-            //volver a historico
-            startActivity(Intent(this, HistoricoActivity::class.java))
-            finish()
-        }
     }
 }
