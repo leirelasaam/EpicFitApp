@@ -26,6 +26,7 @@ class EntrenadorActivity : BaseActivity() {
     private lateinit var workoutsRecyclerView: RecyclerView
     private lateinit var workoutsAdapter: WorkoutsAdapter
     private var workoutsList: List<Workout> = listOf() // Lista de workouts
+    val gdw = GestorDeWorkouts()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +52,7 @@ class EntrenadorActivity : BaseActivity() {
     private fun loadWorkouts() {
         val recycler = findViewById<RecyclerView>(R.id.workoutsRecyclerView)
         recycler.layoutManager = LinearLayoutManager(this)
-        val gdw = GestorDeWorkouts()
+
 
 
         gdw.obtenerWorkouts(
@@ -141,7 +142,7 @@ class EntrenadorActivity : BaseActivity() {
                 tipo = tipoInput.text.toString())
 
             // Llamar a la función para subir a Firebase
-            subirWorkoutAFirebase(nuevoWorkout)
+            gdw.subirWorkout(this,nuevoWorkout)
             dialog.dismiss()
         }
 
@@ -152,20 +153,4 @@ class EntrenadorActivity : BaseActivity() {
         // Mostrar el diálogo
         builder.create().show()
     }
-
-    private fun subirWorkoutAFirebase(workout: Workout) {
-        val gestorDeWorkouts = GestorDeWorkouts()
-
-        gestorDeWorkouts.subirWorkout(workout,
-            onSuccess = {
-                Toast.makeText(this, "Workout añadido con éxito", Toast.LENGTH_SHORT).show()
-                loadWorkouts() // Volver a cargar los workouts para incluir el nuevo
-            },
-            onFailure = { exception ->
-                Log.e("EntrenadorActivity", "Error al añadir workout: ${exception.message}")
-                Toast.makeText(this, "Error al añadir el workout", Toast.LENGTH_SHORT).show()
-            }
-        )
     }
-
-}
