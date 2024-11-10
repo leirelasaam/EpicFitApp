@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/botonVolver"
-        android:layout_width="147dp"gi
+        android:layout_width="147dp"
         android:layout_height="38dp"
         android:text="@string/buttonVolver"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:background="@color/primary"
         android:padding="10dp"
-        android:text="Registro"
+        android:text="@string/textViewRegistro"
         android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

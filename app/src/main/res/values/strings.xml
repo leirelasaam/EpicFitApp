@@ -4,6 +4,7 @@
     <string name="workouts">Workouts</string>
     <string name="perfil">Profile</string>
     <string name="entrenador">Coach</string>
+    <string name="cerrar_sesion">Log out</string>
 
     <!-- Login Strings -->
     <string name="textViewUsuario">User</string>
@@ -13,22 +14,39 @@
     <string name="buttonIniciarSesion" >Login in</string>
     <string name="buttonRegistrarme">Sign up</string>
 
-    <!-- Registro Strings -->
+    <!-- Registro y Perfil Strings -->
+    <string name="textViewRegistro">Register</string>
     <string name="textViewNombre">Name</string>
     <string name="textViewApellido">Surname</string>
     <string name="textViewFechaNacimiento">Date of birth</string>
     <string name="textViewEmail">Email</string>
     <string name="textViewNombreUsuario">User name</string>
-    <string name="textViewIntroduzcaContraseña">Introduce password</string>
+    <string name="textViewIntroduzcaContraseña">Enter password</string>
     <string name="textViewConfirmarContraseña">Confirm password</string>
     <string name="buttonVolver">Go back</string>
 
+    <!--String Perfil-->
+    <string name="inputUsuario">User</string>
+    <string name="inputNombre">Name</string>
+    <string name="inputApellidos">Surname</string>
+    <string name="inputEmail">Email</string>
+    <string name="inputFechaNacimiento">Date of birth</string>
 
     <!-- Workouts Strings -->
     <string name="nivel_pl">Level of</string>
     <string name="nivel">Level:</string>
     <string name="filtrar_niveles">Filter by levels:</string>
     <string name="todos_niveles">All levels</string>
+    <string name="repeticiones">repetitions</string>
+    <string name="descanso">rest between sets</string>
+    <string name="completado">completed in</string>
+    <string name="filtrar_workouts">Filter workouts</string>
+    <string name="aniardir_workout">Add workout</string>
+    <string name="modificar_workout">Update workout</string>
+    <string name="eliminar_workout">Remove Workout</string>
+    <string name="volver">Go back</string>
+    <string name="no_historicos">you have not performed any workout yet </string>
+    <string name="tiempo_previsto">Expected time:</string>
 
     <!-- User Type Spinner (in registration) -->
     <string-array name="tipoUsuario">

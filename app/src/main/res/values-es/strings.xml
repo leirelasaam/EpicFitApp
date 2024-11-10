@@ -4,6 +4,8 @@
     <string name="workouts">Workouts</string>
     <string name="perfil">Perfil</string>
     <string name="entrenador">Entrenador</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+
 
     <!--String Login-->
     <string name="textViewUsuario">Usuario</string>
@@ -14,6 +16,7 @@
    <string name="buttonRegistrarme">Registrarme</string>
 
    <!-- Registro Strings -->
+    <string name="textViewRegistro">Registro</string>
     <string name="textViewNombre">Nombre</string>
     <string name="textViewApellido">Apellidos</string>
     <string name="textViewFechaNacimiento">Fecha de nacimiento</string>
@@ -23,15 +26,31 @@
     <string name="textViewConfirmarContraseña">Repita la contraseña</string>
     <string name="buttonVolver">Volver</string>
 
-
+    <!--String Perfil-->
+    <string name="inputUsuario">Usuario</string>
+    <string name="inputNombre">Nombre</string>
+    <string name="inputApellidos">Apellidos</string>
+    <string name="inputEmail">Correo electrónico</string>
+    <string name="inputFechaNacimiento">Fecha de nacimiento</string>
 
     <!--String Workouts-->
     <string name="nivel_pl">Nivel de</string>
     <string name="nivel">Nivel:</string>
     <string name="filtrar_niveles">Filtrar por niveles:</string>
     <string name="todos_niveles">Todos los niveles</string>
+    <string name="repeticiones">repeticiones</string>
+    <string name="descanso">de descanso entre series</string>
+    <string name="completado">completado en</string>
+    <string name="filtrar_workouts">Filtrar workouts</string>
+    <string name="aniardir_workout">Añadir workout</string>
+    <string name="modificar_workout">Modificar workout</string>
+    <string name="eliminar_workout">Eliminar Workout</string>
+    <string name="volver">Volver</string>
+    <string name="no_historicos">No has realizado ningún workout todavía</string>
+    <string name="tiempo_previsto">Tiempo previsto:</string>
 
-    <!--Spinner Tipo de usuario ( en registro)-->
+
+    <!--Spinner Tipo de usuario (en registro)-->
     <string-array name="tipoUsuario">
         <item>Cliente</item>
         <item>Entrenador</item>

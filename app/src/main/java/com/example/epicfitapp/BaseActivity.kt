@@ -5,13 +5,13 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Switch
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import modelo.pojos.UsuarioLogueado
+
 
 abstract class BaseActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
@@ -55,7 +55,8 @@ abstract class BaseActivity : AppCompatActivity() {
         }
 
         // Ocultar ítems si la actividad actual es LoginActivity
-        if (this is LoginActivity || this is RegistroActivity) {
+        if (this is LoginActivity) //|| this is RegistroActivity)
+        {
             ocultarItemsDelMenu(menu)
         } else {
             mostrarItemsSegunUsuario(menu)
