@@ -10,6 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
+import androidx.core.content.ContextCompat
 import modelo.pojos.UsuarioLogueado
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -35,6 +36,15 @@ abstract class BaseActivity : AppCompatActivity() {
 
         val isDarkMode = sharedPreferences.getBoolean("dark_mode", false)
         switch?.isChecked = isDarkMode
+
+        // Cambiar el color del logo, dependiendo del tema
+        val logoMenuItem = menu.findItem(R.id.logo_menu)
+        val color = if (isDarkMode) {
+            ContextCompat.getColor(this, R.color.white)
+        } else {
+            ContextCompat.getColor(this, R.color.black)
+        }
+        logoMenuItem.icon?.setTint(color)
 
         // Configurar el listener para el Switch
         switch?.setOnCheckedChangeListener { _, isChecked ->
