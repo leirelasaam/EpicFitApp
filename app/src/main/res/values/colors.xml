@@ -4,8 +4,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="primary">#FD8F00</color>
     <color name="secondary">#D0D0D0</color>
-    <color name="light_gray">#D3D3D3</color> <!-- Color gris claro -->
-    <color name="dark_background">#2B2B2B</color> <!-- Color de fondo gris oscuro -->
+    <color name="mid_gray">#808080</color>
+    <color name="light_gray">#D3D3D3</color>
+    <color name="dark_background">#2B2B2B</color>
+    <color name="dark_orange">#FF5722</color>
+    <color name="logo_color">#FF000000</color>
 
     <!-- Tema personalizado para DatePicker -->
     <style name="CustomDatePickerTheme" parent="Theme.AppCompat.Light.Dialog">

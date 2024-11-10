@@ -4,24 +4,23 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.EditText
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.google.firebase.firestore.FirebaseFirestore
-import modelo.pojos.Usuario
+import bbdd.GestorDeUsuarios
 import modelo.pojos.UsuarioLogueado
-import java.time.LocalDateTime
-import java.time.ZoneId
-import java.util.Date
 
 class LoginActivity : BaseActivity() {
-    private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
+
+    //private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
+    private lateinit var rememberMeCheckBox: CheckBox
+    private lateinit var user: EditText
+    private lateinit var pass: EditText
 
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("WrongViewCast")
@@ -29,16 +28,32 @@ class LoginActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.login)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
+        rememberMeCheckBox =
+            findViewById(R.id.inputMantenerSesion) // Ajusta el ID según corresponda
+        val gdu = GestorDeUsuarios()
+
+        // Obtener los datos pasados desde RegistroActivity
+        val userReg = intent.getStringExtra("user")
+        val passReg = intent.getStringExtra("pass")
+
+        user = findViewById(R.id.inputUser)
+        pass = findViewById(R.id.inputPass)
+
+        if (userReg != null && passReg != null) {
+            user.setText(userReg)
+            pass.setText(passReg)
+        }
+
+        // Cargar datos de inicio si la casilla de rememberMe está marcada y ha habido antes un login exitoso
+        gdu.cargarDatosInicio(this, user, pass, rememberMeCheckBox)
+
         // Referencias a los EditText y el botón
-        val user = findViewById<EditText>(R.id.inputUser)
-        val pass = findViewById<EditText>(R.id.inputPass)
         val btnIniciarSesion = findViewById<Button>(R.id.btn_IniciarSesion)
         // Referencia al botón de registro
         val btnRegistrarme: Button = findViewById(R.id.btn_Registrarme)
@@ -47,7 +62,7 @@ class LoginActivity : BaseActivity() {
         btnIniciarSesion.setOnClickListener {
             if (user.text.isNotEmpty() && pass.text.isNotEmpty()) {
                 //Toast.makeText(this, "User y pass introducidos", Toast.LENGTH_SHORT).show()
-                comprobarUsuario(user.text.toString(), pass.text.toString()) { usuario ->
+                gdu.comprobarUsuario(user.text.toString(), pass.text.toString()) { usuario ->
                     if (usuario != null) {
                         // Asignar el usuario a UsuarioLogueado
                         UsuarioLogueado.usuario = usuario
@@ -57,8 +72,20 @@ class LoginActivity : BaseActivity() {
                         Toast.makeText(this, "Bienvenido ${usuario.nombre}", Toast.LENGTH_SHORT)
                             .show()
 
-                        // Pasar a histórico tras login correcto
-                        val intent = Intent(this, HistoricoActivity::class.java)
+                        // Guarda credenciales de inicio si rememberMe seleccionado
+                        if (rememberMeCheckBox.isChecked) {
+                            gdu.recordarUsuario(this, user.text.toString(), pass.text.toString())
+                        } else {
+                            //Si rememberMe no está seleccionado se borra las credenciales de inicio
+                            gdu.borrarUsuarioRecordado(this)
+                        }
+
+                        // Redirige a la actividad dependiendo si es entrenador o no
+                        val intent = if (true == usuario.esEntrenador) {
+                            Intent(this, EntrenadorActivity::class.java)
+                        } else {
+                            Intent(this, HistoricoActivity::class.java)
+                        }
                         startActivity(intent)
                         finish()
                     } else {
@@ -76,53 +103,9 @@ class LoginActivity : BaseActivity() {
             startActivity(intent)
 
         }
-
-    }
-
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun comprobarUsuario(username: String, password: String, callback: (Usuario?) -> Unit) {
-        db.collection("Usuarios")
-            .whereEqualTo("usuario", username)
-            .whereEqualTo("pass", password)
-            .get()
-            .addOnSuccessListener { result ->
-                if (result.isEmpty) {
-                    Log.d(TAG, "Usuario no encontrado o contraseña incorrecta.")
-                    //Toast.makeText(this, "Usuario no encontrado o contraseña incorrecta.", Toast.LENGTH_SHORT).show()
-                    callback(null)
-                } else {
-                    result.documents.firstOrNull()?.let { document ->
-                        val usuarioEncontrado = document.toObject(Usuario::class.java)
-                        usuarioEncontrado?.id = document.id
-
-                        // Asignar el usuario a UsuarioLogueado
-                        UsuarioLogueado.usuario = usuarioEncontrado
-
-                        Log.d(TAG, "Usuario encontrado: ${usuarioEncontrado?.usuario}")
-                        //Toast.makeText(this, "Bienvenido ${usuario.user}", Toast.LENGTH_SHORT).show()
-                        callback(usuarioEncontrado)
-                    }
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error obteniendo documentos.", exception)
-                //Toast.makeText(this, "Error al obtener usuarios.", Toast.LENGTH_SHORT).show()
-                callback(null)
-            }
     }
 
     companion object {
-        private const val TAG = "LoginActivity"
+        const val TAG = "LoginActivity"
     }
-
-
-    //Así se accede al usuario logueado desde cualquier parte del proyecto
-    /*
-    val usuarioActual = UsuarioLogueado.usuario
-    if (usuarioActual != null) {
-        // Haz algo con el usuario logueado
-        println("Usuario logueado: ${usuarioActual.nombre}")
-    }
-    */
 }

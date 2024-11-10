@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/botonVolver"
-        android:layout_width="147dp"
+        android:layout_width="147dp"gi
         android:layout_height="38dp"
         android:text="@string/buttonVolver"
         app:layout_constraintBottom_toBottomOf="parent"

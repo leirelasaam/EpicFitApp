@@ -1,33 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/perfil"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     tools:context=".PerfilActivity">
 
+    <!-- Título que ocupa todo el ancho -->
+    <TextView
+        android:id="@+id/tituloTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_title"
+        android:letterSpacing="0.15"
+        android:padding="10dp"
+        android:text="@string/perfil"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- LinearLayout para los campos de texto, con ancho del 90% -->
     <LinearLayout
-        android:id="@+id/verticalLayout"
+        android:id="@+id/contenedor"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tituloTxt"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintWidth_percent="0.9">
 
         <TextView
-            android:id="@+id/tituloTxt"
+            android:id="@+id/textUsuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primary"
-            android:padding="10dp"
-            android:text="@string/perfil"
-            android:textSize="16dp"
-            android:textStyle="bold" />
+            android:text="@string/inputUsuario" />
+
+        <EditText
+            android:id="@+id/inputUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:paddingStart="10dp"
+            android:inputType="text"
+            android:text="@string/inputUsuario"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/textNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/inputNombre" />
+
+        <EditText
+            android:id="@+id/inputNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:paddingStart="10dp"
+            android:inputType="text"
+            android:text="@string/inputNombre"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/textApellidos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/inputApellidos" />
+
+        <EditText
+            android:id="@+id/inputApellidos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:paddingStart="10dp"
+            android:inputType="text"
+            android:text="@string/inputApellidos"
+            android:layout_marginBottom="20dp" />
+
+        <TextView
+            android:id="@+id/textEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/inputEmail" />
+
+        <EditText
+            android:id="@+id/inputEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:paddingStart="10dp"
+            android:inputType="text"
+            android:text="@string/inputEmail"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/textFechaNacimiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/inputFechaNacimiento" />
+
+        <EditText
+            android:id="@+id/inputFechaNacimiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:paddingStart="10dp"
+            android:inputType="text"
+            android:text="@string/inputFechaNacimiento" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

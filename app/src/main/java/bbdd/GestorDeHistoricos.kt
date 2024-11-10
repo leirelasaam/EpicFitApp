@@ -1,11 +1,6 @@
-package bbdd
-
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.tasks.await
+import modelo.pojos.Ejercicio
 import modelo.pojos.Historico
 import modelo.pojos.Usuario
 import modelo.pojos.Workout
@@ -14,46 +9,73 @@ import modelo.pojos.Workout
 class GestorDeHistoricos {
 
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private val coleccionHistoricos = "Historicos"
     private val coleccionUsuarios = "Usuarios"
+    private val subcoleccionHistoricos = "Historicos"
+    private val subcoleccionEjercicios = "Ejercicios"
 
     fun obtenerHistoricosPorUsuario(
         usuario: Usuario,
         onSuccess: (List<Historico>) -> Unit,
         onFailure: (Exception) -> Unit
     ) {
-        db.collection(coleccionHistoricos).whereEqualTo(
-            "usuario",
-            usuario?.id?.let { db.collection(coleccionUsuarios).document(it) }
-        )
-            // ordenar por fecha de más reciente
-            .orderBy("fecha", com.google.firebase.firestore.Query.Direction.DESCENDING)
+        db.collection(coleccionUsuarios).document(usuario.id!!)
+            .collection(subcoleccionHistoricos)
+            //.orderBy("fecha", Query.Direction.DESCENDING)  --- NO FUNCIONA
             .get()
-            .addOnSuccessListener { result ->
+            .addOnSuccessListener { historicosSnapshot ->
                 val historicos = mutableListOf<Historico>()
 
-                for (document in result) {
+                // Verificar si no hay historicos
+                if (historicosSnapshot.isEmpty) {
+                    Log.d("HIS", "El usuario no tiene históricos.")
+                    // Llamar a onSuccess con lista vacía
+                    onSuccess(historicos)
+                    return@addOnSuccessListener
+                }
+
+                for (document in historicosSnapshot) {
                     val historico = document.toObject(Historico::class.java)
                     historico.id = document.id
-                    historico.usuarioObj = usuario
 
                     val workoutRef = historico.workout
-                    // Obtener workout
+
+                    // -------------- OBTENER WORKOUT DEL HISTÓRICO --------------
                     workoutRef?.get()?.addOnSuccessListener { workoutDocument ->
                         if (workoutDocument != null) {
                             val workout = workoutDocument.toObject(Workout::class.java)
-                            workout?.id = document.id
+                            workout?.id = workoutDocument.id
 
-                            historico.workoutObj = workoutDocument.toObject(Workout::class.java)
+                            if (workout != null) {
+                                // -------------- OBTENER EJERCICIOS DEL WORKOUT --------------
+                                workoutRef.collection(subcoleccionEjercicios)
+                                    .get()
+                                    .addOnSuccessListener { ejerciciosSnapshot ->
+                                        val ejercicios = mutableListOf<Ejercicio>()
+                                        for (ej in ejerciciosSnapshot) {
+                                            val ejercicio = ej.toObject(Ejercicio::class.java)
+                                            ejercicio.id = ej.id
+                                            ejercicios.add(ejercicio)
+                                        }
 
-                            historicos.add(historico)
-                            Log.d("HIS", "Historico objeto: ${historico.toString()}")
+                                        workout.ejerciciosObj = ejercicios
+                                        var tiempoTotal = agregarTiempoEstimadoWorkout(ejercicios)
+                                        workout.tiempo = tiempoTotal
+                                        historico.workoutObj = workout
+                                        historicos.add(historico)
 
-                            if (historicos.size == result.size()) {
-                                onSuccess(historicos)
+                                        if (historicos.size == historicosSnapshot.size()) {
+                                            // Ordenar los historicos por fecha antes de devolver
+                                            val sortedHistoricos = historicos.sortedByDescending { it.fecha }
+                                            onSuccess(sortedHistoricos)
+                                        }
+                                    }
+                                    .addOnFailureListener { exception ->
+                                        Log.e("HIS", "Error al obtener ejercicios: ", exception)
+                                        onFailure(exception)
+                                    }
                             }
-                        }
 
+                        }
                     }?.addOnFailureListener { exception ->
                         Log.e("HIS", "Error al obtener el workout: ", exception)
                         onFailure(exception)
@@ -61,9 +83,21 @@ class GestorDeHistoricos {
                 }
             }
             .addOnFailureListener { exception ->
-                Log.d("HIS", "Error getting documents: ", exception)
+                Log.e("HIS", "Error al obtener historicos: ", exception)
                 onFailure(exception)
             }
     }
 
+    private fun agregarTiempoEstimadoWorkout(ejercicios: MutableList<Ejercicio>): Int {
+        var tiempoTotal = 0
+        for (ejercicio in ejercicios) {
+            val tiempo = ejercicio.tiempoSerie!!
+            val descanso = ejercicio.descanso!!
+            val cuentaRegresiva = 5
+            val series = ejercicio.series!!
+
+            tiempoTotal += (tiempo * series) + (descanso * (series - 1) + (cuentaRegresiva * series))
+        }
+        return tiempoTotal
+    }
 }
