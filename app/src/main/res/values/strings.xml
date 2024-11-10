@@ -14,11 +14,11 @@
     <string name="buttonRegistrarme">Registrarme</string>
 
     <!--String Perfil-->
-    <string name="inputUsuario">usuario</string>
-    <string name="inputNombre">nombre</string>
-    <string name="inputApellidos">apellidos</string>
-    <string name="inputEmail">email</string>
-    <string name="inputFechaNacimiento">fecha de nacimiento</string>
+    <string name="inputUsuario">Usuario</string>
+    <string name="inputNombre">Nombre</string>
+    <string name="inputApellidos">Apellidos</string>
+    <string name="inputEmail">Correo electrónico</string>
+    <string name="inputFechaNacimiento">Fecha de nacimiento</string>
 
     <!--String Workouts-->
     <string name="nivel_pl">Nivel de</string>
@@ -29,11 +29,11 @@
     <string name="descanso">de descanso entre series</string>
     <string name="completado">completado en</string>
     <string name="filtrar_workouts">Filtrar workouts</string>
-    <string name="aniardir_workout">Aniardir workout</string>
+    <string name="aniardir_workout">Añadir workout</string>
     <string name="modificar_workout">Modificar workout</string>
     <string name="eliminar_workout">Eliminar Workout</string>
     <string name="volver">Volver</string>
-    <string name="no_historicos">No has realizado ningún workout todavía</string>
+    <string name="no_historicos">No has realizado ningún workout</string>
 
     <!--Spinner Tipo de usuario ( en registro)-->
     <string-array name="tipoUsuario">
