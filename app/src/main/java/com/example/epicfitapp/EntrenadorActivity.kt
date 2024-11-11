@@ -1,12 +1,16 @@
 package com.example.epicfitapp
 
 import adaptadores.WorkoutsAdapter
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Spinner
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import bbdd.GestorDeWorkouts
@@ -16,20 +20,22 @@ class EntrenadorActivity : BaseActivity() {
 
     private lateinit var workoutsRecyclerView: RecyclerView
     private lateinit var workoutsAdapter: WorkoutsAdapter
-    private var workoutsList: List<Workout> = listOf() // Lista de workouts
+    private var workoutsList: List<Workout> = listOf()
+    val gdw = GestorDeWorkouts()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_entrenador)
 
-        // Configura el RecyclerView
         workoutsRecyclerView = findViewById(R.id.workoutsRecyclerView)
         workoutsRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Carga los datos de los workouts
         loadWorkouts()
 
-        // Configura el adaptador con los datos
+        val btnAniadirWorkout = findViewById<Button>(R.id.btnAgregarWorkout)
+        btnAniadirWorkout.setOnClickListener {
+            mostrarDialogoAniadirWorkout()
+        }
         workoutsAdapter = WorkoutsAdapter(this, workoutsList)
         workoutsRecyclerView.adapter = workoutsAdapter
     }
@@ -37,33 +43,57 @@ class EntrenadorActivity : BaseActivity() {
     private fun loadWorkouts() {
         val recycler = findViewById<RecyclerView>(R.id.workoutsRecyclerView)
         recycler.layoutManager = LinearLayoutManager(this)
-        val gdw = GestorDeWorkouts()
-
 
         gdw.obtenerWorkouts(
-            onSuccess = { workouts ->
-                // Aquí se recibe la lista de workouts
+            onSuccess = { workouts: List<Workout> ->
                 workoutsList = workouts
+                workoutsAdapter = WorkoutsAdapter(this@EntrenadorActivity, workoutsList)
+                workoutsRecyclerView.adapter = workoutsAdapter
 
-                // Configurar el adapter con la lista de workouts
-                val adapter = WorkoutsAdapter(this@EntrenadorActivity, workouts)
-                recycler.adapter = adapter
+                val niveles = workoutsList.mapNotNull { it.nivel }.toSet().sorted()
+                val spinner = findViewById<Spinner>(R.id.spinnerNiveles)
 
-                // Obtener niveles únicos y ordenados de menor a mayor
-                val niveles = workouts.mapNotNull { it.nivel }.toSet().sorted()
-                configurarSpinner(niveles.map { it.toString() }, workouts, adapter)
+                val nivelesConTodos = mutableListOf(getString(R.string.todos_niveles)).apply {
+                    addAll(niveles.map { it.toString() })
+                }
+
+                val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, nivelesConTodos)
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinner.adapter = adapter
+
+                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>, view: android.view.View, position: Int, id: Long
+                    ) {
+                        val selectedLevel = nivelesConTodos[position]
+                        if (selectedLevel == getString(R.string.todos_niveles)) {
+                            workoutsAdapter.updateData(workoutsList)
+                        } else {
+                            val levelToFilter = selectedLevel.toInt()
+                            val filteredWorkouts = workoutsList.filter { it.nivel == levelToFilter }
+                            workoutsAdapter.updateData(filteredWorkouts)
+                        }
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>) {
+                        workoutsAdapter.updateData(workoutsList)
+                    }
+                }
             },
             onFailure = { exception ->
                 Log.e("loadWorkouts", "Error al obtener workouts: ${exception.message}")
-                // Aquí puedes manejar el error, como mostrar un mensaje al usuario
             }
         )
     }
 
-    private fun configurarSpinner(niveles: List<String>, workouts: List<Workout>, workoutAdapter: WorkoutsAdapter) {
+    private fun configurarSpinner(
+        niveles: List<String>,
+        workouts: List<Workout>,
+        workoutAdapter: WorkoutsAdapter
+    ) {
         val spinner = findViewById<Spinner>(R.id.spinnerNiveles)
 
-        // Añadir la opción por defecto, muestra todos los niveles
+        // Opción por defecto, se muestran todos los niveles
         val nivelesConTodos = mutableListOf(getString(R.string.todos_niveles)).apply {
             addAll(niveles)
         }
@@ -72,12 +102,15 @@ class EntrenadorActivity : BaseActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 
-        // Configurar el listener para cambios en el Spinner
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: android.view.View, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: android.view.View,
+                position: Int,
+                id: Long
+            ) {
                 val selectedLevel = nivelesConTodos[position]
                 if (selectedLevel == getString(R.string.todos_niveles)) {
-                    // Si se selecciona "Todos los niveles", mostrar todos los workouts
                     workoutAdapter.updateData(workouts)
                 } else {
                     // Filtrar por nivel seleccionado
@@ -88,12 +121,92 @@ class EntrenadorActivity : BaseActivity() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                // Aquí puedes decidir qué hacer si no se selecciona nada
-                // Por ejemplo, podrías mostrar todos los workouts nuevamente
                 workoutAdapter.updateData(workouts)
             }
         }
     }
 
+    fun mostrarDialogoAniadirWorkout() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Añadir Workout")
 
+        val nombreInput = EditText(this)
+        nombreInput.hint = "Nombre del Workout"
+        val nivelInput = EditText(this)
+        nivelInput.hint = "Nivel (número entero)"
+        val tiempoInput = EditText(this)
+        tiempoInput.hint = "Tiempo (en minutos)"
+        val videoInput = EditText(this)
+        videoInput.hint = "Enlace del video (opcional)"
+        val tipoInput = EditText(this)
+        tipoInput.hint = "Tipo de Workout"
+
+        val layout = LinearLayout(this)
+        layout.orientation = LinearLayout.VERTICAL
+        layout.addView(nombreInput)
+        layout.addView(nivelInput)
+        layout.addView(tiempoInput)
+        layout.addView(videoInput)
+        layout.addView(tipoInput)
+        builder.setView(layout)
+
+        builder.setPositiveButton("Añadir") { dialog: DialogInterface, _: Int ->
+            val nuevoWorkout = Workout(
+                nombre = nombreInput.text.toString(),
+                nivel = nivelInput.text.toString().toIntOrNull() ?: 0,
+                tiempo = tiempoInput.text.toString().toIntOrNull() ?: 0,
+                video = videoInput.text.toString(),
+                tipo = tipoInput.text.toString()
+            )
+            gdw.subirWorkout(this, nuevoWorkout)
+            loadWorkouts()
+            dialog.dismiss()
+        }
+        builder.setNegativeButton("Cancelar") { dialog: DialogInterface, _: Int ->
+            dialog.dismiss()
+        }
+        builder.create().show()
+    }
+
+    fun mostrarDialogoModificarWorkout(context: EntrenadorActivity, idWorkout: String) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Modificar Workout")
+
+        val nombreInput = EditText(context)
+        nombreInput.hint = "Nombre del Workout"
+        val nivelInput = EditText(context)
+        nivelInput.hint = "Nivel (número entero)"
+        val tiempoInput = EditText(context)
+        tiempoInput.hint = "Tiempo (en minutos)"
+        val videoInput = EditText(context)
+        videoInput.hint = "Enlace del video (opcional)"
+        val tipoInput = EditText(context)
+        tipoInput.hint = "Tipo de Workout"
+
+        val layout = LinearLayout(context)
+        layout.orientation = LinearLayout.VERTICAL
+        layout.addView(nombreInput)
+        layout.addView(nivelInput)
+        layout.addView(tiempoInput)
+        layout.addView(videoInput)
+        layout.addView(tipoInput)
+        builder.setView(layout)
+
+        builder.setPositiveButton("Guardar") { dialog: DialogInterface, _: Int ->
+            val workoutModificado = Workout(
+                nombre = nombreInput.text.toString(),
+                nivel = nivelInput.text.toString().toIntOrNull() ?: 0,
+                tiempo = tiempoInput.text.toString().toIntOrNull() ?: 0,
+                video = videoInput.text.toString(),
+                tipo = tipoInput.text.toString()
+            )
+            context.gdw.actualizarWorkout(context, workoutModificado, idWorkout)
+            context.loadWorkouts()
+            dialog.dismiss()
+        }
+        builder.setNegativeButton("Cancelar") { dialog: DialogInterface, _: Int ->
+            dialog.dismiss()
+        }
+        builder.create().show()
+    }
 }
