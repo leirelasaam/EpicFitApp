@@ -40,7 +40,8 @@
             android:paddingStart="10dp"
             android:textSize="18sp"
             android:layout_marginTop="10dp"
-            android:text="@string/filtrar_niveles" />
+            android:text="@string/filtrar_niveles"
+            tools:ignore="RtlSymmetry" />
         <Spinner
             android:id="@+id/spinnerNiveles"
             android:layout_width="match_parent"
@@ -56,10 +57,10 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/btn_aniadirWorkout"
+            android:id="@+id/btnAgregarWorkout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/aniardir_workout" />
+            android:text="@string/agregar_workout" />
 
     </LinearLayout>
 

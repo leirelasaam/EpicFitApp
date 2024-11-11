@@ -44,80 +44,90 @@
             android:id="@+id/textUsuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/inputUsuario" />
+            android:text="@string/usuario" />
 
         <EditText
             android:id="@+id/inputUsuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:autofillHints=""
             android:paddingStart="10dp"
             android:inputType="text"
-            android:text="@string/inputUsuario"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp"
+            tools:ignore="Deprecated,LabelFor,RtlSymmetry"
+            android:editable="false" />
 
         <TextView
             android:id="@+id/textNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/inputNombre" />
+            android:text="@string/nombre" />
 
         <EditText
             android:id="@+id/inputNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:autofillHints=""
             android:paddingStart="10dp"
             android:inputType="text"
-            android:text="@string/inputNombre"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp"
+            tools:ignore="Deprecated,LabelFor,RtlSymmetry"
+            android:editable="false"/>
 
         <TextView
             android:id="@+id/textApellidos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/inputApellidos" />
+            android:text="@string/apellidos" />
 
         <EditText
             android:id="@+id/inputApellidos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:autofillHints=""
             android:paddingStart="10dp"
             android:inputType="text"
-            android:text="@string/inputApellidos"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="20dp"
+            tools:ignore="Deprecated,LabelFor,RtlSymmetry"
+            android:editable="false"/>
 
         <TextView
             android:id="@+id/textEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/inputEmail" />
+            android:text="@string/email" />
 
         <EditText
             android:id="@+id/inputEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:autofillHints=""
             android:paddingStart="10dp"
             android:inputType="text"
-            android:text="@string/inputEmail"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp"
+            tools:ignore="Deprecated,LabelFor,RtlSymmetry,TextFields"
+            android:editable="false"/>
 
         <TextView
             android:id="@+id/textFechaNacimiento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/inputFechaNacimiento" />
+            android:text="@string/fecha_nacimiento" />
 
         <EditText
             android:id="@+id/inputFechaNacimiento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:autofillHints=""
             android:paddingStart="10dp"
             android:inputType="text"
-            android:text="@string/inputFechaNacimiento" />
+            tools:ignore="Deprecated,LabelFor,RtlSymmetry"
+            android:editable="false"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

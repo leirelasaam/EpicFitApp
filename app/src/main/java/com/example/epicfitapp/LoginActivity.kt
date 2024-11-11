@@ -54,9 +54,9 @@ class LoginActivity : BaseActivity() {
         gdu.cargarDatosInicio(this, user, pass, rememberMeCheckBox)
 
         // Referencias a los EditText y el botón
-        val btnIniciarSesion = findViewById<Button>(R.id.btn_IniciarSesion)
+        val btnIniciarSesion = findViewById<Button>(R.id.btnIniciarSesion)
         // Referencia al botón de registro
-        val btnRegistrarme: Button = findViewById(R.id.btn_Registrarme)
+        val btnRegistrarme: Button = findViewById(R.id.btnRegistrarme)
 
 
         btnIniciarSesion.setOnClickListener {
