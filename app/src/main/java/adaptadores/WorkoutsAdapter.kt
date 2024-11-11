@@ -22,6 +22,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import bbdd.GestorDeWorkouts
+import utils.DateUtils
 
 class WorkoutsAdapter(private val context: Context?, private var workouts: List<Workout>) :
     RecyclerView.Adapter<WorkoutsAdapter.WorkoutViewHolder>() {
@@ -50,8 +51,9 @@ class WorkoutsAdapter(private val context: Context?, private var workouts: List<
 
         holder.nombre.text = workout.nombre
         holder.nivel.text = context?.getString(R.string.nivel) + " " + workout.nivel.toString()
-        holder.tiempoPrev.text = workout.tiempo.toString() + " min"
-        holder.descripcion.text = "Descripcion workout para: ${workout.tipo ?: "desconocido"}"
+        val tiempoPrevisto = workout.tiempo?.let { DateUtils.formatearTiempo(it) }
+        holder.tiempoPrev.text = "${context?.getString(R.string.tiempo_previsto)}: ${ tiempoPrevisto?: "${context?.getString(R.string.desconocido)}"} min"
+        holder.descripcion.text = "${context?.getString(R.string.descripcion_workout)} ${workout.tipo ?: "${context?.getString(R.string.desconocido)}"}"
 
         when (workout.tipo) {
             "triceps" -> holder.imagen.setImageResource(R.drawable.triceps)
@@ -81,14 +83,14 @@ class WorkoutsAdapter(private val context: Context?, private var workouts: List<
 
         holder.btnModificar.setOnClickListener {
             val builder = AlertDialog.Builder(context)
-            builder.setMessage("¿Estás seguro de que deseas modificar este workout?")
-                .setPositiveButton("Sí") { dialog, id ->
+            builder.setMessage("${context?.getString(R.string.workout_pregunta_modificar)}")
+                .setPositiveButton("${context?.getString(R.string.si)}") { dialog, id ->
                     workout.id?.let { workoutId ->
                         // No puedo llamar a la funcion para modificar los workouts
                         //context.mostrarDialogoModificarWorkout(workoutId)
                     }
                 }
-                .setNegativeButton("No") { dialog, id ->
+                .setNegativeButton("${context?.getString(R.string.no)}") { dialog, id ->
                     dialog.dismiss()
                 }
             builder.create().show()
@@ -96,24 +98,23 @@ class WorkoutsAdapter(private val context: Context?, private var workouts: List<
 
         holder.btnBorrar.setOnClickListener {
             val builder = AlertDialog.Builder(context)
-            builder.setMessage("¿Estás seguro de que deseas borrar este workout?")
-                .setPositiveButton("Sí") { dialog, id ->
+            builder.setMessage("${context?.getString(R.string.workout_pregunta_borrar)}")
+                .setPositiveButton("${context?.getString(R.string.si)}") { dialog, id ->
                     val gdw = GestorDeWorkouts()
                     workout.id?.let { it1 ->
                         gdw.borrarWorkout(it1,
                             onSuccess = {
                                 workouts = workouts.filter { it.id != workout.id }
                                 notifyDataSetChanged() // Actualizar el RecyclerView
-                                Toast.makeText(context, "Workout borrado con éxito", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "${context?.getString(R.string.workout_borrar_exito)}", Toast.LENGTH_SHORT).show()
                             },
                             onFailure = { exception ->
-                                Log.e("WorkoutsAdapter", "Error al borrar workout: ${exception.message}")
-                                Toast.makeText(context, "Error al borrar el workout", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "${context?.getString(R.string.workout_borrar_error)}", Toast.LENGTH_SHORT).show()
                             }
                         )
                     }
                 }
-                .setNegativeButton("No") { dialog, id ->
+                .setNegativeButton("${context?.getString(R.string.no)}") { dialog, id ->
                     dialog.dismiss()
                 }
             builder.create().show() // Mostrar el dialogo
@@ -140,7 +141,6 @@ class WorkoutsAdapter(private val context: Context?, private var workouts: List<
         val recyclerEjercicios = dialogView.findViewById<RecyclerView>(R.id.recyclerEjercicios)
         val ejercicios = workout.ejerciciosObj ?: emptyList()
         recyclerEjercicios.adapter = EjercicioAdapter(context, ejercicios)
-        Log.d("WorkoutAdapter", "Número de ejercicios: ${workout.ejerciciosObj?.size}")
         recyclerEjercicios.layoutManager = LinearLayoutManager(context)
 
         val dialog = dialogBuilder.create()
@@ -151,8 +151,6 @@ class WorkoutsAdapter(private val context: Context?, private var workouts: List<
         }
         dialog.show()
     }
-
-
     override fun getItemCount(): Int {
         return workouts.size
     }

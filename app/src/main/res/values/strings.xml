@@ -6,6 +6,8 @@
     <string name="registro">Registro</string>
     <string name="entrenador">Entrenador</string>
     <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
 
     <!--String Login-->
     <string name="textViewUsuario">Usuario</string>
@@ -39,6 +41,13 @@
     <string name="volver">Volver</string>
     <string name="no_historicos">No has realizado ningún workout todavía</string>
     <string name="tiempo_previsto">Tiempo previsto:</string>
+    <string name="descripcion_workout">Descripcion: workout para</string>
+    <string name="desconocido">desconocido</string>
+
+    <string name="workout_borrar_error">Error al borrar workout</string>
+    <string name="workout_borrar_exito">Workout borrado con éxito</string>
+    <string name="workout_pregunta_borrar">¿Estás seguro de que deseas borrar este workout?</string>
+    <string name="workout_pregunta_modificar">¿Estás seguro de que deseas modificar este workout?</string>
 
     <!--Spinner Tipo de usuario ( en registro)-->
     <string-array name="tipoUsuario">
