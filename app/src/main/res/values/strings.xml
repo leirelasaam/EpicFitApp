@@ -47,6 +47,7 @@
     <string name="descanso">de descanso entre series</string>
     <string name="completado">completado en</string>
     <string name="no_historicos">No has realizado ningún workout</string>
+    <string name="tiempo_previsto">Tiempo previsto:</string>
 
     <!-- Entrenador -->
     <string name="agregar_workout">Añadir workout</string>
