@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.epicfitapp.R
 import modelo.pojos.Historico
 import utils.DateUtils
-
 
 class HistoricoAdapter(private val context: Context?, private var historicos: List<Historico>) :
     RecyclerView.Adapter<HistoricoAdapter.HistoricoViewHolder>() {
@@ -79,7 +77,6 @@ class HistoricoAdapter(private val context: Context?, private var historicos: Li
         } else {
             holder.btnPlay.isVisible = false
         }
-
     }
 
     override fun getItemCount(): Int {

@@ -10,9 +10,9 @@ class Workout(
     var video: String? = null,
     var tipo: String? = ""
 ) {
-    var ejerciciosObj: List<Ejercicio>? = null // Lista de ejercicios
+    var ejerciciosObj: List<Ejercicio>? = null
 
-    var workoutObj: Workout? = null // Workout como objeto
+    var workoutObj: Workout? = null
 
     override fun toString(): String {
         return "Workout(id='$id', nombre='$nombre', nivel=$nivel, tiempo=$tiempo, video='$video', tipo='$tipo', ejerciciosObj=${ejerciciosObj.toString()})"

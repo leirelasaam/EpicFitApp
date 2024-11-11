@@ -2,13 +2,9 @@ package bbdd
 
 import android.content.Context
 import android.util.Log
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.tasks.await
-import modelo.pojos.Ejercicio
 import modelo.pojos.Workout
 import android.widget.Toast
-
 
 class GestorDeWorkouts {
 
@@ -49,7 +45,6 @@ class GestorDeWorkouts {
     }
 
     fun subirWorkout(context: Context, workout: Workout) {
-
         val data = hashMapOf(
             "nombre" to workout.nombre,
             "nivel" to workout.nivel,
@@ -67,8 +62,26 @@ class GestorDeWorkouts {
                 Toast.makeText(context, "Error al registrar workout: ${e.message}", Toast.LENGTH_SHORT).show()
                 Log.e("Firestore", "Error al guardar workout", e)
             }
-
     }
 
-
+    fun actualizarWorkout(context: Context, workout: Workout, idWorkout: String) {
+        val data = hashMapOf(
+            "nombre" to workout.nombre,
+            "nivel" to workout.nivel,
+            "tiempo" to workout.tiempo,
+            "video" to workout.video,
+            "tipo" to workout.tipo
+        )
+        db.collection(coleccionWorkouts)
+            .document(idWorkout)
+            .update(data as Map<String, Any>) // update() solo actualiza los campos donde se han introducido datos
+            .addOnSuccessListener {
+                Toast.makeText(context, "Workout '${workout.nombre}' actualizado con éxito", Toast.LENGTH_SHORT).show()
+                Log.d("Firestore", "Workout actualizado con ID: $idWorkout")
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(context, "Error al actualizar workout: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e("Firestore", "Error al actualizar workout", e)
+            }
+    }
 }
