@@ -68,8 +68,7 @@ class LoginActivity : BaseActivity() {
                         UsuarioLogueado.usuario = usuario
 
                         // Aquí puedes realizar otras acciones con el usuario logueado
-                        println("Usuario logueado: ${usuario.nombre}")
-                        Toast.makeText(this, "Bienvenido ${usuario.nombre}", Toast.LENGTH_SHORT)
+                        Toast.makeText(this, getString(R.string.login_bienvenido) + " ${usuario.nombre}", Toast.LENGTH_SHORT)
                             .show()
 
                         // Guarda credenciales de inicio si rememberMe seleccionado
@@ -89,11 +88,11 @@ class LoginActivity : BaseActivity() {
                         startActivity(intent)
                         finish()
                     } else {
-                        Toast.makeText(this, "No se pudo iniciar sesión", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, getString(R.string.login_err_inicio), Toast.LENGTH_SHORT).show()
                     }
                 }
             } else {
-                Toast.makeText(this, "Por favor ingrese usuario y contraseña", Toast.LENGTH_SHORT)
+                Toast.makeText(this, getString(R.string.login_err_ingrese), Toast.LENGTH_SHORT)
                     .show()
             }
         }

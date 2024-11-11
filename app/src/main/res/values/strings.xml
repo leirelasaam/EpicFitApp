@@ -22,6 +22,9 @@
     <string name="login_iniciar_sesion">INICIAR SESIÓN</string>
     <string name="login_mantener_sesion">Mantener sesión iniciada</string>
     <string name="login_cuenta">¿Todavía no tienes cuenta?</string>
+    <string name="login_err_inicio">No se pudo iniciar sesión</string>
+    <string name="login_err_ingrese">Por favor, ingrese usuario y contraseña</string>
+    <string name="login_bienvenido">Bienvenid@</string>
 
     <!-- String Registro -->
     <string name="registro_volver">Volver</string>
