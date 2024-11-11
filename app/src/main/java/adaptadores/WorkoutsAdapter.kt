@@ -19,6 +19,7 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import bbdd.GestorDeWorkouts
 
@@ -66,6 +67,18 @@ class WorkoutsAdapter(private val context: Context?, private var workouts: List<
         holder.layoutTexto.setOnClickListener{
             mostrarDialogEjercicios(workout)
         }
+
+        val videoUrl = workout.workoutObj?.video
+        if (!videoUrl.isNullOrEmpty()) {
+            holder.btnPlay.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl))
+                context?.startActivity(intent)
+            }
+            holder.btnPlay.isVisible = true
+        } else {
+            holder.btnPlay.isVisible = false
+        }
+
         holder.btnModificar.setOnClickListener {
             val builder = AlertDialog.Builder(context)
             builder.setMessage("¿Estás seguro de que deseas modificar este workout?")
@@ -84,13 +97,11 @@ class WorkoutsAdapter(private val context: Context?, private var workouts: List<
         holder.btnBorrar.setOnClickListener {
             val builder = AlertDialog.Builder(context)
             builder.setMessage("¿Estás seguro de que deseas borrar este workout?")
-                // Dialogo de confirmacion
                 .setPositiveButton("Sí") { dialog, id ->
                     val gdw = GestorDeWorkouts()
                     workout.id?.let { it1 ->
                         gdw.borrarWorkout(it1,
                             onSuccess = {
-                                // Elimina el workout de la lista
                                 workouts = workouts.filter { it.id != workout.id }
                                 notifyDataSetChanged() // Actualizar el RecyclerView
                                 Toast.makeText(context, "Workout borrado con éxito", Toast.LENGTH_SHORT).show()
@@ -129,6 +140,7 @@ class WorkoutsAdapter(private val context: Context?, private var workouts: List<
         val recyclerEjercicios = dialogView.findViewById<RecyclerView>(R.id.recyclerEjercicios)
         val ejercicios = workout.ejerciciosObj ?: emptyList()
         recyclerEjercicios.adapter = EjercicioAdapter(context, ejercicios)
+        Log.d("WorkoutAdapter", "Número de ejercicios: ${workout.ejerciciosObj?.size}")
         recyclerEjercicios.layoutManager = LinearLayoutManager(context)
 
         val dialog = dialogBuilder.create()

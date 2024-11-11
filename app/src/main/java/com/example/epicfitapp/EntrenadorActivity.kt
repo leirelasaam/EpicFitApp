@@ -20,7 +20,7 @@ class EntrenadorActivity : BaseActivity() {
 
     private lateinit var workoutsRecyclerView: RecyclerView
     private lateinit var workoutsAdapter: WorkoutsAdapter
-    private var workoutsList: List<Workout> = listOf() // Lista de workouts
+    private var workoutsList: List<Workout> = listOf()
     val gdw = GestorDeWorkouts()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,15 +45,40 @@ class EntrenadorActivity : BaseActivity() {
         recycler.layoutManager = LinearLayoutManager(this)
 
         gdw.obtenerWorkouts(
-            onSuccess = { workouts ->
+            onSuccess = { workouts: List<Workout> ->
                 workoutsList = workouts
+                workoutsAdapter = WorkoutsAdapter(this@EntrenadorActivity, workoutsList)
+                workoutsRecyclerView.adapter = workoutsAdapter
 
-                val adapter = WorkoutsAdapter(this@EntrenadorActivity, workouts)
-                recycler.adapter = adapter
+                val niveles = workoutsList.mapNotNull { it.nivel }.toSet().sorted()
+                val spinner = findViewById<Spinner>(R.id.spinnerNiveles)
 
-                // Obtener niveles, se ordenan de menor a mayor
-                val niveles = workouts.mapNotNull { it.nivel }.toSet().sorted()
-                configurarSpinner(niveles.map { it.toString() }, workouts, adapter)
+                val nivelesConTodos = mutableListOf(getString(R.string.todos_niveles)).apply {
+                    addAll(niveles.map { it.toString() })
+                }
+
+                val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, nivelesConTodos)
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinner.adapter = adapter
+
+                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>, view: android.view.View, position: Int, id: Long
+                    ) {
+                        val selectedLevel = nivelesConTodos[position]
+                        if (selectedLevel == getString(R.string.todos_niveles)) {
+                            workoutsAdapter.updateData(workoutsList)
+                        } else {
+                            val levelToFilter = selectedLevel.toInt()
+                            val filteredWorkouts = workoutsList.filter { it.nivel == levelToFilter }
+                            workoutsAdapter.updateData(filteredWorkouts)
+                        }
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>) {
+                        workoutsAdapter.updateData(workoutsList)
+                    }
+                }
             },
             onFailure = { exception ->
                 Log.e("loadWorkouts", "Error al obtener workouts: ${exception.message}")

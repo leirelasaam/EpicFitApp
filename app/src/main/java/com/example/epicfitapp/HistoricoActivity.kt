@@ -6,7 +6,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -44,7 +43,6 @@ class HistoricoActivity : BaseActivity() {
                 val intent = Intent(this, PerfilActivity::class.java)
                 startActivity(intent)
             }
-
             (findViewById<TextView>(R.id.nivelValorTxt)).text = usuarioActual.nivel.toString()
         }
 
@@ -121,7 +119,6 @@ class HistoricoActivity : BaseActivity() {
                     historicoAdapter.updateData(filteredHistoricos)
                 }
             }
-
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // TODO
             }
