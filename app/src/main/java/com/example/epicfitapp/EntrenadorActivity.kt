@@ -32,7 +32,7 @@ class EntrenadorActivity : BaseActivity() {
 
         loadWorkouts()
 
-        val btnAniadirWorkout = findViewById<Button>(R.id.btn_aniadirWorkout)
+        val btnAniadirWorkout = findViewById<Button>(R.id.btnAgregarWorkout)
         btnAniadirWorkout.setOnClickListener {
             mostrarDialogoAniadirWorkout()
         }
