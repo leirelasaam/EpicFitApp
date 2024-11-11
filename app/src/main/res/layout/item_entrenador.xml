@@ -37,7 +37,7 @@
             android:textStyle="bold" />
 
         <LinearLayout
-            android:layout_width="220dp"
+            android:layout_width="156dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:orientation="horizontal">
@@ -66,7 +66,7 @@
 
             <TextView
                 android:id="@+id/tiempoTxt"
-                android:layout_width="100dp"
+                android:layout_width="34dp"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
@@ -87,13 +87,14 @@
         android:background="@color/secondary" />
 
     <ImageView
-        android:id="@+id/btnPlay"
+        android:id="@+id/btnModificar"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="10dp"
-        android:src="@drawable/play"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/modificar"
         app:elevation="0dp"
         app:tint="@null" />
 
@@ -101,9 +102,22 @@
         android:id="@+id/btnBorrar"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_below="@id/btnPlay"
-        android:layout_margin="10dp"
-        android:src="@drawable/ic_action_name"
+        android:layout_below="@id/btnModificar"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/borrar"
+        android:layout_alignParentEnd="true"
+        app:elevation="0dp"
+        app:tint="@null" />
+
+    <ImageView
+        android:id="@+id/btnPlay"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/btnModificar"
+        android:layout_marginRight="70dp"
+        android:layout_marginTop="-10dp"
+        android:src="@drawable/play"
         android:layout_alignParentEnd="true"
         app:elevation="0dp"
         app:tint="@null" />
