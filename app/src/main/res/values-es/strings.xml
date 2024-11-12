@@ -1,37 +1,39 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!--String General-->
-    <string name="app_name">EpicFit</string>
-    <string name="workouts">Workouts</string>
+<resources>
     <string name="perfil">Perfil</string>
+    <string name="registro">Registro</string>
     <string name="entrenador">Entrenador</string>
-    <string name="cerrar_sesion">Cerrar sesión</string>
 
+    <!-- String Generales -->
+    <string name="usuario">Usuario</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="email">Correo electrónico</string>
+    <string name="fecha_nacimiento">Fecha de nacimiento</string>
+    <string name="pass">Contraseña</string>
+    <string name="registrarme">Registrarme</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
 
     <!--String Login-->
-    <string name="textViewUsuario">Usuario</string>
-    <string name="textViewContraseña">Contraseña</string>
-    <string name="textViewMantenerSesion">Mantener sesión iniciada</string>
-    <string name="textViewNoTienesCuenta">¿Todavía no tienes cuenta?</string>
-    <string name="buttonIniciarSesion" >Iniciar Sesión</string>
-   <string name="buttonRegistrarme">Registrarme</string>
+    <string name="login_iniciar_sesion">INICIAR SESIÓN</string>
+    <string name="login_mantener_sesion">Mantener sesión iniciada</string>
+    <string name="login_cuenta">¿Todavía no tienes cuenta?</string>
+    <string name="login_err_inicio">No se pudo iniciar sesión</string>
+    <string name="login_err_ingrese">Por favor, ingrese usuario y contraseña</string>
+    <string name="login_bienvenido">Bienvenid@</string>
 
-   <!-- Registro Strings -->
-    <string name="textViewRegistro">Registro</string>
-    <string name="textViewNombre">Nombre</string>
-    <string name="textViewApellido">Apellidos</string>
-    <string name="textViewFechaNacimiento">Fecha de nacimiento</string>
-    <string name="textViewEmail">Correo electrónico</string>
-    <string name="textViewNombreUsuario">Nombre de usuario</string>
-    <string name="textViewIntroduzcaContraseña">Introduzca contraseña</string>
-    <string name="textViewConfirmarContraseña">Repita la contraseña</string>
-    <string name="buttonVolver">Volver</string>
+    <!-- String Registro -->
+    <string name="registro_volver">Volver</string>
+    <string name="registro_pass_1">Introduzca la contraseña</string>
+    <string name="registro_pass_2">Repita la contraseña</string>
+    <string name="registro_tipo_usuario">Tipo de usuario</string>
 
-    <!--String Perfil-->
-    <string name="inputUsuario">Usuario</string>
-    <string name="inputNombre">Nombre</string>
-    <string name="inputApellidos">Apellidos</string>
-    <string name="inputEmail">Correo electrónico</string>
-    <string name="inputFechaNacimiento">Fecha de nacimiento</string>
+    <!--Registro-->
+    <string-array name="tipoUsuario">
+        <item>Cliente</item>
+        <item>Entrenador</item>
+    </string-array>
 
     <!--String Workouts-->
     <string name="nivel_pl">Nivel de</string>
@@ -41,20 +43,20 @@
     <string name="repeticiones">repeticiones</string>
     <string name="descanso">de descanso entre series</string>
     <string name="completado">completado en</string>
-    <string name="filtrar_workouts">Filtrar workouts</string>
-    <string name="aniardir_workout">Añadir workout</string>
+    <string name="no_historicos">No has realizado ningún workout</string>
+    <string name="tiempo_previsto">Tiempo previsto:</string>
+    <string name="descripcion_workout">Descripcion: workout para</string>
+    <string name="desconocido">desconocido</string>
+
+    <string name="workout_borrar_error">Error al borrar workout</string>
+    <string name="workout_borrar_exito">Workout borrado con éxito</string>
+    <string name="workout_pregunta_borrar">¿Estás seguro de que deseas borrar este workout?</string>
+    <string name="workout_pregunta_modificar">¿Estás seguro de que deseas modificar este workout?</string>
+
+    <!-- Entrenador -->
+    <string name="agregar_workout">Añadir workout</string>
     <string name="modificar_workout">Modificar workout</string>
     <string name="eliminar_workout">Eliminar Workout</string>
-    <string name="volver">Volver</string>
-    <string name="no_historicos">No has realizado ningún workout todavía</string>
-    <string name="tiempo_previsto">Tiempo previsto:</string>
-
-
-    <!--Spinner Tipo de usuario (en registro)-->
-    <string-array name="tipoUsuario">
-        <item>Cliente</item>
-        <item>Entrenador</item>
-    </string-array>
 
     <!--Spinner Idiomas-->
     <string-array name="Idiomas">

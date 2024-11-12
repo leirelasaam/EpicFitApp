@@ -1,36 +1,39 @@
 <resources>
-    <!-- General Strings -->
-    <string name="app_name">EpicFit</string>
-    <string name="workouts">Workouts</string>
     <string name="perfil">Profile</string>
+    <string name="registro" >Register</string>
     <string name="entrenador">Coach</string>
-    <string name="cerrar_sesion">Log out</string>
+
+    <!-- General Strings -->
+    <string name="usuario">User</string>
+    <string name="nombre">Name</string>
+    <string name="apellidos">Last Name</string>
+    <string name="email">Email</string>
+    <string name="fecha_nacimiento">Date of Birth</string>
+    <string name="pass">Password</string>
+    <string name="registrarme">Register</string>
+    <string name="cerrar_sesion">Log Out</string>
+    <string name="si">Yes</string>
+    <string name="no">No</string>
 
     <!-- Login Strings -->
-    <string name="textViewUsuario">User</string>
-    <string name="textViewContraseña">Password</string>
-    <string name="textViewMantenerSesion">Keep me logged in</string>
-    <string name="textViewNoTienesCuenta">Do not have an account?</string>
-    <string name="buttonIniciarSesion" >Login in</string>
-    <string name="buttonRegistrarme">Sign up</string>
+    <string name="login_iniciar_sesion">LOG IN</string>
+    <string name="login_mantener_sesion">Keep session active</string>
+    <string name="login_cuenta">Do not have an account yet?</string>
+    <string name="login_err_inicio">Failed to log in</string>
+    <string name="login_err_ingrese">Please enter username and password</string>
+    <string name="login_bienvenido">Welcome</string>
 
-    <!-- Registro y Perfil Strings -->
-    <string name="textViewRegistro">Register</string>
-    <string name="textViewNombre">Name</string>
-    <string name="textViewApellido">Surname</string>
-    <string name="textViewFechaNacimiento">Date of birth</string>
-    <string name="textViewEmail">Email</string>
-    <string name="textViewNombreUsuario">User name</string>
-    <string name="textViewIntroduzcaContraseña">Enter password</string>
-    <string name="textViewConfirmarContraseña">Confirm password</string>
-    <string name="buttonVolver">Go back</string>
+    <!-- Register Strings -->
+    <string name="registro_volver">Back</string>
+    <string name="registro_pass_1">Enter password</string>
+    <string name="registro_pass_2">Repeat password</string>
+    <string name="registro_tipo_usuario">User Type</string>
 
-    <!--String Perfil-->
-    <string name="inputUsuario">User</string>
-    <string name="inputNombre">Name</string>
-    <string name="inputApellidos">Surname</string>
-    <string name="inputEmail">Email</string>
-    <string name="inputFechaNacimiento">Date of birth</string>
+    <!-- User Type (Registration) -->
+    <string-array name="tipoUsuario">
+        <item>Client</item>
+        <item>Coach</item>
+    </string-array>
 
     <!-- Workouts Strings -->
     <string name="nivel_pl">Level of</string>
@@ -40,19 +43,20 @@
     <string name="repeticiones">repetitions</string>
     <string name="descanso">rest between sets</string>
     <string name="completado">completed in</string>
-    <string name="filtrar_workouts">Filter workouts</string>
-    <string name="aniardir_workout">Add workout</string>
-    <string name="modificar_workout">Update workout</string>
-    <string name="eliminar_workout">Remove Workout</string>
-    <string name="volver">Go back</string>
-    <string name="no_historicos">you have not performed any workout yet </string>
-    <string name="tiempo_previsto">Expected time:</string>
+    <string name="no_historicos">You have not completed any workouts</string>
+    <string name="tiempo_previsto">Estimated time:</string>
+    <string name="descripcion_workout">Description: workout for</string>
+    <string name="desconocido">unknown</string>
 
-    <!-- User Type Spinner (in registration) -->
-    <string-array name="tipoUsuario">
-        <item>Client</item>
-        <item>Coach</item>
-    </string-array>
+    <string name="workout_borrar_error">Error deleting workout</string>
+    <string name="workout_borrar_exito">Workout successfully deleted</string>
+    <string name="workout_pregunta_borrar">Are you sure you want to delete this workout?</string>
+    <string name="workout_pregunta_modificar">Are you sure you want to modify this workout?</string>
+
+    <!-- Coach Strings -->
+    <string name="agregar_workout">Add workout</string>
+    <string name="modificar_workout">Modify workout</string>
+    <string name="eliminar_workout">Delete Workout</string>
 
     <string-array name="Idiomas">
         <item>Spanish</item>
@@ -60,3 +64,4 @@
     </string-array>
 
 </resources>
+

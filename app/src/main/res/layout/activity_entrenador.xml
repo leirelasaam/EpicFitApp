@@ -7,32 +7,36 @@
     android:layout_height="match_parent"
     tools:context=".EntrenadorActivity">
 
+    <TextView
+        android:id="@+id/tituloTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_title"
+        android:letterSpacing="0.15"
+        android:padding="10dp"
+        android:text="@string/workouts"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <LinearLayout
-        android:id="@+id/verticalLayout"
+        android:id="@+id/contenedor"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tituloTxt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.9"
-        app:layout_constraintHeight_percent="0.9">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintWidth_percent="0.9">
 
-        <TextView
-            android:id="@+id/tituloTxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_title"
-            android:letterSpacing="0.15"
-            android:padding="10dp"
-            android:text="@string/workouts"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            />
+
         <TextView
             android:id="@+id/txtFiltrar"
             android:layout_width="match_parent"
@@ -40,7 +44,8 @@
             android:paddingStart="10dp"
             android:textSize="18sp"
             android:layout_marginTop="10dp"
-            android:text="@string/filtrar_niveles" />
+            android:text="@string/filtrar_niveles"
+            tools:ignore="RtlSymmetry" />
         <Spinner
             android:id="@+id/spinnerNiveles"
             android:layout_width="match_parent"
@@ -56,10 +61,12 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/btn_aniadirWorkout"
+            android:id="@+id/btnAgregarWorkout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/aniardir_workout" />
+            android:text="@string/agregar_workout"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
 
     </LinearLayout>
 
