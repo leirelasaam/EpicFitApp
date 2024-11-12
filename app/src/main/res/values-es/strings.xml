@@ -55,4 +55,11 @@
         <item>Cliente</item>
         <item>Entrenador</item>
     </string-array>
+
+    <!--Spinner Idiomas-->
+    <string-array name="Idiomas">
+        <item>Español</item>
+        <item>Inglés</item>
+    </string-array>
+
 </resources>

@@ -9,6 +9,12 @@
         app:tint="@color/logo_color"
         app:showAsAction="always" />
     <item
+        android:id="@+id/cambio_idioma"
+        android:title="Multi_idioma"
+        android:icon="@drawable/tierra"
+        app:tint="@color/logo_color"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/switch_tema"
         android:title="Switch"
         app:actionLayout="@layout/switch_item"

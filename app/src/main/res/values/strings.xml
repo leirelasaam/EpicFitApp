@@ -53,4 +53,10 @@
         <item>Client</item>
         <item>Coach</item>
     </string-array>
+
+    <string-array name="Idiomas">
+        <item>Spanish</item>
+        <item>English</item>
+    </string-array>
+
 </resources>

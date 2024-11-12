@@ -51,10 +51,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:paddingStart="10dp"
+            android:layout_marginBottom="20dp"
             android:inputType="text"
-            android:text="@string/inputUsuario"
-            android:layout_marginBottom="20dp"/>
+            android:minHeight="48dp"
+            android:paddingStart="10dp"
+            android:text="@string/inputUsuario" />
 
         <TextView
             android:id="@+id/textViewNombre"
@@ -67,10 +68,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:paddingStart="10dp"
+            android:layout_marginBottom="20dp"
             android:inputType="text"
-            android:text="@string/inputNombre"
-            android:layout_marginBottom="20dp"/>
+            android:minHeight="48dp"
+            android:paddingStart="10dp"
+            android:text="@string/inputNombre" />
 
         <TextView
             android:id="@+id/textViewApellido"
@@ -83,10 +85,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:paddingStart="10dp"
+            android:layout_marginBottom="20dp"
             android:inputType="text"
-            android:text="@string/inputApellidos"
-            android:layout_marginBottom="20dp" />
+            android:minHeight="48dp"
+            android:paddingStart="10dp"
+            android:text="@string/inputApellidos" />
 
         <TextView
             android:id="@+id/textViewEmail"
@@ -99,10 +102,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:paddingStart="10dp"
+            android:layout_marginBottom="20dp"
             android:inputType="text"
-            android:text="@string/inputEmail"
-            android:layout_marginBottom="20dp"/>
+            android:minHeight="48dp"
+            android:paddingStart="10dp"
+            android:text="@string/inputEmail" />
 
         <TextView
             android:id="@+id/textViewFechaNacimiento"
@@ -115,8 +119,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:paddingStart="10dp"
             android:inputType="text"
+            android:minHeight="48dp"
+            android:paddingStart="10dp"
             android:text="@string/inputFechaNacimiento" />
     </LinearLayout>
 
