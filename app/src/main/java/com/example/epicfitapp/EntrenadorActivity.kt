@@ -176,46 +176,4 @@ class EntrenadorActivity : BaseActivity() {
         }
         builder.create().show()
     }
-
-    fun mostrarDialogoModificarWorkout(context: EntrenadorActivity, idWorkout: String) {
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle("Modificar Workout")
-
-        val nombreInput = EditText(context)
-        nombreInput.hint = "Nombre del Workout"
-        val nivelInput = EditText(context)
-        nivelInput.hint = "Nivel (número entero)"
-        val tiempoInput = EditText(context)
-        tiempoInput.hint = "Tiempo (en minutos)"
-        val videoInput = EditText(context)
-        videoInput.hint = "Enlace del video (opcional)"
-        val tipoInput = EditText(context)
-        tipoInput.hint = "Tipo de Workout"
-
-        val layout = LinearLayout(context)
-        layout.orientation = LinearLayout.VERTICAL
-        layout.addView(nombreInput)
-        layout.addView(nivelInput)
-        layout.addView(tiempoInput)
-        layout.addView(videoInput)
-        layout.addView(tipoInput)
-        builder.setView(layout)
-
-        builder.setPositiveButton("Guardar") { dialog: DialogInterface, _: Int ->
-            val workoutModificado = Workout(
-                nombre = nombreInput.text.toString(),
-                nivel = nivelInput.text.toString().toIntOrNull() ?: 0,
-                tiempo = tiempoInput.text.toString().toIntOrNull() ?: 0,
-                video = videoInput.text.toString(),
-                tipo = tipoInput.text.toString()
-            )
-            context.gdw.actualizarWorkout(context, workoutModificado, idWorkout)
-            context.loadWorkouts()
-            dialog.dismiss()
-        }
-        builder.setNegativeButton("Cancelar") { dialog: DialogInterface, _: Int ->
-            dialog.dismiss()
-        }
-        builder.create().show()
-    }
 }
