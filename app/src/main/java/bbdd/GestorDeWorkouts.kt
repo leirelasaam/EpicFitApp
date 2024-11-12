@@ -109,7 +109,7 @@ class GestorDeWorkouts {
             }
     }
 
-    fun actualizarWorkout(context: Context, workout: Workout, idWorkout: String) {
+    fun actualizarWorkout(workout: Workout, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
         val data = hashMapOf(
             "nombre" to workout.nombre,
             "nivel" to workout.nivel,
@@ -117,17 +117,22 @@ class GestorDeWorkouts {
             "video" to workout.video,
             "tipo" to workout.tipo
         )
-        db.collection(coleccionWorkouts)
-            .document(idWorkout)
-            .update(data as Map<String, Any>) // update() solo actualiza los campos donde se han introducido datos
-            .addOnSuccessListener {
-                Toast.makeText(context, "Workout '${workout.nombre}' actualizado con éxito", Toast.LENGTH_SHORT).show()
-                Log.d("Firestore", "Workout actualizado con ID: $idWorkout")
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(context, "Error al actualizar workout: ${e.message}", Toast.LENGTH_SHORT).show()
-                Log.e("Firestore", "Error al actualizar workout", e)
-            }
+
+        var id = workout.id
+
+        workout.id?.let {
+            db.collection(coleccionWorkouts)
+                .document(it)
+                .update(data as Map<String, Any>)
+                .addOnSuccessListener {
+                    //Toast.makeText(context, "Workout '${workout.nombre}' actualizado con éxito", Toast.LENGTH_SHORT).show()
+                    Log.d("Firestore", "Workout actualizado con ID: $workout.nombre")
+                }
+                .addOnFailureListener { e ->
+                    //Toast.makeText(context, "Error al actualizar workout: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Log.e("Firestore", "Error al actualizar workout", e)
+                }
+        }
     }
 
     private fun agregarTiempoEstimadoWorkout(ejercicios: MutableList<Ejercicio>): Int {

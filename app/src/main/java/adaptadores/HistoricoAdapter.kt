@@ -93,6 +93,7 @@ class HistoricoAdapter(private val context: Context?, private var historicos: Li
         val dialogBuilder = AlertDialog.Builder(context)
             .setView(dialogView)
 
+
         val tituloWorkout = dialogView.findViewById<TextView>(R.id.tituloWorkout)
         tituloWorkout.text = historico.workoutObj?.nombre
 

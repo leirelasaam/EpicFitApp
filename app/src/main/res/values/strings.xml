@@ -17,6 +17,8 @@
     <string name="pass">Contraseña</string>
     <string name="registrarme">Registrarme</string>
     <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
 
     <!--String Login-->
     <string name="login_iniciar_sesion">INICIAR SESIÓN</string>
@@ -48,6 +50,13 @@
     <string name="completado">completado en</string>
     <string name="no_historicos">No has realizado ningún workout</string>
     <string name="tiempo_previsto">Tiempo previsto:</string>
+    <string name="descripcion_workout">Descripcion: workout para</string>
+    <string name="desconocido">desconocido</string>
+
+    <string name="workout_borrar_error">Error al borrar workout</string>
+    <string name="workout_borrar_exito">Workout borrado con éxito</string>
+    <string name="workout_pregunta_borrar">¿Estás seguro de que deseas borrar este workout?</string>
+    <string name="workout_pregunta_modificar">¿Estás seguro de que deseas modificar este workout?</string>
 
     <!-- Entrenador -->
     <string name="agregar_workout">Añadir workout</string>
