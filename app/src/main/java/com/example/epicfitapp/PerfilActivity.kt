@@ -14,15 +14,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.google.firebase.firestore.FirebaseFirestore
 import modelo.pojos.UsuarioLogueado
 import utils.DateUtils.Companion.formatearTimestamp
 import java.util.Locale
 
 @Suppress("DEPRECATION")
 class PerfilActivity : BaseActivity() {
-
-    private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
 
     @SuppressLint("MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.O)

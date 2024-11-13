@@ -61,6 +61,7 @@ class RegistroActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
         fechaNac.setOnClickListener {
             showDatePickerDialog(fechaNac)
         }
@@ -95,12 +96,14 @@ class RegistroActivity : AppCompatActivity() {
             )
 
             val comprobarValidaciones = validacionesCamposCorrectos(nuevoUsuario, pass, pass2);
-            if (comprobarValidaciones == true) {
+            if (comprobarValidaciones) {
                 // Guarda el usuario en Firestore
                 guardarUsuario(nuevoUsuario)
                 val intent = Intent(this, LoginActivity::class.java)
+                intent.putExtra("user", nuevoUsuario.usuario)
+                intent.putExtra("pass", nuevoUsuario.pass)
                 startActivity(intent)
-
+                finish()
             }
 
         }
@@ -129,9 +132,6 @@ class RegistroActivity : AppCompatActivity() {
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-/*  val datePickerDialog = DatePickerDialog(
-        this,
-        R.style.CustomDatePickerTheme,*/
         val datePickerDialog =
             DatePickerDialog(this, R.style.CustomDatePickerTheme,{ _, selectedYear, selectedMonth, selectedDay ->
                 //Crear la fecha en Timestamp
