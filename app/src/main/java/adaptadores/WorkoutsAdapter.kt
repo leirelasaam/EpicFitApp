@@ -177,25 +177,25 @@ class WorkoutsAdapter(
             setPadding(16, 16, 16, 16)
         }
         val nombreInput = EditText(context).apply {
-            hint = "Nombre del Workout"
+            hint = context?.getString(R.string.nombre_hint)
             setText(workout.nombre)
         }
         val nivelInput = EditText(context).apply {
-            hint = "Nivel (número entero)"
+            hint = context?.getString(R.string.nivel_hint)
             inputType = android.text.InputType.TYPE_CLASS_NUMBER
             setText(workout.nivel.toString())
         }
         val tiempoInput = EditText(context).apply {
-            hint = "Tiempo (en minutos)"
+            hint = context?.getString(R.string.tiempo_hint)
             inputType = android.text.InputType.TYPE_CLASS_NUMBER
             setText(workout.tiempo.toString())
         }
         val videoInput = EditText(context).apply {
-            hint = "Enlace del video (opcional)"
+            hint = context?.getString(R.string.video_hint)
             setText(workout.video)
         }
         val tipoInput = EditText(context).apply {
-            hint = "Tipo de Workout"
+            hint = context?.getString(R.string.tipo_hint)
             setText(workout.tipo)
         }
         layout.addView(nombreInput)
@@ -205,9 +205,9 @@ class WorkoutsAdapter(
         layout.addView(tipoInput)
 
         val dialogBuilder = AlertDialog.Builder(context)
-            .setTitle("Modificar Workout")
+            .setTitle(context.getString(R.string.modificar_workout_titulo))
             .setView(layout)
-            .setPositiveButton("Guardar") { dialog, _ ->
+            .setPositiveButton(context.getString(R.string.guardar)) { dialog, _ ->
                 val workoutModificado = Workout(
                     id = workout.id,
                     nombre = nombreInput.text.toString(),
@@ -224,14 +224,14 @@ class WorkoutsAdapter(
                             workouts = workouts.map { if (it.id == id) workoutModificado else it }
                             Toast.makeText(
                                 context,
-                                "Workout actualizado correctamente",
+                                context.getString(R.string.workout_actualizado),
                                 Toast.LENGTH_SHORT
                             ).show()
                         },
                         onFailure = {
                             Toast.makeText(
                                 context,
-                                "Error al actualizar el Workout",
+                                context.getString(R.string.error_actualizar_workout),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -239,7 +239,7 @@ class WorkoutsAdapter(
                 }
                 dialog.dismiss()
             }
-            .setNegativeButton("Cancelar") { dialog, _ ->
+            .setNegativeButton(context.getString(R.string.cancelar)) { dialog, _ ->
                 dialog.dismiss()
 
             }

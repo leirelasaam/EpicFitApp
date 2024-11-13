@@ -62,4 +62,17 @@
     <string name="agregar_workout">Añadir workout</string>
     <string name="modificar_workout">Modificar workout</string>
     <string name="eliminar_workout">Eliminar Workout</string>
+
+    <string name="agregar">Agregar</string>
+    <string name="modificar_workout_titulo">Modificar Workout</string>
+    <string name="nombre_hint">Nombre del Workout</string>
+    <string name="nivel_hint">Nivel (número entero)</string>
+    <string name="tiempo_hint">Tiempo (en minutos)</string>
+    <string name="video_hint">Enlace del video (opcional)</string>
+    <string name="tipo_hint">Tipo de Workout</string>
+    <string name="guardar">Guardar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="workout_actualizado">Workout actualizado correctamente</string>
+    <string name="error_actualizar_workout">Error al actualizar el Workout</string>
+
 </resources>

@@ -137,18 +137,18 @@ class EntrenadorActivity : BaseActivity() {
 
     fun mostrarDialogoAniadirWorkout() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Añadir Workout")
+        builder.setTitle(getString(R.string.agregar_workout))
 
         val nombreInput = EditText(this)
-        nombreInput.hint = "Nombre del Workout"
+        nombreInput.hint = getString(R.string.agregar_workout)
         val nivelInput = EditText(this)
-        nivelInput.hint = "Nivel (número entero)"
+        nivelInput.hint = getString(R.string.nivel_hint)
         val tiempoInput = EditText(this)
-        tiempoInput.hint = "Tiempo (en minutos)"
+        tiempoInput.hint = getString(R.string.tiempo_hint)
         val videoInput = EditText(this)
-        videoInput.hint = "Enlace del video (opcional)"
+        videoInput.hint = getString(R.string.video_hint)
         val tipoInput = EditText(this)
-        tipoInput.hint = "Tipo de Workout"
+        tipoInput.hint = getString(R.string.tipo_hint)
 
         val layout = LinearLayout(this)
         layout.orientation = LinearLayout.VERTICAL
@@ -159,7 +159,7 @@ class EntrenadorActivity : BaseActivity() {
         layout.addView(tipoInput)
         builder.setView(layout)
 
-        builder.setPositiveButton("Añadir") { dialog: DialogInterface, _: Int ->
+        builder.setPositiveButton(getString(R.string.agregar)) { dialog: DialogInterface, _: Int ->
             val nuevoWorkout = Workout(
                 nombre = nombreInput.text.toString(),
                 nivel = nivelInput.text.toString().toIntOrNull() ?: 0,
@@ -171,7 +171,7 @@ class EntrenadorActivity : BaseActivity() {
             loadWorkouts()
             dialog.dismiss()
         }
-        builder.setNegativeButton("Cancelar") { dialog: DialogInterface, _: Int ->
+        builder.setNegativeButton(getString(R.string.cancelar)) { dialog: DialogInterface, _: Int ->
             dialog.dismiss()
         }
         builder.create().show()

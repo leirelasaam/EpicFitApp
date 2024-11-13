@@ -6,6 +6,7 @@ import android.os.Build
 import android.util.Log
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.epicfitapp.LoginActivity
 import com.example.epicfitapp.LoginActivity.Companion
@@ -75,6 +76,7 @@ class GestorDeUsuarios {
             putString("password", password)
             putBoolean("rememberMe", true)
             apply()
+            Toast.makeText(context, "Error al obtener usuarios.", Toast.LENGTH_SHORT).show()
         }
     }
 
