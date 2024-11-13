@@ -12,7 +12,7 @@
 
     <!-- Tema personalizado para DatePicker -->
     <style name="CustomDatePickerTheme" parent="Theme.AppCompat.Light.Dialog">
-        <!-- Color de los elementos activos en el DatePicker (naranja) -->
+        <!-- Color de los elementos en el DatePicker (naranja) -->
         <item name="colorAccent">#FD8F00</item>
 
     </style>

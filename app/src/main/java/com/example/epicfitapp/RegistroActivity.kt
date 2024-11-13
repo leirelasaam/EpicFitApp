@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.regex.Pattern
 
-class RegistroActivity : BaseActivity() {
+class RegistroActivity : AppCompatActivity() {
     private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
     private var fechaNacimiento: Timestamp? = null // Variable para almacenar la fecha de nacimiento
 
@@ -95,14 +95,12 @@ class RegistroActivity : BaseActivity() {
             )
 
             val comprobarValidaciones = validacionesCamposCorrectos(nuevoUsuario, pass, pass2);
-            if (comprobarValidaciones) {
+            if (comprobarValidaciones == true) {
                 // Guarda el usuario en Firestore
                 guardarUsuario(nuevoUsuario)
                 val intent = Intent(this, LoginActivity::class.java)
-                intent.putExtra("user", nuevoUsuario.usuario)
-                intent.putExtra("pass", nuevoUsuario.pass)
                 startActivity(intent)
-                finish()
+
             }
 
         }
@@ -145,6 +143,7 @@ class RegistroActivity : BaseActivity() {
                 val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                 fechaNacEditText.setText(sdf.format(selectedCalendar.time))
             }, year, month, day)
+
         datePickerDialog.show()
     }
 
@@ -167,7 +166,7 @@ class RegistroActivity : BaseActivity() {
     }
 
     private fun validarPassword(pass: String?): Boolean {
-        val regexPass = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!_*/-]).{8,20}$"
+        val regexPass = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!_*/?|-]).{8,20}$"
         return pass != null && Pattern.matches(regexPass, pass)
     }
 
@@ -180,7 +179,6 @@ class RegistroActivity : BaseActivity() {
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val result: QuerySnapshot? = task.result
                     // Si la consulta devuelve algún documento, significa que el usuario ya existe
                     siExisteUsuario = true
                 }

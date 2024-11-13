@@ -89,7 +89,7 @@
     <EditText
         android:id="@+id/inputUser"
         android:layout_width="261dp"
-        android:layout_height="39dp"
+        android:layout_height="48dp"
         android:autofillHints=""
         android:inputType="text"
         android:text=""
@@ -103,7 +103,7 @@
     <EditText
         android:id="@+id/inputPass"
         android:layout_width="263dp"
-        android:layout_height="46dp"
+        android:layout_height="48dp"
         android:autofillHints=""
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/inputMantenerSesion"

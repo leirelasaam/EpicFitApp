@@ -43,7 +43,8 @@
             android:layout_marginTop="20dp"
             android:autofillHints=""
             android:hint="@string/nombre"
-            android:inputType="text" />
+            android:inputType="text"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/inputApellido"
@@ -52,7 +53,8 @@
             android:layout_marginTop="20dp"
             android:autofillHints=""
             android:hint="@string/apellidos"
-            android:inputType="text" />
+            android:inputType="text"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/inputUsuario"
@@ -61,7 +63,8 @@
             android:layout_marginTop="20dp"
             android:autofillHints=""
             android:hint="@string/usuario"
-            android:inputType="text" />
+            android:inputType="text"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/inputCorreo"
@@ -70,7 +73,8 @@
             android:layout_marginTop="20dp"
             android:autofillHints=""
             android:hint="@string/email"
-            android:inputType="textPostalAddress" />
+            android:inputType="textPostalAddress"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/inputFechaNac"
@@ -81,7 +85,8 @@
             android:clickable="false"
             android:focusable="false"
             android:hint="@string/fecha_nacimiento"
-            android:inputType="date" />
+            android:inputType="date"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/inputPass"
@@ -90,7 +95,9 @@
             android:layout_marginTop="20dp"
             android:autofillHints=""
             android:hint="@string/registro_pass_1"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:textColorHint="#546E7A" />
 
         <EditText
             android:id="@+id/inputPass2"
@@ -99,7 +106,8 @@
             android:layout_marginTop="20dp"
             android:autofillHints=""
             android:hint="@string/registro_pass_2"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:minHeight="48dp" />
 
         <TextView
             android:id="@+id/textTipoUsuario"
@@ -136,7 +144,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="@string/registrarme" />
+                android:text="@string/registrarme"
+                tools:ignore="VisualLintButtonSize" />
         </LinearLayout>
     </LinearLayout>
 
