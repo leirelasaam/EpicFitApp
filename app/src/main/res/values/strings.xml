@@ -67,7 +67,7 @@
     <string name="modificar_workout_titulo">Modificar Workout</string>
     <string name="nombre_hint">Nombre del Workout</string>
     <string name="nivel_hint">Nivel (número entero)</string>
-    <string name="tiempo_hint">Tiempo (en minutos)</string>
+    <string name="tiempo_hint">Tiempo (en segundos)</string>
     <string name="video_hint">Enlace del video (opcional)</string>
     <string name="tipo_hint">Tipo de Workout</string>
     <string name="guardar">Guardar</string>
