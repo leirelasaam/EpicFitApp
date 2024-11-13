@@ -77,7 +77,7 @@ class HistoricoActivity : BaseActivity() {
                     mostrarOcultar(recycler, false)
                     mostrarOcultar(spinner, false)
                     mostrarOcultar(txtFiltrar, false)
-                    Toast.makeText(this, "No se han podido obtener los históricos", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.err_historicos), Toast.LENGTH_SHORT).show()
                 }
             )
         }

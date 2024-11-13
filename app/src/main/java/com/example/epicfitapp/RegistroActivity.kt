@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.regex.Pattern
 
-class RegistroActivity : BaseActivity() {
+class RegistroActivity : AppCompatActivity() {
     private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
     private var fechaNacimiento: Timestamp? = null // Variable para almacenar la fecha de nacimiento
 
@@ -61,6 +61,7 @@ class RegistroActivity : BaseActivity() {
             startActivity(intent)
             finish()
         }
+
         fechaNac.setOnClickListener {
             showDatePickerDialog(fechaNac)
         }
@@ -113,16 +114,14 @@ class RegistroActivity : BaseActivity() {
             .add(nuevoUsuario)
             .addOnSuccessListener { documentReference ->
                 nuevoUsuario.id = documentReference.id // Asigna el ID generado por Firebase
-                Toast.makeText(this, "@${nuevoUsuario.usuario} registrado con éxito", Toast.LENGTH_SHORT).show()
-                Log.d("Firestore", "Usuario guardado con ID: ${documentReference.id}")
+                Toast.makeText(this, "@${nuevoUsuario.usuario} " + getString(R.string.registro_msg_exito), Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { e ->
                 Toast.makeText(
                     this,
-                    "Error al registrar usuario: ${e.message}",
+                    getString(R.string.registro_err),
                     Toast.LENGTH_SHORT
                 ).show()
-                Log.e("Firestore", "Error al guardar usuario", e)
             }
     }
 
@@ -133,9 +132,6 @@ class RegistroActivity : BaseActivity() {
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-/*  val datePickerDialog = DatePickerDialog(
-        this,
-        R.style.CustomDatePickerTheme,*/
         val datePickerDialog =
             DatePickerDialog(this, R.style.CustomDatePickerTheme,{ _, selectedYear, selectedMonth, selectedDay ->
                 //Crear la fecha en Timestamp
@@ -147,6 +143,7 @@ class RegistroActivity : BaseActivity() {
                 val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                 fechaNacEditText.setText(sdf.format(selectedCalendar.time))
             }, year, month, day)
+
         datePickerDialog.show()
     }
 
@@ -169,7 +166,7 @@ class RegistroActivity : BaseActivity() {
     }
 
     private fun validarPassword(pass: String?): Boolean {
-        val regexPass = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!_*/-]).{8,20}$"
+        val regexPass = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!_*/?|-]).{8,20}$"
         return pass != null && Pattern.matches(regexPass, pass)
     }
 
@@ -182,7 +179,6 @@ class RegistroActivity : BaseActivity() {
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val result: QuerySnapshot? = task.result
                     // Si la consulta devuelve algún documento, significa que el usuario ya existe
                     siExisteUsuario = true
                 }
@@ -200,12 +196,12 @@ class RegistroActivity : BaseActivity() {
         if (!validarApellido(usuario.apellido)) {
             Toast.makeText(
                 this,
-                "El apellido está vacío o es mayor de 50 caracteres",
+                getString(R.string.registro_err_apellido),
                 Toast.LENGTH_LONG
             ).show()
             validar = false
         } else if (!validarCorreo(usuario.correo)) {
-            Toast.makeText(this, "Correo incorrecto, vuelva a insertarlo.", Toast.LENGTH_LONG)
+            Toast.makeText(this, getString(R.string.registro_err_correo), Toast.LENGTH_LONG)
                 .show()
             validar = false
             /*} else if (!validarFechaNacimiento(usuario.fechaNac)) {
@@ -214,33 +210,33 @@ class RegistroActivity : BaseActivity() {
         } else if (!validarNombre(usuario.nombre)) {
             Toast.makeText(
                 this,
-                "Nombre incorrecto, está vacío o es mayor de 25 caracteres.",
+                getString(R.string.registro_err_nombre),
                 Toast.LENGTH_LONG
             ).show()
             validar = false
         } else if (!validarPassword(usuario.pass)) {
             Toast.makeText(
                 this,
-                "Contraseña incorrecta, debe tener entre 8 y 20 caracteres, incluir al menos una letra minúscula, una mayúscula, un número y un carácter especial.",
+                getString(R.string.registro_err_pass),
                 Toast.LENGTH_LONG
             ).show()
             validar = false
         } else if (pass1 != pass2) {
             Toast.makeText(
                 this,
-                "Las contraseñas no coinciden, vuelva a intentarlo.",
+                getString(R.string.registro_err_pass_no_coinciden),
                 Toast.LENGTH_LONG
             ).show()
             validar = false
         } else if (!validarUsername(usuario.usuario)) {
             Toast.makeText(
                 this,
-                "Usuario incorrecto, debe contener solo letras minúsculas.",
+                getString(R.string.registro_err_usuario),
                 Toast.LENGTH_LONG
             ).show()
             validar = false
         } else if (comprobarSiExisteNombreUsuario(usuario.usuario.toString())) {
-            Toast.makeText(this, "El nombre de usuario ya existe.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.registro_err_duplicado), Toast.LENGTH_LONG).show()
             validar = false
         }
 

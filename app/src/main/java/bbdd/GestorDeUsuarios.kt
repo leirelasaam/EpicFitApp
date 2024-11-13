@@ -55,7 +55,10 @@ class GestorDeUsuarios {
                         // Asignar el usuario a UsuarioLogueado
                         UsuarioLogueado.usuario = usuarioEncontrado
 
-                        Log.d(LoginActivity.TAG, "Usuario encontrado: ${usuarioEncontrado?.usuario}")
+                        Log.d(
+                            LoginActivity.TAG,
+                            "Usuario encontrado: ${usuarioEncontrado?.usuario}"
+                        )
                         //Toast.makeText(this, "Bienvenido ${usuario.user}", Toast.LENGTH_SHORT).show()
                         callback(usuarioEncontrado)
                     }
@@ -68,7 +71,7 @@ class GestorDeUsuarios {
             }
     }
 
-    fun recordarUsuario(context: Context,username: String, password: String) {
+    fun recordarUsuario(context: Context, username: String, password: String) {
         val sharedPreferences = context.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
         with(sharedPreferences.edit()) {
             putString("username", username)
@@ -78,7 +81,12 @@ class GestorDeUsuarios {
         }
     }
 
-    fun cargarDatosInicio(context: Context, user: EditText, pass: EditText, rememberMeCheckBox: CheckBox) {
+    fun cargarDatosInicio(
+        context: Context,
+        user: EditText,
+        pass: EditText,
+        rememberMeCheckBox: CheckBox
+    ) {
         val sharedPreferences = context.getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
         val rememberMe = sharedPreferences.getBoolean("rememberMe", false)
 
@@ -104,5 +112,5 @@ class GestorDeUsuarios {
         }
     }
 
-    }
+}
 
