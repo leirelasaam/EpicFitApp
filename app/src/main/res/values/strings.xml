@@ -56,7 +56,7 @@
     <string name="descanso">rest between sets</string>
     <string name="completado">completed in</string>
     <string name="no_historicos">You have not completed any workouts</string>
-    <string name="tiempo_previsto">Estimated time:</string>
+    <string name="tiempo_previsto">Estimated time</string>
     <string name="descripcion_workout">Description: workout for</string>
     <string name="desconocido">unknown</string>
     <string name="err_historicos">Could not obtain historical records</string>
@@ -88,6 +88,7 @@
     <string name="workout_actualizado">Workout updated successfully</string>
     <string name="error_actualizar_workout">Error updating the Workout</string>
 
+    <string name="aceptar">OK</string>
 
 </resources>
 

@@ -57,7 +57,7 @@
     <string name="descanso">de descanso entre series</string>
     <string name="completado">completado en</string>
     <string name="no_historicos">No has realizado ningún workout</string>
-    <string name="tiempo_previsto">Tiempo previsto:</string>
+    <string name="tiempo_previsto">Tiempo previsto</string>
     <string name="descripcion_workout">Descripción: workout para</string>
     <string name="desconocido">desconocido</string>
     <string name="err_historicos">No se han podido obtener los históricos</string>
@@ -89,5 +89,7 @@
     <string name="cancelar">Cancelar</string>
     <string name="workout_actualizado">Workout actualizado correctamente</string>
     <string name="error_actualizar_workout">Error al actualizar el Workout</string>
+
+    <string name="aceptar">Aceptar</string>
 
 </resources>
