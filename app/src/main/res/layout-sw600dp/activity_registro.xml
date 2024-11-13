@@ -22,7 +22,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
 
     <LinearLayout
         android:id="@+id/contenedor"
@@ -44,7 +45,8 @@
             android:autofillHints=""
             android:hint="@string/nombre"
             android:inputType="text"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            tools:ignore="VisualLintTextFieldSize" />
 
         <EditText
             android:id="@+id/inputApellido"
@@ -54,7 +56,8 @@
             android:autofillHints=""
             android:hint="@string/apellidos"
             android:inputType="text"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            tools:ignore="VisualLintTextFieldSize" />
 
         <EditText
             android:id="@+id/inputUsuario"
@@ -64,7 +67,8 @@
             android:autofillHints=""
             android:hint="@string/usuario"
             android:inputType="text"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
 
         <EditText
             android:id="@+id/inputCorreo"
@@ -74,7 +78,8 @@
             android:autofillHints=""
             android:hint="@string/email"
             android:inputType="textPostalAddress"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
 
         <EditText
             android:id="@+id/inputFechaNac"
@@ -86,7 +91,8 @@
             android:focusable="false"
             android:hint="@string/fecha_nacimiento"
             android:inputType="date"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            tools:ignore="VisualLintTextFieldSize" />
 
         <EditText
             android:id="@+id/inputPass"
@@ -97,7 +103,8 @@
             android:hint="@string/registro_pass_1"
             android:inputType="textPassword"
             android:minHeight="48dp"
-            android:textColorHint="#546E7A" />
+            android:textColorHint="#546E7A"
+            tools:ignore="VisualLintTextFieldSize" />
 
         <EditText
             android:id="@+id/inputPass2"
@@ -107,7 +114,8 @@
             android:autofillHints=""
             android:hint="@string/registro_pass_2"
             android:inputType="textPassword"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            tools:ignore="VisualLintTextFieldSize" />
 
         <TextView
             android:id="@+id/textTipoUsuario"
@@ -133,7 +141,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="@string/registro_volver" />
+                android:text="@string/registro_volver"
+                tools:ignore="TextContrastCheck,VisualLintButtonSize" />
 
             <View
                 android:layout_width="20dp"
@@ -145,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="@string/registrarme"
-                tools:ignore="VisualLintButtonSize" />
+                tools:ignore="VisualLintButtonSize,TextContrastCheck" />
         </LinearLayout>
     </LinearLayout>
 

@@ -4,13 +4,13 @@
 
     <item
         android:id="@+id/logo_menu"
-        android:title="EF"
+        android:title="@string/app_name"
         android:icon="@drawable/logo"
         app:tint="@color/logo_color"
         app:showAsAction="always" />
     <item
         android:id="@+id/switch_tema"
-        android:title="Switch"
+        android:title="@string/tema"
         app:actionLayout="@layout/switch_item"
         app:showAsAction="always" />
     <item

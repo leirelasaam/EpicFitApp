@@ -91,5 +91,9 @@
     <string name="error_actualizar_workout">Error al actualizar el Workout</string>
 
     <string name="aceptar">Aceptar</string>
-
+    <string name="logo">logo</string>
+    <string name="tipo">tipo</string>
+    <string name="borrar">borrar</string>
+    <string name="play">play</string>
+    <string name="tema">tema</string>
 </resources>

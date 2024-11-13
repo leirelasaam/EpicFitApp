@@ -22,7 +22,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
 
     <LinearLayout
         android:id="@+id/contenedor"
@@ -86,7 +87,8 @@
             android:focusable="false"
             android:hint="@string/fecha_nacimiento"
             android:inputType="date"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            tools:ignore="TextContrastCheck" />
 
         <EditText
             android:id="@+id/inputPass"
@@ -107,7 +109,8 @@
             android:autofillHints=""
             android:hint="@string/registro_pass_2"
             android:inputType="textPassword"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            tools:ignore="TextContrastCheck" />
 
         <TextView
             android:id="@+id/textTipoUsuario"
@@ -133,7 +136,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="@string/registro_volver" />
+                android:text="@string/registro_volver"
+                tools:ignore="TextContrastCheck" />
 
             <View
                 android:layout_width="20dp"
@@ -145,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="@string/registrarme"
-                tools:ignore="VisualLintButtonSize" />
+                tools:ignore="VisualLintButtonSize,TextContrastCheck" />
         </LinearLayout>
     </LinearLayout>
 
