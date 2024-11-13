@@ -59,6 +59,7 @@
     <string name="tiempo_previsto">Estimated time:</string>
     <string name="descripcion_workout">Description: workout for</string>
     <string name="desconocido">unknown</string>
+    <string name="err_historicos">Could not obtain historical records</string>
 
     <string name="workout_borrar_error">Error deleting workout</string>
     <string name="workout_borrar_exito">Workout successfully deleted</string>
