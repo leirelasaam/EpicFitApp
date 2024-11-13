@@ -1,7 +1,5 @@
 package modelo.pojos
 
-import com.google.firebase.firestore.DocumentReference
-
 class Workout(
     var id: String? = null,
     var nombre: String? = "",

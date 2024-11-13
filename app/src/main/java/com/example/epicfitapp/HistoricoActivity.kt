@@ -1,6 +1,6 @@
 package com.example.epicfitapp
 
-import GestorDeHistoricos
+import bbdd.GestorDeHistoricos
 import adaptadores.HistoricoAdapter
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -51,7 +51,7 @@ class HistoricoActivity : BaseActivity() {
         val spinner = findViewById<Spinner>(R.id.spinnerNiveles)
         val recycler = findViewById<RecyclerView>(R.id.listaHistorico)
         recycler.layoutManager = LinearLayoutManager(this)
-        val gdh: GestorDeHistoricos = GestorDeHistoricos()
+        val gdh = GestorDeHistoricos()
 
         if (usuarioActual != null) {
             gdh.obtenerHistoricosPorUsuario(
@@ -103,7 +103,7 @@ class HistoricoActivity : BaseActivity() {
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
-                view: android.view.View,
+                view: View,
                 position: Int,
                 id: Long
             ) {

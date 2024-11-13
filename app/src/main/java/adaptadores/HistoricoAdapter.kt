@@ -83,6 +83,7 @@ class HistoricoAdapter(private val context: Context?, private var historicos: Li
         return historicos.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateData(newHistoricos: List<Historico>) {
         historicos = newHistoricos
         notifyDataSetChanged()

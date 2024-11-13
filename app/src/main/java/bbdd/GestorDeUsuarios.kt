@@ -1,39 +1,23 @@
 package bbdd
 
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Build
 import android.util.Log
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat.getString
 import com.example.epicfitapp.LoginActivity
-import com.example.epicfitapp.LoginActivity.Companion
+import com.example.epicfitapp.R
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import modelo.pojos.Usuario
 import modelo.pojos.UsuarioLogueado
-import java.util.regex.Pattern
-
 
 class GestorDeUsuarios {
 
-    val db = Firebase.firestore
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun obtenerUsuarios() { //: List<Usuario> Esto sirve para devolver una lista de users
-
-        db.collection("Usuarios")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d(TAG, "${document.id} => ${document.data}")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents.", exception)
-            }
-    }
+    private val db = Firebase.firestore
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun comprobarUsuario(username: String, password: String, callback: (Usuario?) -> Unit) {
@@ -110,6 +94,34 @@ class GestorDeUsuarios {
             putBoolean("rememberMe", false)
             apply()
         }
+    }
+
+    fun guardarUsuario(nuevoUsuario: Usuario, context: Context) {
+        db.collection("Usuarios")
+            .add(nuevoUsuario)
+            .addOnSuccessListener { documentReference ->
+                nuevoUsuario.id = documentReference.id // Asigna el ID generado por Firebase
+                Toast.makeText(context, "@${nuevoUsuario.usuario} " + getString(context, R.string.registro_msg_exito), Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText( context, getString(context, R.string.registro_err), Toast.LENGTH_SHORT ).show()
+            }
+    }
+
+    fun comprobarSiExisteNombreUsuario(
+        username: String
+    ): Boolean {
+        var siExisteUsuario = false
+        db.collection("usuarios")
+            .whereEqualTo("usuario", username)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Si la consulta devuelve algún documento, significa que el usuario ya existe
+                    siExisteUsuario = true
+                }
+            }
+        return siExisteUsuario
     }
 
 }

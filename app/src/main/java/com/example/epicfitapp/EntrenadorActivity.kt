@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,7 +25,7 @@ class EntrenadorActivity : BaseActivity() {
     private lateinit var workoutsRecyclerView: RecyclerView
     private lateinit var workoutsAdapter: WorkoutsAdapter
     private var workoutsList: List<Workout> = listOf()
-    val gdw = GestorDeWorkouts()
+    private val gdw = GestorDeWorkouts()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,60 +96,20 @@ class EntrenadorActivity : BaseActivity() {
         )
     }
 
-    private fun configurarSpinner(
-        niveles: List<String>,
-        workouts: List<Workout>,
-        workoutAdapter: WorkoutsAdapter
-    ) {
-        val spinner = findViewById<Spinner>(R.id.spinnerNiveles)
-
-        // Opción por defecto, se muestran todos los niveles
-        val nivelesConTodos = mutableListOf(getString(R.string.todos_niveles)).apply {
-            addAll(niveles)
-        }
-
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, nivelesConTodos)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = adapter
-
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: android.view.View,
-                position: Int,
-                id: Long
-            ) {
-                val selectedLevel = nivelesConTodos[position]
-                if (selectedLevel == getString(R.string.todos_niveles)) {
-                    workoutAdapter.updateData(workouts)
-                } else {
-                    // Filtrar por nivel seleccionado
-                    val levelToFilter = selectedLevel.toInt()
-                    val filteredWorkouts = workouts.filter { it.nivel == levelToFilter }
-                    workoutAdapter.updateData(filteredWorkouts)
-                }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                workoutAdapter.updateData(workouts)
-            }
-        }
-    }
-
-    fun mostrarDialogoAniadirWorkout() {
+    private fun mostrarDialogoAniadirWorkout() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Añadir Workout")
+        builder.setTitle(getString(R.string.agregar_workout))
 
         val nombreInput = EditText(this)
-        nombreInput.hint = "Nombre del Workout"
+        nombreInput.hint = getString(R.string.nombre_hint)
         val nivelInput = EditText(this)
-        nivelInput.hint = "Nivel (número entero)"
+        nivelInput.hint = getString(R.string.nivel_hint)
         val tiempoInput = EditText(this)
-        tiempoInput.hint = "Tiempo (en minutos)"
+        tiempoInput.hint = getString(R.string.tiempo_hint)
         val videoInput = EditText(this)
-        videoInput.hint = "Enlace del video (opcional)"
+        videoInput.hint = getString(R.string.video_hint)
         val tipoInput = EditText(this)
-        tipoInput.hint = "Tipo de Workout"
+        tipoInput.hint = getString(R.string.tipo_hint)
 
         val layout = LinearLayout(this)
         layout.orientation = LinearLayout.VERTICAL
@@ -159,7 +120,7 @@ class EntrenadorActivity : BaseActivity() {
         layout.addView(tipoInput)
         builder.setView(layout)
 
-        builder.setPositiveButton("Añadir") { dialog: DialogInterface, _: Int ->
+        builder.setPositiveButton(getString(R.string.agregar)) { dialog: DialogInterface, _: Int ->
             val nuevoWorkout = Workout(
                 nombre = nombreInput.text.toString(),
                 nivel = nivelInput.text.toString().toIntOrNull() ?: 0,
@@ -171,7 +132,7 @@ class EntrenadorActivity : BaseActivity() {
             loadWorkouts()
             dialog.dismiss()
         }
-        builder.setNegativeButton("Cancelar") { dialog: DialogInterface, _: Int ->
+        builder.setNegativeButton(getString(R.string.cancelar)) { dialog: DialogInterface, _: Int ->
             dialog.dismiss()
         }
         builder.create().show()
