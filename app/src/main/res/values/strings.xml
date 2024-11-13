@@ -31,6 +31,15 @@
     <string name="registro_pass_1">Introduzca la contraseña</string>
     <string name="registro_pass_2">Repita la contraseña</string>
     <string name="registro_tipo_usuario">Tipo de usuario</string>
+    <string name="registro_msg_exito">registrado con éxito</string>
+    <string name="registro_err">Error al registrar usuario</string>
+    <string name="registro_err_apellido">El apellido está vacío o es mayor de 50 caracteres</string>
+    <string name="registro_err_correo">Correo incorrecto, vuelva a insertarlo</string>
+    <string name="registro_err_nombre">Nombre incorrecto, está vacío o es mayor de 25 caracteres</string>
+    <string name="registro_err_pass">Contraseña incorrecta, debe tener entre 8 y 20 caracteres, incluir al menos una letra minúscula, una mayúscula, un número y un carácter especial</string>
+    <string name="registro_err_pass_no_coinciden">Las contraseñas no coinciden, vuelva a intentarlo</string>
+    <string name="registro_err_usuario">Usuario incorrecto, debe contener solo letras minúsculas</string>
+    <string name="registro_err_duplicado">El nombre de usuario ya existe</string>
 
     <!--Registro-->
     <string-array name="tipoUsuario">
@@ -47,6 +56,7 @@
     <string name="descanso">de descanso entre series</string>
     <string name="completado">completado en</string>
     <string name="no_historicos">No has realizado ningún workout</string>
+    <string name="err_historicos">No se han podido obtener los históricos</string>
 
     <!-- Entrenador -->
     <string name="agregar_workout">Añadir workout</string>
