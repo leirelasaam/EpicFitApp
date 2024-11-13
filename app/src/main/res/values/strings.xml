@@ -57,6 +57,7 @@
     <string name="completado">completado en</string>
     <string name="no_historicos">No has realizado ningún workout</string>
     <string name="err_historicos">No se han podido obtener los históricos</string>
+    <string name="tiempo_previsto">Tiempo previsto:</string>
 
     <!-- Entrenador -->
     <string name="agregar_workout">Añadir workout</string>
