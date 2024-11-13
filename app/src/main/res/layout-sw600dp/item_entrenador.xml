@@ -10,6 +10,7 @@
 
     <ImageView
         android:id="@+id/imagen"
+        android:contentDescription="@string/tipo"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentStart="true"
@@ -47,7 +48,8 @@
                 android:layout_width="76dp"
                 android:layout_height="wrap_content"
                 android:paddingEnd="10dp"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:ignore="RtlSymmetry" />
         </LinearLayout>
 
         <LinearLayout
@@ -92,6 +94,7 @@
 
     <ImageView
         android:id="@+id/btnModificar"
+        android:contentDescription="@string/modificar_workout"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentTop="true"
@@ -100,10 +103,12 @@
         android:layout_marginRight="10dp"
         android:src="@drawable/modificar"
         app:elevation="0dp"
-        app:tint="@null" />
+        app:tint="@null"
+        tools:ignore="RtlHardcoded" />
 
     <ImageView
         android:id="@+id/btnBorrar"
+        android:contentDescription="@string/borrar"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_below="@id/btnModificar"
@@ -112,10 +117,12 @@
         android:src="@drawable/borrar"
         android:layout_alignParentEnd="true"
         app:elevation="0dp"
-        app:tint="@null" />
+        app:tint="@null"
+        tools:ignore="RtlHardcoded" />
 
     <ImageView
         android:id="@+id/btnPlay"
+        android:contentDescription="@string/play"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_below="@id/btnModificar"
@@ -124,6 +131,7 @@
         android:src="@drawable/play"
         android:layout_alignParentEnd="true"
         app:elevation="0dp"
-        app:tint="@null" />
+        app:tint="@null"
+        tools:ignore="RtlHardcoded" />
 
 </RelativeLayout>

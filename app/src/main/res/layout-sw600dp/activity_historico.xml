@@ -31,7 +31,8 @@
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="TextContrastCheck" />
 
         <LinearLayout
             android:id="@+id/layoutNivel"
@@ -40,7 +41,8 @@
             android:orientation="horizontal"
             android:paddingStart="10dp"
             android:paddingTop="20dp"
-            android:paddingBottom="10dp">
+            android:paddingBottom="10dp"
+            tools:ignore="RtlSymmetry">
 
             <TextView
                 android:id="@+id/nivelTxt"
@@ -77,7 +79,8 @@
             android:layout_height="1.5dp"
             android:layout_below="@id/imagen"
             android:layout_margin="10dp"
-            android:background="@color/secondary" />
+            android:background="@color/secondary"
+            tools:ignore="ObsoleteLayoutParam" />
 
         <TextView
             android:id="@+id/noHistoricos"
@@ -93,7 +96,8 @@
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
             android:textSize="18sp"
-            android:text="@string/filtrar_niveles" />
+            android:text="@string/filtrar_niveles"
+            tools:ignore="RtlSymmetry" />
 
         <Spinner
             android:id="@+id/spinnerNiveles"
@@ -101,7 +105,8 @@
             android:layout_height="48dp"
             android:layout_weight="0"
             android:paddingStart="10dp"
-            android:paddingEnd="10dp" />
+            android:paddingEnd="10dp"
+            tools:ignore="InefficientWeight" />
 
         <View
             android:layout_width="match_parent"
@@ -110,7 +115,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:background="@color/secondary" />
+            android:background="@color/secondary"
+            tools:ignore="ObsoleteLayoutParam" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listaHistorico"

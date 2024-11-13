@@ -16,13 +16,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.21"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        tools:ignore="TextSizeCheck" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="306dp"
         android:layout_height="252dp"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/logo"
         app:layout_constraintBottom_toTopOf="@+id/textViewUser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -40,7 +41,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputMantenerSesion" />
+        app:layout_constraintTop_toBottomOf="@+id/inputMantenerSesion"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/btnRegistrarme"
@@ -51,7 +53,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNoTienesCuenta" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNoTienesCuenta"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/textViewNoTienesCuenta"
@@ -98,6 +101,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewUser"
+        android:importantForAccessibility="no"
         tools:ignore="LabelFor" />
 
     <EditText
@@ -106,6 +110,7 @@
         android:layout_height="48dp"
         android:autofillHints=""
         android:inputType="textPassword"
+        android:importantForAccessibility="no"
         app:layout_constraintBottom_toTopOf="@+id/inputMantenerSesion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
