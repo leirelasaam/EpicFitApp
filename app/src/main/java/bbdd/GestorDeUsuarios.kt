@@ -1,6 +1,5 @@
 package bbdd
 
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Build
 import android.util.Log
@@ -10,33 +9,15 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.getString
 import com.example.epicfitapp.LoginActivity
-import com.example.epicfitapp.LoginActivity.Companion
 import com.example.epicfitapp.R
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import modelo.pojos.Usuario
 import modelo.pojos.UsuarioLogueado
-import java.util.regex.Pattern
-
 
 class GestorDeUsuarios {
 
-    val db = Firebase.firestore
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun obtenerUsuarios() { //: List<Usuario> Esto sirve para devolver una lista de users
-
-        db.collection("Usuarios")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d(TAG, "${document.id} => ${document.data}")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents.", exception)
-            }
-    }
+    private val db = Firebase.firestore
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun comprobarUsuario(username: String, password: String, callback: (Usuario?) -> Unit) {
@@ -130,7 +111,7 @@ class GestorDeUsuarios {
     fun comprobarSiExisteNombreUsuario(
         username: String
     ): Boolean {
-        var siExisteUsuario = false;
+        var siExisteUsuario = false
         db.collection("usuarios")
             .whereEqualTo("usuario", username)
             .get()
@@ -140,7 +121,7 @@ class GestorDeUsuarios {
                     siExisteUsuario = true
                 }
             }
-        return siExisteUsuario;
+        return siExisteUsuario
     }
 
 }

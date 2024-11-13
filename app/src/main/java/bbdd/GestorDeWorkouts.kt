@@ -12,15 +12,6 @@ class GestorDeWorkouts {
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val coleccionWorkouts = "Workouts"
 
-    class GestorDeWorkouts {
-
-        private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
-        private val coleccionWorkouts = "Workouts"
-
-
-
-    }
-
     fun obtenerWorkouts(onSuccess: (List<Workout>) -> Unit, onFailure: (Exception) -> Unit) {
         db.collection(coleccionWorkouts)
             .get()
@@ -50,7 +41,7 @@ class GestorDeWorkouts {
                             }
 
                             workout.ejerciciosObj = ejercicios
-                            var tiempoTotal = agregarTiempoEstimadoWorkout(ejercicios)
+                            val tiempoTotal = agregarTiempoEstimadoWorkout(ejercicios)
                             workout.tiempo = tiempoTotal
                             workouts.add(workout)
 
@@ -117,8 +108,6 @@ class GestorDeWorkouts {
             "video" to workout.video,
             "tipo" to workout.tipo
         )
-
-        var id = workout.id
 
         workout.id?.let {
             db.collection(coleccionWorkouts)

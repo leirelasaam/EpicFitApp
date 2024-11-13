@@ -14,15 +14,15 @@
         android:text="@string/usuario"
         app:layout_constraintBottom_toTopOf="@+id/inputUser"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.21"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/inputUser"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="306dp"
         android:layout_height="252dp"
-        android:contentDescription="TODO"
+        android:contentDescription="Logo"
         app:layout_constraintBottom_toTopOf="@+id/textViewUser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -82,8 +82,8 @@
         android:text="@string/pass"
         app:layout_constraintBottom_toTopOf="@+id/inputPass"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.218"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/inputUser"
         app:layout_constraintTop_toBottomOf="@+id/inputUser" />
 
     <EditText

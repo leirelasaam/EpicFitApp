@@ -1,6 +1,6 @@
 package com.example.epicfitapp
 
-import GestorDeHistoricos
+import bbdd.GestorDeHistoricos
 import adaptadores.HistoricoAdapter
 import android.annotation.SuppressLint
 import android.content.Intent

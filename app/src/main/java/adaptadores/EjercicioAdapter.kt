@@ -1,6 +1,6 @@
 package adaptadores
 
-import adaptadores.HistoricoAdapter.HistoricoViewHolder
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +27,7 @@ class EjercicioAdapter (private val context: Context?, private var ejercicios: L
         return EjercicioViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: EjercicioViewHolder, position: Int) {
         val ejercicio = ejercicios[position]
         holder.nombre.text = ejercicio.nombre

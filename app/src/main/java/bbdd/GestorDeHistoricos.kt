@@ -1,3 +1,5 @@
+package bbdd
+
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import modelo.pojos.Ejercicio
@@ -58,7 +60,7 @@ class GestorDeHistoricos {
                                         }
 
                                         workout.ejerciciosObj = ejercicios
-                                        var tiempoTotal = agregarTiempoEstimadoWorkout(ejercicios)
+                                        val tiempoTotal = agregarTiempoEstimadoWorkout(ejercicios)
                                         workout.tiempo = tiempoTotal
                                         historico.workoutObj = workout
                                         historicos.add(historico)

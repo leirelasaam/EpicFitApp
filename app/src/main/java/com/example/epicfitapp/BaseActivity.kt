@@ -2,19 +2,15 @@ package com.example.epicfitapp
 
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import modelo.pojos.UsuarioLogueado
-import java.util.Locale
 
 
 abstract class BaseActivity : AppCompatActivity() {

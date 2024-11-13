@@ -47,23 +47,19 @@ class WorkoutsAdapter(
         return WorkoutViewHolder(view)
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: WorkoutViewHolder, position: Int) {
         val workout = workouts[position]
 
         holder.nombre.text = workout.nombre
-        holder.nivel.text = context?.getString(R.string.nivel) + " " + workout.nivel.toString()
+        holder.nivel.text = context.getString(R.string.nivel) + " " + workout.nivel.toString()
         val tiempoPrevisto = workout.tiempo?.let { DateUtils.formatearTiempo(it) }
-        holder.tiempoPrev.text = "${context?.getString(R.string.tiempo_previsto)}: ${
-            tiempoPrevisto ?: "${
-                context?.getString(R.string.desconocido)
-            }"
+        holder.tiempoPrev.text = "${context.getString(R.string.tiempo_previsto)}: ${
+            tiempoPrevisto ?: context.getString(R.string.desconocido)
         } min"
-        holder.descripcion.text = "${context?.getString(R.string.descripcion_workout)} ${
-            workout.tipo ?: "${
-                context?.getString(R.string.desconocido)
-            }"
+        holder.descripcion.text = "${context.getString(R.string.descripcion_workout)} ${
+            workout.tipo ?: context.getString(R.string.desconocido)
         }"
 
         when (workout.tipo) {
@@ -85,7 +81,7 @@ class WorkoutsAdapter(
         if (!videoUrl.isNullOrEmpty()) {
             holder.btnPlay.setOnClickListener {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl))
-                context?.startActivity(intent)
+                context.startActivity(intent)
             }
             holder.btnPlay.isVisible = true
         } else {
@@ -94,14 +90,14 @@ class WorkoutsAdapter(
 
         holder.btnModificar.setOnClickListener {
             val builder = AlertDialog.Builder(context)
-            builder.setMessage("${context?.getString(R.string.workout_pregunta_modificar)}")
-                .setPositiveButton("${context?.getString(R.string.si)}") { dialog, id ->
-                    workout.id?.let { workoutId ->
+            builder.setMessage(context.getString(R.string.workout_pregunta_modificar))
+                .setPositiveButton(context.getString(R.string.si)) { _, _ ->
+                    workout.id?.let {
                         mostrarDialogoModificarWorkout(workout)
                         notifyDataSetChanged()
                     }
                 }
-                .setNegativeButton("${context?.getString(R.string.no)}") { dialog, id ->
+                .setNegativeButton(context.getString(R.string.no)) { dialog, _ ->
                     dialog.dismiss()
                 }
             builder.create().show()
@@ -109,8 +105,8 @@ class WorkoutsAdapter(
 
         holder.btnBorrar.setOnClickListener {
             val builder = AlertDialog.Builder(context)
-            builder.setMessage("${context?.getString(R.string.workout_pregunta_borrar)}")
-                .setPositiveButton("${context?.getString(R.string.si)}") { dialog, id ->
+            builder.setMessage(context.getString(R.string.workout_pregunta_borrar))
+                .setPositiveButton(context.getString(R.string.si)) { _, _ ->
                     val gdw = GestorDeWorkouts()
                     workout.id?.let { it1 ->
                         gdw.borrarWorkout(it1,
@@ -119,32 +115,31 @@ class WorkoutsAdapter(
                                 notifyDataSetChanged()
                                 Toast.makeText(
                                     context,
-                                    "${context?.getString(R.string.workout_borrar_exito)}",
+                                    context.getString(R.string.workout_borrar_exito),
                                     Toast.LENGTH_SHORT
                                 ).show()
                             },
-                            onFailure = { exception ->
+                            onFailure = {
                                 Toast.makeText(
                                     context,
-                                    "${context?.getString(R.string.workout_borrar_error)}",
+                                    context.getString(R.string.workout_borrar_error),
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
                         )
                     }
                 }
-                .setNegativeButton("${context?.getString(R.string.no)}") { dialog, id ->
+                .setNegativeButton(context.getString(R.string.no)) { dialog, _ ->
                     dialog.dismiss()
                 }
             builder.create().show()
         }
 
         holder.imagen.setOnClickListener {
-            val videoUrl = workout.video
             if (!videoUrl.isNullOrEmpty()) {
                 // Abrir el enlace del video
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl))
-                context?.startActivity(intent)
+                context.startActivity(intent)
             }
         }
     }
@@ -255,12 +250,5 @@ class WorkoutsAdapter(
     fun updateData(newWorkouts: List<Workout>) {
         workouts = newWorkouts
         notifyDataSetChanged()
-    }
-
-    companion object {
-        val btnModificar: Any
-            get() {
-                TODO()
-            }
     }
 }
