@@ -10,7 +10,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Spinner
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import bbdd.GestorDeWorkouts
@@ -25,7 +28,13 @@ class EntrenadorActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_entrenador)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.entrenador)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
         workoutsRecyclerView = findViewById(R.id.workoutsRecyclerView)
         workoutsRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -160,48 +169,6 @@ class EntrenadorActivity : BaseActivity() {
             )
             gdw.subirWorkout(this, nuevoWorkout)
             loadWorkouts()
-            dialog.dismiss()
-        }
-        builder.setNegativeButton("Cancelar") { dialog: DialogInterface, _: Int ->
-            dialog.dismiss()
-        }
-        builder.create().show()
-    }
-
-    fun mostrarDialogoModificarWorkout(context: EntrenadorActivity, idWorkout: String) {
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle("Modificar Workout")
-
-        val nombreInput = EditText(context)
-        nombreInput.hint = "Nombre del Workout"
-        val nivelInput = EditText(context)
-        nivelInput.hint = "Nivel (número entero)"
-        val tiempoInput = EditText(context)
-        tiempoInput.hint = "Tiempo (en minutos)"
-        val videoInput = EditText(context)
-        videoInput.hint = "Enlace del video (opcional)"
-        val tipoInput = EditText(context)
-        tipoInput.hint = "Tipo de Workout"
-
-        val layout = LinearLayout(context)
-        layout.orientation = LinearLayout.VERTICAL
-        layout.addView(nombreInput)
-        layout.addView(nivelInput)
-        layout.addView(tiempoInput)
-        layout.addView(videoInput)
-        layout.addView(tipoInput)
-        builder.setView(layout)
-
-        builder.setPositiveButton("Guardar") { dialog: DialogInterface, _: Int ->
-            val workoutModificado = Workout(
-                nombre = nombreInput.text.toString(),
-                nivel = nivelInput.text.toString().toIntOrNull() ?: 0,
-                tiempo = tiempoInput.text.toString().toIntOrNull() ?: 0,
-                video = videoInput.text.toString(),
-                tipo = tipoInput.text.toString()
-            )
-            context.gdw.actualizarWorkout(context, workoutModificado, idWorkout)
-            context.loadWorkouts()
             dialog.dismiss()
         }
         builder.setNegativeButton("Cancelar") { dialog: DialogInterface, _: Int ->
