@@ -6,7 +6,6 @@ import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
@@ -16,18 +15,16 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bbdd.GestorDeUsuarios
 import com.google.firebase.Timestamp
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
 import modelo.pojos.Usuario
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.regex.Pattern
 
 class RegistroActivity : AppCompatActivity() {
-    private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
     private var fechaNacimiento: Timestamp? = null // Variable para almacenar la fecha de nacimiento
-
+    private val gdu = GestorDeUsuarios()
 
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("WrongViewCast")
@@ -75,7 +72,7 @@ class RegistroActivity : AppCompatActivity() {
             val pass = passEditText.text.toString()
             val pass2 = pass2EditText.text.toString()
             val usuario = usuarioEditText.text.toString()
-            var esEntrenador = false;
+            var esEntrenador = false
             if (tipoUsuario.selectedItem.toString() == "Entrenador") {
                 esEntrenador = true
             }
@@ -95,10 +92,10 @@ class RegistroActivity : AppCompatActivity() {
                 usuario = usuario
             )
 
-            val comprobarValidaciones = validacionesCamposCorrectos(nuevoUsuario, pass, pass2);
+            val comprobarValidaciones = validacionesCamposCorrectos(nuevoUsuario, pass, pass2)
             if (comprobarValidaciones) {
                 // Guarda el usuario en Firestore
-                guardarUsuario(nuevoUsuario)
+                gdu.guardarUsuario(nuevoUsuario, this)
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.putExtra("user", nuevoUsuario.usuario)
                 intent.putExtra("pass", nuevoUsuario.pass)
@@ -109,22 +106,6 @@ class RegistroActivity : AppCompatActivity() {
         }
     }
 
-    private fun guardarUsuario(nuevoUsuario: Usuario) {
-        db.collection("Usuarios")
-            .add(nuevoUsuario)
-            .addOnSuccessListener { documentReference ->
-                nuevoUsuario.id = documentReference.id // Asigna el ID generado por Firebase
-                Toast.makeText(this, "@${nuevoUsuario.usuario} " + getString(R.string.registro_msg_exito), Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(
-                    this,
-                    getString(R.string.registro_err),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-    }
-
     // Función para mostrar el DatePickerDialog
     private fun showDatePickerDialog(fechaNacEditText: EditText) {
         val calendar = Calendar.getInstance()
@@ -133,26 +114,33 @@ class RegistroActivity : AppCompatActivity() {
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
         val datePickerDialog =
-            DatePickerDialog(this, R.style.CustomDatePickerTheme,{ _, selectedYear, selectedMonth, selectedDay ->
-                //Crear la fecha en Timestamp
-                val selectedCalendar = Calendar.getInstance()
-                selectedCalendar.set(selectedYear, selectedMonth, selectedDay)
-                fechaNacimiento = Timestamp(selectedCalendar.time)
+            DatePickerDialog(
+                this,
+                R.style.CustomDatePickerTheme,
+                { _, selectedYear, selectedMonth, selectedDay ->
+                    //Crear la fecha en Timestamp
+                    val selectedCalendar = Calendar.getInstance()
+                    selectedCalendar.set(selectedYear, selectedMonth, selectedDay)
+                    fechaNacimiento = Timestamp(selectedCalendar.time)
 
-                // Formato de la fecha para mostrar en el EditText
-                val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                fechaNacEditText.setText(sdf.format(selectedCalendar.time))
-            }, year, month, day)
+                    // Formato de la fecha para mostrar en el EditText
+                    val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                    fechaNacEditText.setText(sdf.format(selectedCalendar.time))
+                },
+                year,
+                month,
+                day
+            )
 
         datePickerDialog.show()
     }
 
     private fun validarNombre(nombre: String?): Boolean {
-        return nombre != null && nombre.isNotEmpty() && nombre.length <= 25
+        return !nombre.isNullOrEmpty() && nombre.length <= 25
     }
 
     private fun validarApellido(apellido: String?): Boolean {
-        return apellido != null && apellido.isNotEmpty() && apellido.length <= 25
+        return !apellido.isNullOrEmpty() && apellido.length <= 25
     }
 
     private fun validarCorreo(correo: String?): Boolean {
@@ -170,23 +158,7 @@ class RegistroActivity : AppCompatActivity() {
         return pass != null && Pattern.matches(regexPass, pass)
     }
 
-    fun comprobarSiExisteNombreUsuario(
-        username: String
-    ): Boolean {
-        var siExisteUsuario = false;
-        db.collection("usuarios")
-            .whereEqualTo("usuario", username)
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    // Si la consulta devuelve algún documento, significa que el usuario ya existe
-                    siExisteUsuario = true
-                }
-            }
-        return siExisteUsuario;
-    }
-
-    fun validacionesCamposCorrectos(
+    private fun validacionesCamposCorrectos(
         usuario: Usuario,
         pass1: String,
         pass2: String
@@ -204,9 +176,6 @@ class RegistroActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.registro_err_correo), Toast.LENGTH_LONG)
                 .show()
             validar = false
-            /*} else if (!validarFechaNacimiento(usuario.fechaNac)) {
-                Toast.makeText(this, "Fecha de nacimiento incorrecta. El usuario debe ser mayor de 14 años.", Toast.LENGTH_LONG).show()
-                validar = false*/
         } else if (!validarNombre(usuario.nombre)) {
             Toast.makeText(
                 this,
@@ -235,8 +204,9 @@ class RegistroActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG
             ).show()
             validar = false
-        } else if (comprobarSiExisteNombreUsuario(usuario.usuario.toString())) {
-            Toast.makeText(this, getString(R.string.registro_err_duplicado), Toast.LENGTH_LONG).show()
+        } else if (gdu.comprobarSiExisteNombreUsuario(usuario.usuario.toString())) {
+            Toast.makeText(this, getString(R.string.registro_err_duplicado), Toast.LENGTH_LONG)
+                .show()
             validar = false
         }
 
