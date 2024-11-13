@@ -1,4 +1,6 @@
 <resources>
+    <string name="app_name">Epicfit</string>
+
     <string name="perfil">Profile</string>
     <string name="registro" >Register</string>
     <string name="entrenador">Coach</string>
@@ -57,6 +59,8 @@
     <string name="agregar_workout">Add workout</string>
     <string name="modificar_workout">Modify workout</string>
     <string name="eliminar_workout">Delete Workout</string>
+
+    <string name="workouts">Workout</string>
 
     <string-array name="Idiomas">
         <item>Spanish</item>

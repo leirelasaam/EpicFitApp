@@ -96,7 +96,8 @@
             android:autofillHints=""
             android:hint="@string/registro_pass_1"
             android:inputType="textPassword"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:textColorHint="#546E7A" />
 
         <EditText
             android:id="@+id/inputPass2"
@@ -143,7 +144,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="@string/registrarme" />
+                android:text="@string/registrarme"
+                tools:ignore="VisualLintButtonSize" />
         </LinearLayout>
     </LinearLayout>
 
