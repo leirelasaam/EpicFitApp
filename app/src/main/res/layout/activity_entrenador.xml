@@ -14,7 +14,7 @@
         android:background="@drawable/bg_title"
         android:letterSpacing="0.15"
         android:padding="10dp"
-        android:text="@string/workouts"
+        android:text="@string/entrenador"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/white"
